@@ -1,342 +1,4 @@
-========== main.go ==========
-package main
-
-import (
-        "embed"
-
-        "log"
-        "time"
-
-        "github.com/wailsapp/wails/v3/pkg/application"
-)
-
-// Wails uses Go's `embed` package to embed the frontend files into the binary.
-// Any files in the frontend/dist folder will be embedded into the binary and
-// made available to the frontend.
-// See https://pkg.go.dev/embed for more information.
-
-//go:embed all:frontend/dist
-var assets embed.FS
-
-func init() {
-        // Register a custom event whose associated data type is string.
-        // This is not required, but the binding generator will pick up registered events
-        // and provide a strongly typed JS/TS API for them.
-        application.RegisterEvent[string]("time")
-}
-
-// main function serves as the application's entry point. It initializes the application, creates a window,
-// and starts a goroutine that emits a time-based event every second. It subsequently runs the application and
-// logs any error that might occur.
-func main() {
-
-        // Create a new Wails application by providing the necessary options.
-        // Variables 'Name' and 'Description' are for application metadata.
-        // 'Assets' configures the asset server with the 'FS' variable pointing to the frontend files.
-        // 'Bind' is a list of Go struct instances. The frontend has access to the methods of these instances.
-        // 'Mac' options tailor the application when running an macOS.
-        app := application.New(application.Options{
-                Name:        "NovaHost",
-                Description: "A demo of using raw HTML & CSS",
-                Services: []application.Service{
-                        application.NewService(&GreetService{}),
-                },
-                Assets: application.AssetOptions{
-                        Handler: application.AssetFileServerFS(assets),
-                },
-                Mac: application.MacOptions{
-                        ApplicationShouldTerminateAfterLastWindowClosed: true,
-                },
-        })
-
-        // Create a new window with the necessary options.
-        // 'Title' is the title of the window.
-        // 'Mac' options tailor the window when running on macOS.
-        // 'BackgroundColour' is the background colour of the window.
-        // 'URL' is the URL that will be loaded into the webview.
-        app.Window.NewWithOptions(application.WebviewWindowOptions{
-                Title: "NovaHost Local Hosting",
-                // Window sized to the golden ratio (1000 / 618 â‰ˆ 1.618).
-                Width:  1000,
-                Height: 618,
-                Mac: application.MacWindow{
-                        InvisibleTitleBarHeight: 50,
-                        Backdrop:                application.MacBackdropTranslucent,
-                        TitleBar:                application.MacTitleBarHiddenInset,
-                },
-                BackgroundColour: application.NewRGB(6, 7, 15),
-                URL:              "/",
-        })
-
-        // Create a goroutine that emits an event containing the current time every second.
-        // The frontend can listen to this event and update the UI accordingly.
-        go func() {
-                for {
-                        now := time.Now().Format(time.RFC1123)
-                        app.Event.Emit("time", now)
-                        time.Sleep(time.Second)
-                }
-        }()
-
-        // Run the application. This blocks until the application has been exited.
-        err := app.Run()
-
-        // If an error occurred while running the application, log it and exit.
-        if err != nil {
-                log.Fatal(err)
-        }
-}
-
-
-========== greetservice.go ==========
-package main
-
-type GreetService struct{}
-
-func (g *GreetService) Greet(name string) string {
-        return "Hello " + name + "!"
-}
-
-========== go.mod ==========
-module novahost.local/desktop
-
-go 1.26.0
-
-require github.com/wailsapp/wails/v3 v3.0.0
-
-require (
-        github.com/adrg/xdg v0.5.3 // indirect
-        github.com/coder/websocket v1.8.14 // indirect
-        github.com/go-ole/go-ole v1.3.0 // indirect
-        github.com/godbus/dbus/v5 v5.2.2 // indirect
-        github.com/mattn/go-colorable v0.1.14 // indirect
-        github.com/mattn/go-isatty v0.0.20 // indirect
-        golang.org/x/sys v0.48.0 // indirect
-)
-
-========== frontend\src\main.ts ==========
-import "@fortawesome/fontawesome-free/css/all.min.css";
-
-type LogType = "success" | "stop" | "error" | "info";
-
-interface LogEntry {
-    time: string;
-    type: LogType;
-    module: string;
-    message: string;
-}
-
-let logs: LogEntry[] = [];
-let logsPaused = false;
-let activeFilter = "all";
-
-const $ = <T extends HTMLElement>(selector: string): T | null =>
-    document.querySelector<T>(selector);
-
-const $$ = <T extends HTMLElement>(selector: string): T[] =>
-    Array.from(document.querySelectorAll<T>(selector));
-
-function updateClock(): void {
-    const now = new Date();
-    const systemTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-    const clock = new Intl.DateTimeFormat("bg-BG", {
-        timeZone: systemTimeZone,
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false
-    }).format(now);
-
-    const date = new Intl.DateTimeFormat("bg-BG", {
-        timeZone: systemTimeZone,
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-    }).format(now);
-
-    const topClock = $("#clock");
-    const footerClock = $("#footer-clock");
-    const timezoneLabel = $("#timezone-label");
-
-    if (topClock) topClock.textContent = clock;
-    if (timezoneLabel) timezoneLabel.textContent = systemTimeZone;
-    if (footerClock) footerClock.textContent = `${date} ${clock}`;
-}
-
-function renderLogs(): void {
-    const list = $("#log-list");
-    const count = $("#log-count");
-
-    if (!list) return;
-
-    const filtered = logs.filter(log =>
-        activeFilter === "all" || log.type === activeFilter
-    );
-
-    if (count) {
-        count.textContent = `${filtered.length} entries`;
-    }
-
-    if (filtered.length === 0) {
-        list.innerHTML = '<div class="log-empty">ÐÑÐ¼Ð° Ð½Ð°Ð»Ð¸Ñ‡Ð½Ð¸ Ð»Ð¾Ð³Ð¾Ð²Ðµ. Ð ÐµÐ°Ð»Ð½Ð¸Ñ‚Ðµ ÑÑŠÐ±Ð¸Ñ‚Ð¸Ñ Ñ‰Ðµ ÑÐµ Ð¿Ð¾ÐºÐ°Ð·Ð²Ð°Ñ‚ Ñ‚ÑƒÐº.</div>';
-        return;
-    }
-
-    list.replaceChildren();
-
-    for (const log of filtered) {
-        const row = document.createElement("div");
-        row.className = "log-row";
-
-        const time = document.createElement("span");
-        time.className = "log-time";
-        time.textContent = log.time;
-
-        const type = document.createElement("span");
-        type.className = `tag-${log.type}`;
-        type.textContent = log.type.toUpperCase();
-
-        const module = document.createElement("span");
-        module.className = "log-module";
-        module.textContent = log.module;
-
-        const message = document.createElement("span");
-        message.className = "log-message";
-        message.textContent = log.message;
-
-        row.append(time, type, module, message);
-        list.appendChild(row);
-    }
-}
-
-function addLog(
-    type: LogType,
-    module: string,
-    message: string
-): void {
-    if (logsPaused) return;
-
-    logs.push({
-        time: new Date().toLocaleTimeString("bg-BG", {
-            hour12: false
-        }),
-        type,
-        module,
-        message
-    });
-
-    renderLogs();
-}
-
-function setupLogControls(): void {
-    $$(".filter").forEach(button => {
-        button.addEventListener("click", () => {
-            activeFilter = button.dataset.filter || "all";
-
-            $$(".filter").forEach(item =>
-                item.classList.toggle("active", item === button)
-            );
-
-            renderLogs();
-        });
-    });
-
-    $("#pause-logs")?.addEventListener("click", event => {
-        logsPaused = !logsPaused;
-
-        const button = event.currentTarget as HTMLButtonElement;
-        button.innerHTML = logsPaused
-            ? '<i class="fa-solid fa-play"></i>'
-            : '<i class="fa-solid fa-pause"></i>';
-
-        button.title = logsPaused ? "Resume logs" : "Pause logs";
-    });
-
-    $("#clear-logs")?.addEventListener("click", () => {
-        logs = [];
-        renderLogs();
-    });
-
-    $("#export-logs")?.addEventListener("click", () => {
-        if (logs.length === 0) {
-            alert("ÐÑÐ¼Ð° Ð»Ð¾Ð³Ð¾Ð²Ðµ Ð·Ð° ÐµÐºÑÐ¿Ð¾Ñ€Ñ‚Ð¸Ñ€Ð°Ð½Ðµ.");
-            return;
-        }
-
-        const content = [
-            "Time\tType\tModule\tMessage",
-            ...logs.map(log =>
-                `${log.time}\t${log.type}\t${log.module}\t${log.message}`
-            )
-        ].join("\n");
-
-        const blob = new Blob([content], {
-            type: "text/plain;charset=utf-8"
-        });
-
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
-
-        link.href = url;
-        link.download = `novahost-logs-${Date.now()}.txt`;
-        link.click();
-
-        URL.revokeObjectURL(url);
-    });
-
-    renderLogs();
-}
-
-function setupTools(): void {
-    const message = $("#tool-message");
-
-    $$<HTMLButtonElement>(".tool-button").forEach(button => {
-        button.addEventListener("click", () => {
-            const tool = button.dataset.tool || button.textContent?.trim() || "Tool";
-
-            if (message) {
-                message.textContent =
-                    `${tool}: Ð¼Ð¾Ð´ÑƒÐ»ÑŠÑ‚ Ñ‰Ðµ Ð±ÑŠÐ´Ðµ ÑÐ²ÑŠÑ€Ð·Ð°Ð½ Ñ Ñ€ÐµÐ°Ð»Ð½Ð°Ñ‚Ð° Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¾Ð½Ð°Ð»Ð½Ð¾ÑÑ‚ Ð² ÑÐ»ÐµÐ´Ð²Ð°Ñ‰Ð¸Ñ ÐµÑ‚Ð°Ð¿.`;
-            }
-        });
-    });
-}
-
-function setupModuleButtons(): void {
-    // Start/Stop/Admin/Config/Logs Ð¾ÑÑ‚Ð°Ð²Ð°Ñ‚ Ð¸Ð·ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸,
-    // Ð´Ð¾ÐºÐ°Ñ‚Ð¾ Ð½Ðµ Ð±ÑŠÐ´Ð°Ñ‚ ÑÐ²ÑŠÑ€Ð·Ð°Ð½Ð¸ Ñ Ñ€ÐµÐ°Ð»Ð½Ð¸Ñ Go backend.
-    $$(".module-table button").forEach(button => {
-        if (
-            button.classList.contains("start") ||
-            button.classList.contains("stop") ||
-            button.classList.contains("admin") ||
-            button.classList.contains("config") ||
-            button.classList.contains("logs")
-        ) {
-            (button as HTMLButtonElement).disabled = true;
-        }
-    });
-}
-
-function initialize(): void {
-    updateClock();
-    window.setInterval(updateClock, 1000);
-
-    setupLogControls();
-    setupTools();
-    setupModuleButtons();
-
-    console.info("NovaHost frontend initialized.");
-}
-
-if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initialize);
-} else {
-    initialize();
-}
-
-========== frontend\index.html ==========
+========== INDEX.HTML ==========
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -347,8 +9,80 @@ if (document.readyState === "loading") {
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<div class="window">
-    <header class="topbar">
+<div class="app-shell">
+
+    <aside class="sidebar sidebar-left" aria-label="Workspace navigation">
+        <div class="sidebar-brand">
+            <div class="sidebar-brand-icon">
+                <i class="fa-solid fa-server"></i>
+            </div>
+            <div class="sidebar-brand-text">
+                <strong>NovaHost</strong>
+                <span>CONTROL CENTER</span>
+            </div>
+        </div>
+
+        <div class="sidebar-group">
+            <div class="sidebar-heading">WORKSPACE</div>
+
+            <button class="sidebar-link active" data-target="dashboard-top">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span>Dashboard</span>
+            </button>
+
+            <button class="sidebar-link" data-target="module-section">
+                <i class="fa-solid fa-server"></i>
+                <span>Server Modules</span>
+            </button>
+
+            <button class="sidebar-link" data-tool="Projects">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Projects</span>
+            </button>
+
+            <button class="sidebar-link" data-tool="Databases">
+                <i class="fa-solid fa-database"></i>
+                <span>Databases</span>
+            </button>
+
+            <button class="sidebar-link" data-tool="Runtimes">
+                <i class="fa-solid fa-cubes"></i>
+                <span>Runtimes</span>
+            </button>
+        </div>
+
+        <div class="sidebar-group">
+            <div class="sidebar-heading">TOOLS</div>
+
+            <button class="sidebar-link" data-tool="PHP Manager">
+                <i class="fa-brands fa-php"></i>
+                <span>PHP Manager</span>
+            </button>
+
+            <button class="sidebar-link" data-tool="SSL Manager">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>SSL Manager</span>
+            </button>
+
+            <button class="sidebar-link" data-tool="Backups">
+                <i class="fa-solid fa-box-archive"></i>
+                <span>Backups</span>
+            </button>
+
+            <button class="sidebar-link" data-tool="Settings">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </button>
+        </div>
+
+        <div class="sidebar-status">
+            <span class="sidebar-status-dot"></span>
+            <span>LOCAL ENVIRONMENT</span>
+        </div>
+    </aside>
+
+    <div class="window">
+    <header id="dashboard-top" class="topbar">
         <div class="brand">
             <i class="fa-solid fa-server"></i>
             <strong>NovaHost</strong>
@@ -361,7 +95,7 @@ if (document.readyState === "loading") {
     </header>
 
     <main>
-        <section class="module-section">
+        <section id="module-section" class="module-section">
             <div class="section-title">
                 <h2>Modules</h2>
                 <span>Local development environment</span>
@@ -504,11 +238,432 @@ if (document.readyState === "loading") {
     </footer>
 </div>
 
-<script type="module" src="/src/main.ts"></script>
+    <aside class="sidebar sidebar-right" aria-label="Quick access">
+        <div class="sidebar-heading">SHORTCUTS</div>
+        <h2 class="quick-access-title">Quick Access</h2>
+
+        <button class="shortcut-button" data-tool="Projects">
+            <span class="shortcut-icon blue"><i class="fa-solid fa-folder-open"></i></span>
+            <span class="shortcut-copy">
+                <strong>Projects</strong>
+                <small>Manage local websites</small>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square shortcut-arrow"></i>
+        </button>
+
+        <button class="shortcut-button" data-tool="Databases">
+            <span class="shortcut-icon orange"><i class="fa-solid fa-database"></i></span>
+            <span class="shortcut-copy">
+                <strong>Databases</strong>
+                <small>Manage database instances</small>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square shortcut-arrow"></i>
+        </button>
+
+        <button class="shortcut-button" data-tool="PHP Manager">
+            <span class="shortcut-icon purple"><i class="fa-brands fa-php"></i></span>
+            <span class="shortcut-copy">
+                <strong>PHP Manager</strong>
+                <small>Versions and configuration</small>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square shortcut-arrow"></i>
+        </button>
+
+        <button class="shortcut-button" data-tool="Backups">
+            <span class="shortcut-icon green"><i class="fa-solid fa-box-archive"></i></span>
+            <span class="shortcut-copy">
+                <strong>Backups</strong>
+                <small>Protect local data</small>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square shortcut-arrow"></i>
+        </button>
+
+        <div class="web-root-card">
+            <div class="web-root-heading">
+                <i class="fa-solid fa-folder-tree"></i>
+                <span>WEB ROOT</span>
+            </div>
+            <code>D:\NovaHost\home\public</code>
+        </div>
+    </aside>
+
+</div><script type="module" src="/src/main.ts"></script>
 </body>
 </html>
 
-========== frontend\public\style.css ==========
+
+========== THEME / CSS CONTROLS ==========
+
+  frontend\public\style.css:2:    font-family: "Segoe UI", Arial, sans-serif;
+  frontend\public\style.css:3:    color: #e8edf5;
+> frontend\public\style.css:4:    background: #101820;
+  frontend\public\style.css:5:    font-synthesis: none;
+  frontend\public\style.css:6:    text-rendering: optimizeLegibility;
+  frontend\public\style.css:7:    --bg: #101820;
+  frontend\public\style.css:25:    min-width: 760px;
+  frontend\public\style.css:26:    min-height: 100vh;
+> frontend\public\style.css:27:    background: var(--bg);
+  frontend\public\style.css:28:    color: var(--text);
+  frontend\public\style.css:29:    font-size: 13px;
+  frontend\public\style.css:30:}
+  frontend\public\style.css:31:
+> frontend\public\style.css:32:button {
+  frontend\public\style.css:33:    font: inherit;
+  frontend\public\style.css:34:}
+  frontend\public\style.css:35:
+  frontend\public\style.css:37:    width: min(1180px, calc(100% - 32px));
+  frontend\public\style.css:38:    margin: 18px auto;
+> frontend\public\style.css:39:    background: var(--panel);
+  frontend\public\style.css:40:    border: 1px solid var(--border);
+  frontend\public\style.css:41:    border-radius: 7px;
+  frontend\public\style.css:42:    box-shadow: 0 12px 40px rgba(0, 0, 0, .28);
+  frontend\public\style.css:51:    justify-content: space-between;
+  frontend\public\style.css:52:    gap: 20px;
+> frontend\public\style.css:53:    background: #172530;
+  frontend\public\style.css:54:    border-bottom: 1px solid var(--border);
+  frontend\public\style.css:55:}
+  frontend\public\style.css:56:
+  frontend\public\style.css:111:
+  frontend\public\style.css:112:.section-title,
+> frontend\public\style.css:113:.logs-header {
+  frontend\public\style.css:114:    display: flex;
+  frontend\public\style.css:115:    align-items: center;
+  frontend\public\style.css:116:    justify-content: space-between;
+  frontend\public\style.css:145:    height: 36px;
+  frontend\public\style.css:146:    padding: 0 12px;
+> frontend\public\style.css:147:    background: #263743;
+  frontend\public\style.css:148:    color: #c3d0da;
+  frontend\public\style.css:149:    font-weight: 650;
+  frontend\public\style.css:150:    border-bottom: 1px solid var(--border);
+  frontend\public\style.css:162:
+  frontend\public\style.css:163:.module-table tbody tr:hover {
+> frontend\public\style.css:164:    background: #223440;
+  frontend\public\style.css:165:}
+  frontend\public\style.css:166:
+  frontend\public\style.css:167:.module-table th:first-child,
+  frontend\public\style.css:225:
+  frontend\public\style.css:226:.btn.start {
+> frontend\public\style.css:227:    background: #238b52;
+  frontend\public\style.css:228:    border-color: #31a765;
+  frontend\public\style.css:229:}
+  frontend\public\style.css:230:
+  frontend\public\style.css:231:.btn.stop {
+> frontend\public\style.css:232:    background: #b83e43;
+  frontend\public\style.css:233:    border-color: #d45a5e;
+  frontend\public\style.css:234:}
+  frontend\public\style.css:235:
+  frontend\public\style.css:236:.btn.admin {
+> frontend\public\style.css:237:    background: #286d9e;
+  frontend\public\style.css:238:    border-color: #3987ba;
+  frontend\public\style.css:239:}
+  frontend\public\style.css:240:
+  frontend\public\style.css:241:.btn.config {
+> frontend\public\style.css:242:    background: #586875;
+  frontend\public\style.css:243:    border-color: #71818e;
+  frontend\public\style.css:244:}
+  frontend\public\style.css:245:
+  frontend\public\style.css:246:.btn.logs {
+> frontend\public\style.css:247:    background: #6653a0;
+  frontend\public\style.css:248:    border-color: #8570c2;
+  frontend\public\style.css:249:}
+  frontend\public\style.css:250:
+  frontend\public\style.css:266:    border: 1px solid var(--border);
+  frontend\public\style.css:267:    border-radius: 5px;
+> frontend\public\style.css:268:    background: #172530;
+  frontend\public\style.css:269:}
+  frontend\public\style.css:270:
+  frontend\public\style.css:271:.tools-section h2 {
+  frontend\public\style.css:279:}
+  frontend\public\style.css:280:
+> frontend\public\style.css:281:.tool-button {
+  frontend\public\style.css:282:    min-width: 91px;
+  frontend\public\style.css:283:    height: 35px;
+  frontend\public\style.css:284:    display: inline-flex;
+  frontend\public\style.css:289:    border: 1px solid #405462;
+  frontend\public\style.css:290:    border-radius: 4px;
+> frontend\public\style.css:291:    background: #263945;
+  frontend\public\style.css:292:    color: #dce5ec;
+  frontend\public\style.css:293:    cursor: pointer;
+  frontend\public\style.css:294:    font-size: 12px;
+  frontend\public\style.css:295:}
+  frontend\public\style.css:296:
+> frontend\public\style.css:297:.tool-button i {
+  frontend\public\style.css:298:    color: #65b5ed;
+  frontend\public\style.css:299:}
+  frontend\public\style.css:300:
+> frontend\public\style.css:301:.tool-button:hover {
+> frontend\public\style.css:302:    background: #304957;
+  frontend\public\style.css:303:    border-color: #5a91b4;
+  frontend\public\style.css:304:}
+  frontend\public\style.css:305:
+  frontend\public\style.css:315:    border-radius: 5px;
+  frontend\public\style.css:316:    overflow: hidden;
+> frontend\public\style.css:317:    background: #111b23;
+  frontend\public\style.css:318:}
+  frontend\public\style.css:319:
+> frontend\public\style.css:320:.logs-header {
+  frontend\public\style.css:321:    margin: 0;
+  frontend\public\style.css:322:    padding: 11px 13px;
+> frontend\public\style.css:323:    background: #202f3b;
+  frontend\public\style.css:324:    border-bottom: 1px solid var(--border);
+  frontend\public\style.css:325:}
+  frontend\public\style.css:326:
+  frontend\public\style.css:330:}
+  frontend\public\style.css:331:
+> frontend\public\style.css:332:.log-controls button {
+  frontend\public\style.css:333:    width: 29px;
+  frontend\public\style.css:334:    height: 27px;
+  frontend\public\style.css:335:    border: 1px solid #485b68;
+  frontend\public\style.css:336:    border-radius: 3px;
+> frontend\public\style.css:337:    background: #30424e;
+  frontend\public\style.css:338:    color: #dce5ec;
+  frontend\public\style.css:339:    cursor: pointer;
+  frontend\public\style.css:340:}
+  frontend\public\style.css:341:
+> frontend\public\style.css:342:.log-controls button:hover {
+> frontend\public\style.css:343:    background: #405866;
+  frontend\public\style.css:344:}
+  frontend\public\style.css:345:
+  frontend\public\style.css:346:.log-toolbar {
+  frontend\public\style.css:362:    border: 0;
+  frontend\public\style.css:363:    border-radius: 3px;
+> frontend\public\style.css:364:    background: transparent;
+  frontend\public\style.css:365:    color: #9eafbc;
+  frontend\public\style.css:366:    cursor: pointer;
+  frontend\public\style.css:367:    font-size: 11px;
+  frontend\public\style.css:369:
+  frontend\public\style.css:370:.filter.active {
+> frontend\public\style.css:371:    background: #286d9e;
+  frontend\public\style.css:372:    color: white;
+  frontend\public\style.css:373:}
+  frontend\public\style.css:374:
+  frontend\public\style.css:414:    justify-content: space-between;
+  frontend\public\style.css:415:    gap: 12px;
+> frontend\public\style.css:416:    background: #172530;
+  frontend\public\style.css:417:    border-top: 1px solid var(--border);
+  frontend\public\style.css:418:    color: #91a4b2;
+  frontend\public\style.css:419:    font-size: 11px;
+  frontend\public\style.css:447:}
+  frontend\public\style.css:448:
+> frontend\public\style.css:449:/* NOVAHOST CUSTOM BACKGROUND */
+  frontend\public\style.css:450:body {
+> frontend\public\style.css:451:    background:
+  frontend\public\style.css:452:        linear-gradient(
+  frontend\public\style.css:453:            135deg,
+  frontend\public\style.css:454:            rgba(5, 12, 24, 0.58),
+  frontend\public\style.css:455:            rgba(8, 20, 36, 0.72)
+  frontend\public\style.css:456:        ),
+> frontend\public\style.css:457:        url("/background.png") center center / cover fixed no-repeat;
+  frontend\public\style.css:458:}
+  frontend\public\style.css:459:
+  frontend\public\style.css:460:.window {
+> frontend\public\style.css:461:    background: rgba(15, 29, 43, 0.86);
+  frontend\public\style.css:462:    border: 1px solid rgba(95, 165, 220, 0.28);
+  frontend\public\style.css:463:    backdrop-filter: blur(14px);
+  frontend\public\style.css:464:    -webkit-backdrop-filter: blur(14px);
+  frontend\public\style.css:470:/* ==========================================
+  frontend\public\style.css:471:   NOVAHOST THREE-PANEL DASHBOARD
+> frontend\public\style.css:472:   SIDEBARS + RESPONSIVE LAYOUT + AURORA
+  frontend\public\style.css:473:   ========================================== */
+  frontend\public\style.css:474:
+  frontend\public\style.css:475:body {
+  frontend\public\style.css:487:    pointer-events: none;
+  frontend\public\style.css:488:    opacity: 0.48;
+> frontend\public\style.css:489:    background:
+  frontend\public\style.css:490:        radial-gradient(ellipse at 18% 28%,
+  frontend\public\style.css:491:            rgba(0, 153, 255, 0.24), transparent 38%),
+  frontend\public\style.css:492:        radial-gradient(ellipse at 78% 24%,
+  frontend\public\style.css:532:}
+  frontend\public\style.css:533:
+> frontend\public\style.css:534:/* Shared sidebar appearance */
+> frontend\public\style.css:535:.app-shell > .sidebar {
+  frontend\public\style.css:536:    box-sizing: border-box;
+  frontend\public\style.css:537:    width: 100%;
+  frontend\public\style.css:538:    min-width: 0;
+  frontend\public\style.css:543:    gap: 18px;
+  frontend\public\style.css:544:    color: #dce9f5;
+> frontend\public\style.css:545:    background: linear-gradient(
+  frontend\public\style.css:546:        160deg,
+  frontend\public\style.css:547:        rgba(13, 30, 49, 0.94),
+  frontend\public\style.css:548:        rgba(9, 20, 35, 0.91)
+  frontend\public\style.css:558:
+  frontend\public\style.css:559:/* Left brand */
+> frontend\public\style.css:560:.sidebar-brand {
+  frontend\public\style.css:561:    display: flex;
+  frontend\public\style.css:562:    align-items: center;
+  frontend\public\style.css:563:    gap: 11px;
+  frontend\public\style.css:566:}
+  frontend\public\style.css:567:
+> frontend\public\style.css:568:.sidebar-brand-icon {
+  frontend\public\style.css:569:    width: 39px;
+  frontend\public\style.css:570:    height: 39px;
+  frontend\public\style.css:571:    flex: 0 0 39px;
+  frontend\public\style.css:576:    border: 1px solid rgba(70, 165, 255, 0.32);
+  frontend\public\style.css:577:    border-radius: 10px;
+> frontend\public\style.css:578:    background: linear-gradient(
+  frontend\public\style.css:579:        145deg,
+  frontend\public\style.css:580:        rgba(30, 130, 220, 0.25),
+  frontend\public\style.css:581:        rgba(65, 75, 190, 0.15)
+  frontend\public\style.css:584:}
+  frontend\public\style.css:585:
+> frontend\public\style.css:586:.sidebar-brand-text {
+  frontend\public\style.css:587:    min-width: 0;
+  frontend\public\style.css:588:    display: flex;
+  frontend\public\style.css:589:    flex-direction: column;
+  frontend\public\style.css:591:}
+  frontend\public\style.css:592:
+> frontend\public\style.css:593:.sidebar-brand-text strong {
+  frontend\public\style.css:594:    color: #f0f7ff;
+  frontend\public\style.css:595:    font-size: 15px;
+  frontend\public\style.css:596:    letter-spacing: 0.3px;
+  frontend\public\style.css:597:}
+  frontend\public\style.css:598:
+> frontend\public\style.css:599:.sidebar-brand-text span {
+  frontend\public\style.css:600:    color: #7898b4;
+  frontend\public\style.css:601:    font-size: 9px;
+  frontend\public\style.css:602:    letter-spacing: 1.5px;
+  frontend\public\style.css:604:
+  frontend\public\style.css:605:/* Vertical navigation groups */
+> frontend\public\style.css:606:.sidebar-group {
+  frontend\public\style.css:607:    display: flex;
+  frontend\public\style.css:608:    flex-direction: column;
+  frontend\public\style.css:609:    gap: 6px;
+  frontend\public\style.css:610:}
+  frontend\public\style.css:611:
+> frontend\public\style.css:612:.sidebar-heading {
+  frontend\public\style.css:613:    margin: 0 0 5px;
+  frontend\public\style.css:614:    padding: 0 9px;
+  frontend\public\style.css:615:    color: #7894ad;
+  frontend\public\style.css:619:}
+  frontend\public\style.css:620:
+> frontend\public\style.css:621:.sidebar-link {
+  frontend\public\style.css:622:    box-sizing: border-box;
+  frontend\public\style.css:623:    width: 100%;
+  frontend\public\style.css:624:    min-height: 42px;
+  frontend\public\style.css:630:    border: 1px solid transparent;
+  frontend\public\style.css:631:    border-radius: 7px;
+> frontend\public\style.css:632:    background: transparent;
+  frontend\public\style.css:633:    color: #a9bdcf;
+  frontend\public\style.css:634:    text-align: left;
+  frontend\public\style.css:635:    font: inherit;
+  frontend\public\style.css:637:    cursor: pointer;
+  frontend\public\style.css:638:    transition:
+> frontend\public\style.css:639:        background 180ms ease,
+  frontend\public\style.css:640:        border-color 180ms ease,
+  frontend\public\style.css:641:        color 180ms ease,
+  frontend\public\style.css:642:        transform 180ms ease;
+  frontend\public\style.css:643:}
+  frontend\public\style.css:644:
+> frontend\public\style.css:645:.sidebar-link i {
+  frontend\public\style.css:646:    width: 18px;
+  frontend\public\style.css:647:    flex: 0 0 18px;
+  frontend\public\style.css:648:    color: #7fa8c9;
+  frontend\public\style.css:651:}
+  frontend\public\style.css:652:
+> frontend\public\style.css:653:.sidebar-link:hover {
+  frontend\public\style.css:654:    color: #ffffff;
+> frontend\public\style.css:655:    background: rgba(54, 133, 195, 0.13);
+  frontend\public\style.css:656:    border-color: rgba(88, 166, 230, 0.18);
+  frontend\public\style.css:657:    transform: translateX(2px);
+  frontend\public\style.css:658:}
+  frontend\public\style.css:659:
+> frontend\public\style.css:660:.sidebar-link.active {
+  frontend\public\style.css:661:    color: #ffffff;
+> frontend\public\style.css:662:    background: linear-gradient(
+  frontend\public\style.css:663:        90deg,
+  frontend\public\style.css:664:        rgba(30, 132, 220, 0.24),
+  frontend\public\style.css:665:        rgba(30, 132, 220, 0.07)
+  frontend\public\style.css:669:}
+  frontend\public\style.css:670:
+> frontend\public\style.css:671:.sidebar-link.active i {
+  frontend\public\style.css:672:    color: #65bdff;
+  frontend\public\style.css:673:}
+  frontend\public\style.css:674:
+  frontend\public\style.css:675:/* Local environment status */
+> frontend\public\style.css:676:.sidebar-status {
+  frontend\public\style.css:677:    margin-top: auto;
+  frontend\public\style.css:678:    padding: 12px 9px 2px;
+  frontend\public\style.css:679:    display: flex;
+  frontend\public\style.css:686:}
+  frontend\public\style.css:687:
+> frontend\public\style.css:688:.sidebar-status-dot {
+  frontend\public\style.css:689:    width: 8px;
+  frontend\public\style.css:690:    height: 8px;
+  frontend\public\style.css:691:    flex: 0 0 8px;
+  frontend\public\style.css:692:    border-radius: 50%;
+> frontend\public\style.css:693:    background: #35d69a;
+  frontend\public\style.css:694:    box-shadow: 0 0 10px rgba(53, 214, 154, 0.65);
+  frontend\public\style.css:695:}
+  frontend\public\style.css:696:
+  frontend\public\style.css:703:}
+  frontend\public\style.css:704:
+> frontend\public\style.css:705:.shortcut-button {
+  frontend\public\style.css:706:    box-sizing: border-box;
+  frontend\public\style.css:707:    width: 100%;
+  frontend\public\style.css:708:    min-height: 66px;
+  frontend\public\style.css:713:    border: 1px solid rgba(100, 150, 195, 0.13);
+  frontend\public\style.css:714:    border-radius: 9px;
+> frontend\public\style.css:715:    background: rgba(23, 43, 63, 0.56);
+  frontend\public\style.css:716:    color: #e5f0fb;
+  frontend\public\style.css:717:    text-align: left;
+  frontend\public\style.css:718:    cursor: pointer;
+  frontend\public\style.css:719:    transition:
+> frontend\public\style.css:720:        background 180ms ease,
+  frontend\public\style.css:721:        border-color 180ms ease,
+  frontend\public\style.css:722:        transform 180ms ease;
+  frontend\public\style.css:723:}
+  frontend\public\style.css:724:
+> frontend\public\style.css:725:.shortcut-button:hover {
+> frontend\public\style.css:726:    background: rgba(37, 75, 110, 0.65);
+  frontend\public\style.css:727:    border-color: rgba(82, 166, 235, 0.38);
+  frontend\public\style.css:728:    transform: translateY(-2px);
+  frontend\public\style.css:729:}
+  frontend\public\style.css:741:.shortcut-icon.blue {
+  frontend\public\style.css:742:    color: #6bc0ff;
+> frontend\public\style.css:743:    background: rgba(45, 145, 235, 0.16);
+  frontend\public\style.css:744:}
+  frontend\public\style.css:745:
+  frontend\public\style.css:746:.shortcut-icon.orange {
+  frontend\public\style.css:747:    color: #ffb66d;
+> frontend\public\style.css:748:    background: rgba(235, 145, 45, 0.15);
+  frontend\public\style.css:749:}
+  frontend\public\style.css:750:
+  frontend\public\style.css:751:.shortcut-icon.purple {
+  frontend\public\style.css:752:    color: #c3a0ff;
+> frontend\public\style.css:753:    background: rgba(145, 95, 235, 0.16);
+  frontend\public\style.css:754:}
+  frontend\public\style.css:755:
+  frontend\public\style.css:756:.shortcut-icon.green {
+  frontend\public\style.css:757:    color: #65e0ae;
+> frontend\public\style.css:758:    background: rgba(45, 195, 135, 0.15);
+  frontend\public\style.css:759:}
+  frontend\public\style.css:760:
+  frontend\public\style.css:761:.shortcut-copy {
+  frontend\public\style.css:793:    border: 1px solid rgba(85, 155, 210, 0.2);
+  frontend\public\style.css:794:    border-radius: 9px;
+> frontend\public\style.css:795:    background: rgba(12, 30, 48, 0.72);
+  frontend\public\style.css:796:}
+  frontend\public\style.css:797:
+  frontend\public\style.css:798:.web-root-heading {
+  frontend\public\style.css:833:    }
+  frontend\public\style.css:834:
+> frontend\public\style.css:835:    .sidebar-link,
+> frontend\public\style.css:836:    .shortcut-button {
+  frontend\public\style.css:837:        transition: none;
+  frontend\public\style.css:838:    }
+  frontend\public\style.css:839:}
+  frontend\public\style.css:851:
+  frontend\public\style.css:852:.module-table .btn.stop {
+> frontend\public\style.css:853:    background: #7650c8;
+  frontend\public\style.css:854:    border-color: #7650c8;
+  frontend\public\style.css:855:    color: #fff;
+  frontend\public\style.css:856:}
+  frontend\public\style.css:857:
+  frontend\public\style.css:858:.module-table .btn.stop:hover {
+> frontend\public\style.css:859:    background: #6540b5;
+  frontend\public\style.css:860:}
+
+========== CSS START ==========
 :root {
     font-family: "Segoe UI", Arial, sans-serif;
     color: #e8edf5;
@@ -689,720 +844,3 @@ h2 {
 }
 
 .module-table th:last-child {
-    width: 350px;
-}
-
-.module-icon {
-    width: 23px;
-    margin-right: 7px;
-    text-align: center;
-    font-size: 15px;
-}
-
-.blue { color: #49a8ef; }
-.purple { color: #b48af0; }
-.orange { color: #e9a34b; }
-.red { color: #ed6b6b; }
-.green { color: #55c98a; }
-.yellow { color: #e5cb56; }
-
-.mono {
-    color: #c1ced8;
-    font-size: 12px;
-}
-
-.actions {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.btn {
-    min-width: 65px;
-    height: 27px;
-    padding: 0 9px;
-    border: 1px solid transparent;
-    border-radius: 3px;
-    color: white;
-    font-size: 11px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.btn:disabled {
-    opacity: .48;
-    cursor: not-allowed;
-}
-
-.btn.start {
-    background: #238b52;
-    border-color: #31a765;
-}
-
-.btn.stop {
-    background: #b83e43;
-    border-color: #d45a5e;
-}
-
-.btn.admin {
-    background: #286d9e;
-    border-color: #3987ba;
-}
-
-.btn.config {
-    background: #586875;
-    border-color: #71818e;
-}
-
-.btn.logs {
-    background: #6653a0;
-    border-color: #8570c2;
-}
-
-.table-note {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 9px;
-    color: var(--muted);
-    font-size: 11px;
-}
-
-.table-note i {
-    color: #e5b34e;
-}
-
-.tools-section {
-    padding: 13px;
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    background: #172530;
-}
-
-.tools-section h2 {
-    margin-bottom: 11px;
-}
-
-.tools-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-}
-
-.tool-button {
-    min-width: 91px;
-    height: 35px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    padding: 0 10px;
-    border: 1px solid #405462;
-    border-radius: 4px;
-    background: #263945;
-    color: #dce5ec;
-    cursor: pointer;
-    font-size: 12px;
-}
-
-.tool-button i {
-    color: #65b5ed;
-}
-
-.tool-button:hover {
-    background: #304957;
-    border-color: #5a91b4;
-}
-
-.tool-message {
-    min-height: 28px;
-    padding-top: 10px;
-    color: var(--muted);
-    font-size: 11px;
-}
-
-.logs-section {
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    overflow: hidden;
-    background: #111b23;
-}
-
-.logs-header {
-    margin: 0;
-    padding: 11px 13px;
-    background: #202f3b;
-    border-bottom: 1px solid var(--border);
-}
-
-.log-controls {
-    display: flex;
-    gap: 5px;
-}
-
-.log-controls button {
-    width: 29px;
-    height: 27px;
-    border: 1px solid #485b68;
-    border-radius: 3px;
-    background: #30424e;
-    color: #dce5ec;
-    cursor: pointer;
-}
-
-.log-controls button:hover {
-    background: #405866;
-}
-
-.log-toolbar {
-    min-height: 39px;
-    padding: 5px 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #283944;
-}
-
-.filters {
-    display: flex;
-    gap: 4px;
-}
-
-.filter {
-    padding: 5px 10px;
-    border: 0;
-    border-radius: 3px;
-    background: transparent;
-    color: #9eafbc;
-    cursor: pointer;
-    font-size: 11px;
-}
-
-.filter.active {
-    background: #286d9e;
-    color: white;
-}
-
-#log-count {
-    color: var(--muted);
-    font-size: 11px;
-}
-
-.log-list {
-    height: 175px;
-    overflow: auto;
-    padding: 10px 12px;
-    font-family: Consolas, monospace;
-    font-size: 11px;
-}
-
-.log-empty {
-    padding: 12px 2px;
-    color: #8295a3;
-}
-
-.log-row {
-    display: grid;
-    grid-template-columns: 80px 65px 120px 1fr;
-    gap: 10px;
-    padding: 5px 0;
-    border-bottom: 1px solid #1e2c35;
-}
-
-.log-time { color: #8498a7; }
-.log-module { color: #67b4e8; }
-.log-message { color: #c7d2da; }
-.tag-success { color: #51ca85; }
-.tag-stop { color: #b89af2; }
-.tag-error { color: #ed6868; }
-.tag-info { color: #66b4eb; }
-
-footer {
-    min-height: 37px;
-    padding: 0 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    background: #172530;
-    border-top: 1px solid var(--border);
-    color: #91a4b2;
-    font-size: 11px;
-}
-
-@media (max-width: 850px) {
-    .window {
-        width: calc(100% - 12px);
-        margin: 6px auto;
-    }
-
-    main {
-        padding: 10px;
-    }
-
-    .topbar,
-    footer {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-
-    .top-info {
-        gap: 8px;
-    }
-
-    footer {
-        flex-wrap: wrap;
-        padding-top: 8px;
-        padding-bottom: 8px;
-    }
-}
-
-/* NOVAHOST CUSTOM BACKGROUND */
-body {
-    background:
-        linear-gradient(
-            135deg,
-            rgba(5, 12, 24, 0.58),
-            rgba(8, 20, 36, 0.72)
-        ),
-        url("/background.png") center center / cover fixed no-repeat;
-}
-
-.window {
-    background: rgba(15, 29, 43, 0.86);
-    border: 1px solid rgba(95, 165, 220, 0.28);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 0 35px rgba(0, 130, 255, 0.12),
-                0 20px 70px rgba(0, 0, 0, 0.45);
-}
-
-
-========== frontend\package.json ==========
-{
-  "name": "frontend",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build:dev": "vite build --minify false --mode development",
-    "build": "vite build --mode production",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^7.3.1",
-    "@wailsio/runtime": "3.0.0"
-  },
-  "devDependencies": {
-    "typescript": "^4.9.3",
-    "vite": "^8.2.4"
-  }
-}
-
-========== build\config.yml ==========
-# This file contains the configuration for this project.
-# When you update `info` or `fileAssociations`, run `wails3 task common:update:build-assets` to update the assets.
-# Note that this will overwrite any changes you have made to the assets.
-version: '3'
-
-# This information is used to generate the build assets.
-info:
-  companyName: "NovaHost" # The name of the company
-  productName: "NovaHost Desktop" # The name of the application
-  productIdentifier: "com.novahost.desktop" # The unique product identifier
-  description: "NovaHost Local Server Management Platform" # The application description
-  copyright: "(c) 2026, NovaHost" # Copyright text
-  comments: "NovaHost Desktop Application" # Comments
-  version: "0.1.0" # The application version
-  # cfBundleIconName: "appicon" # The macOS icon name in Assets.car icon bundles (optional)
-  #                               # Should match the name of your .icon file without the extension
-  #                               # If not set and Assets.car exists, defaults to "appicon"
-
-# iOS build configuration (uncomment to customise iOS project generation)
-# Note: Keys under `ios` OVERRIDE values under `info` when set.
-# ios:
-#   # The iOS bundle identifier used in the generated Xcode project (CFBundleIdentifier)
-#   bundleID: "com.mycompany.myproduct"
-#   # The display name shown under the app icon (CFBundleDisplayName/CFBundleName)
-#   displayName: "My Product"
-#   # The app version to embed in Info.plist (CFBundleShortVersionString/CFBundleVersion)
-#   version: "0.1.0"
-#   # The company/organisation name for templates and project settings
-#   company: "My Company"
-#   # Additional comments to embed in Info.plist metadata
-#   comments: "NovaHost Desktop Application"
-
-# Dev mode configuration
-dev_mode:
-  root_path: .
-  log_level: warn
-  debounce: 1000
-  ignore:
-    dir:
-      - .git
-      - node_modules
-      - frontend
-      - bin
-    file:
-      - .DS_Store
-      - .gitignore
-      - .gitkeep
-      - "*_test.go"
-    watched_extension:
-      - "*.go"
-      - "*.js" # Watch for changes to JS/TS files included using the //wails:include directive.
-      - "*.ts" # The frontend directory will be excluded entirely by the setting above.
-    git_ignore: true
-  executes:
-    - cmd: wails3 build DEV=true
-      type: blocking
-    - cmd: wails3 task common:dev:frontend
-      type: background
-      # The standard frontend task waits up to 60s for HTTP 200 from
-      # FRONTEND_DEVSERVER_URL before starting the app. Override if needed;
-      # custom background commands can opt in with the same readiness block.
-      # readiness:
-      #   http: "http://localhost:5173/"
-      #   timeout: "60s"
-      #   interval: "200ms"
-    - cmd: wails3 task run
-      type: primary
-      exit_policy: shutdown
-
-# File Associations
-# More information at: https://v3.wails.io/noit/done/yet
-fileAssociations:
-#  - ext: wails
-#    name: Wails
-#    description: Wails Application File
-#    iconName: wailsFileIcon
-#    role: Editor
-#  - ext: jpg
-#    name: JPEG
-#    description: Image File
-#    iconName: jpegFileIcon
-#    role: Editor
-#    mimeType: image/jpeg  # (optional)
-
-# Other data
-other:
-  - name: My Other Data
-
-========== build\windows\Taskfile.yml ==========
-version: '3'
-
-includes:
-  common: ../Taskfile.yml
-
-vars:
-  # Signing configuration - edit these values for your project
-  # SIGN_CERTIFICATE: "path/to/certificate.pfx"
-  # SIGN_THUMBPRINT: "certificate-thumbprint"  # Alternative to SIGN_CERTIFICATE
-  # TIMESTAMP_SERVER: "http://timestamp.digicert.com"
-  #
-  # Password is stored securely in system keychain. Run: wails3 setup signing
-
-  # Docker image for cross-compilation with CGO (used when CGO_ENABLED=1 on non-Windows)
-  CROSS_IMAGE: wails-cross
-
-tasks:
-  build:
-    summary: Builds the application for Windows
-    cmds:
-      # Auto-detect CGO: if CGO_ENABLED=1, use Docker; otherwise use native Go cross-compile
-      - task: '{{if and (ne OS "windows") (eq .CGO_ENABLED "1")}}build:docker{{else}}build:native{{end}}'
-        vars:
-          ARCH: '{{.ARCH}}'
-          DEV: '{{.DEV}}'
-          EXTRA_TAGS: '{{.EXTRA_TAGS}}'
-          OBFUSCATED: '{{.OBFUSCATED}}'
-          GARBLE_ARGS: '{{.GARBLE_ARGS}}'
-    vars:
-      # Default to CGO_ENABLED=0 if not explicitly set
-      CGO_ENABLED: '{{.CGO_ENABLED | default "0"}}'
-
-  build:native:
-    summary: Builds the application using native Go cross-compilation
-    internal: true
-    deps:
-      - task: common:go:mod:tidy
-      - task: common:build:frontend
-        vars:
-          BUILD_FLAGS:
-            ref: .BUILD_FLAGS
-          OBFUSCATED:
-            ref: .OBFUSCATED
-          DEV:
-            ref: .DEV
-      - task: common:generate:icons
-    preconditions:
-      - sh: '{{if eq .OBFUSCATED "true"}}command -v garble >/dev/null 2>&1{{else}}true{{end}}'
-        msg: "garble is required for obfuscated builds. Install it with: go install mvdan.cc/garble@v0.16.0 (requires Go 1.24+). See https://github.com/burrowers/garble/releases for version/toolchain compatibility."
-    cmds:
-      - task: generate:syso
-        vars:
-          ARCH: '{{.ARCH}}'
-      - '{{if eq .OBFUSCATED "true"}}garble {{.GARBLE_ARGS}} build{{else}}go build{{end}} {{.BUILD_FLAGS}} -o "{{.BIN_DIR}}/{{.APP_NAME}}.exe"'
-      - cmd: powershell Remove-item *.syso
-        platforms: [windows]
-      - cmd: rm -f *.syso
-        platforms: [linux, darwin]
-    vars:
-      BUILD_FLAGS: '{{if eq .DEV "true"}}{{if or .EXTRA_TAGS (eq .OBFUSCATED "true")}}-tags {{if eq .OBFUSCATED "true"}}wails_obfuscated{{if .EXTRA_TAGS}},{{end}}{{end}}{{.EXTRA_TAGS}} {{end}}-buildvcs=false -gcflags=all="-l"{{else}}-tags production{{if eq .OBFUSCATED "true"}},wails_obfuscated{{end}}{{if .EXTRA_TAGS}},{{.EXTRA_TAGS}}{{end}} -trimpath -buildvcs=false -ldflags="-w -s -H windowsgui"{{end}}'
-    env:
-      GOOS: windows
-      CGO_ENABLED: '{{.CGO_ENABLED | default "0"}}'
-      GOARCH: '{{.ARCH | default ARCH}}'
-
-  build:docker:
-    summary: Cross-compiles for Windows using Docker with Zig (for CGO builds on non-Windows)
-    internal: true
-    deps:
-      - task: common:build:frontend
-        vars:
-          OBFUSCATED:
-            ref: .OBFUSCATED
-      - task: common:generate:icons
-    preconditions:
-      - sh: docker info > /dev/null 2>&1
-        msg: "Docker is required for CGO cross-compilation. Please install Docker."
-      - sh: docker image inspect {{.CROSS_IMAGE}} > /dev/null 2>&1
-        msg: |
-          Docker image '{{.CROSS_IMAGE}}' not found.
-          Build it first: wails3 task setup:docker
-    cmds:
-      - task: generate:syso
-        vars:
-          ARCH: '{{.ARCH}}'
-      - docker run --rm -v "{{.ROOT_DIR}}:/app" {{.DOCKER_MOUNTS}} -e APP_NAME="{{.APP_NAME}}" {{if .EXTRA_TAGS}}-e EXTRA_TAGS="{{.EXTRA_TAGS}}"{{end}} {{if eq .OBFUSCATED "true"}}-e OBFUSCATED=true{{end}} {{if .GARBLE_ARGS}}-e GARBLE_ARGS="{{.GARBLE_ARGS}}"{{end}} {{.CROSS_IMAGE}} windows {{.DOCKER_ARCH}}
-      - cmd: docker run --rm -v "{{.ROOT_DIR}}:/app" alpine chown -R $(id -u):$(id -g) /app/bin
-        platforms: [linux, darwin]
-      - rm -f *.syso
-    vars:
-      DOCKER_ARCH: '{{.ARCH | default "amd64"}}'
-      # Generate Docker volume mounts: Go module cache + go.mod replace directives
-      # Uses wails3 tool docker-mounts for cross-platform compatibility (Windows/Linux/macOS)
-      DOCKER_MOUNTS:
-        sh: 'wails3 tool docker-mounts'
-
-  package:
-    summary: Packages the application
-    cmds:
-      - task: '{{if eq (.FORMAT | default "nsis") "msix"}}create:msix:package{{else}}create:nsis:installer{{end}}'
-        vars:
-          INSTALL_SCOPE: '{{.INSTALL_SCOPE | default "machine"}}'
-    vars:
-      FORMAT: '{{.FORMAT | default "nsis"}}'
-      INSTALL_SCOPE: '{{.INSTALL_SCOPE | default "machine"}}'
-
-  generate:syso:
-    summary: Generates Windows `.syso` file
-    dir: build
-    cmds:
-      - wails3 generate syso -arch {{.ARCH}} -icon windows/icon.ico -manifest windows/wails.exe.manifest -info windows/info.json -out ../wails_windows_{{.ARCH}}.syso
-    vars:
-      ARCH: '{{.ARCH | default ARCH}}'
-
-  create:nsis:installer:
-    summary: Creates an NSIS installer
-    dir: build/windows/nsis
-    deps:
-      - task: build
-    preconditions:
-      - sh: '[ "{{.INSTALL_SCOPE}}" = "user" ] || [ "{{.INSTALL_SCOPE}}" = "machine" ]'
-        msg: "INSTALL_SCOPE must be 'user' or 'machine', got '{{.INSTALL_SCOPE}}'"
-    cmds:
-      # Create the Microsoft WebView2 bootstrapper if it doesn't exist
-      - wails3 generate webview2bootstrapper -dir "{{.ROOT_DIR}}/build/windows/nsis"
-      - |
-        {{if eq OS "windows"}}
-        makensis {{if eq .INSTALL_SCOPE "user"}}-DWAILS_INSTALL_SCOPE=user -DREQUEST_EXECUTION_LEVEL=user {{end}}-DARG_WAILS_{{.ARG_FLAG}}_BINARY="{{.ROOT_DIR}}\{{.BIN_DIR}}\{{.APP_NAME}}.exe" project.nsi
-        {{else}}
-        makensis {{if eq .INSTALL_SCOPE "user"}}-DWAILS_INSTALL_SCOPE=user -DREQUEST_EXECUTION_LEVEL=user {{end}}-DARG_WAILS_{{.ARG_FLAG}}_BINARY="{{.ROOT_DIR}}/{{.BIN_DIR}}/{{.APP_NAME}}.exe" project.nsi
-        {{end}}
-    vars:
-      ARCH: '{{.ARCH | default ARCH}}'
-      ARG_FLAG: '{{if eq .ARCH "amd64"}}AMD64{{else}}ARM64{{end}}'
-      INSTALL_SCOPE: '{{.INSTALL_SCOPE | default "machine"}}'
-
-  create:msix:package:
-    summary: Creates an MSIX package
-    deps:
-      - task: build
-    cmds:
-      - |-
-        wails3 tool msix \
-          --config "{{.ROOT_DIR}}/build/config.yml" \
-          --name "{{.APP_NAME}}.exe" \
-          --executable "{{.ROOT_DIR}}/{{.BIN_DIR}}/{{.APP_NAME}}.exe" \
-          --arch "{{.ARCH}}" \
-          --out "{{.ROOT_DIR}}/{{.BIN_DIR}}/{{.APP_NAME}}-{{.ARCH}}.msix" \
-          {{if .CERT_PATH}}--cert "{{.CERT_PATH}}"{{end}} \
-          {{if .PUBLISHER}}--publisher "{{.PUBLISHER}}"{{end}} \
-          {{if eq .USE_MSIX_TOOL "true"}}--use-msix-tool{{else}}--use-makeappx{{end}}
-    vars:
-      ARCH: '{{.ARCH | default ARCH}}'
-      CERT_PATH: '{{.CERT_PATH | default ""}}'
-      PUBLISHER: '{{.PUBLISHER | default ""}}'
-      USE_MSIX_TOOL: '{{.USE_MSIX_TOOL | default "false"}}'
-
-  install:msix:tools:
-    summary: Installs tools required for MSIX packaging
-    cmds:
-      - wails3 tool msix-install-tools
-
-  run:
-    cmds:
-      - '{{.BIN_DIR}}/{{.APP_NAME}}.exe'
-
-  sign:
-    summary: Signs the Windows executable
-    desc: |
-      Signs the .exe with an Authenticode certificate.
-      Set SIGN_CERTIFICATE or SIGN_THUMBPRINT to override the certificate
-      configured globally via `wails3 setup` (~/.config/wails/defaults.yaml).
-      Password is retrieved from system keychain (run: wails3 setup signing)
-    deps:
-      - task: build
-    cmds:
-      # Certificate vars are optional: if unset, `wails3 tool sign` falls back to
-      # the certificate configured globally via `wails3 setup`.
-      - wails3 tool sign --input "{{.BIN_DIR}}/{{.APP_NAME}}.exe" {{if .SIGN_CERTIFICATE}}--certificate "{{.SIGN_CERTIFICATE}}"{{end}} {{if .SIGN_THUMBPRINT}}--thumbprint "{{.SIGN_THUMBPRINT}}"{{end}} {{if .TIMESTAMP_SERVER}}--timestamp "{{.TIMESTAMP_SERVER}}"{{end}}
-
-  sign:installer:
-    summary: Signs the NSIS installer
-    desc: |
-      Creates and signs the NSIS installer.
-      Set SIGN_CERTIFICATE or SIGN_THUMBPRINT to override the certificate
-      configured globally via `wails3 setup` (~/.config/wails/defaults.yaml).
-      Password is retrieved from system keychain (run: wails3 setup signing)
-    deps:
-      - task: create:nsis:installer
-        vars:
-          INSTALL_SCOPE: '{{.INSTALL_SCOPE | default "machine"}}'
-    vars:
-      INSTALL_SCOPE: '{{.INSTALL_SCOPE | default "machine"}}'
-    cmds:
-      - wails3 tool sign --input "build/windows/nsis/{{.APP_NAME}}-installer.exe" {{if .SIGN_CERTIFICATE}}--certificate "{{.SIGN_CERTIFICATE}}"{{end}} {{if .SIGN_THUMBPRINT}}--thumbprint "{{.SIGN_THUMBPRINT}}"{{end}} {{if .TIMESTAMP_SERVER}}--timestamp "{{.TIMESTAMP_SERVER}}"{{end}}
-
-========== build\windows\nsis\project.nsi ==========
-Unicode true
-
-####
-## Please note: Template replacements don't work in this file. They are provided with default defines like
-## mentioned underneath.
-## If the keyword is not defined, "wails_tools.nsh" will populate them.
-## If they are defined here, "wails_tools.nsh" will not touch them. This allows you to use this project.nsi manually
-## from outside of Wails for debugging and development of the installer.
-##
-## For development first make a wails nsis build to populate the "wails_tools.nsh":
-## > wails build --target windows/amd64 --nsis
-## Then you can call makensis on this file with specifying the path to your binary:
-## For a AMD64 only installer:
-## > makensis -DARG_WAILS_AMD64_BINARY=..\..\bin\app.exe
-## For a ARM64 only installer:
-## > makensis -DARG_WAILS_ARM64_BINARY=..\..\bin\app.exe
-## For a installer with both architectures:
-## > makensis -DARG_WAILS_AMD64_BINARY=..\..\bin\app-amd64.exe -DARG_WAILS_ARM64_BINARY=..\..\bin\app-arm64.exe
-####
-## The following information is taken from the wails_tools.nsh file, but they can be overwritten here.
-####
-## !define INFO_PROJECTNAME    "my-project" # Default "NovaHost"
-## !define INFO_COMPANYNAME    "My Company" # Default "NovaHost"
-## !define INFO_PRODUCTNAME    "My Product Name" # Default "NovaHost Desktop"
-## !define INFO_PRODUCTVERSION "1.0.0"     # Default "0.1.0"
-## !define INFO_COPYRIGHT      "(c) Now, My Company" # Default "Â© 2026, My Company"
-###
-## !define PRODUCT_EXECUTABLE  "Application.exe"      # Default "${INFO_PROJECTNAME}.exe"
-## !define UNINST_KEY_NAME     "UninstKeyInRegistry"  # Default "${INFO_COMPANYNAME}${INFO_PRODUCTNAME}"
-####
-## !define REQUEST_EXECUTION_LEVEL "admin"            # Default "admin"  see also https://nsis.sourceforge.io/Docs/Chapter4.html
-## !define WAILS_INSTALL_SCOPE     "user"             # Default "machine" - set to "user" for per-user install ($LOCALAPPDATA) without UAC prompt
-####
-## Include the wails tools
-####
-!include "wails_tools.nsh"
-
-# The version information for this two must consist of 4 parts
-VIProductVersion "${INFO_PRODUCTVERSION}.0"
-VIFileVersion    "${INFO_PRODUCTVERSION}.0"
-
-VIAddVersionKey "CompanyName"     "${INFO_COMPANYNAME}"
-VIAddVersionKey "FileDescription" "${INFO_PRODUCTNAME} Installer"
-VIAddVersionKey "ProductVersion"  "${INFO_PRODUCTVERSION}"
-VIAddVersionKey "FileVersion"     "${INFO_PRODUCTVERSION}"
-VIAddVersionKey "LegalCopyright"  "${INFO_COPYRIGHT}"
-VIAddVersionKey "ProductName"     "${INFO_PRODUCTNAME}"
-
-# Enable HiDPI support. https://nsis.sourceforge.io/Reference/ManifestDPIAware
-ManifestDPIAware true
-
-!include "MUI.nsh"
-
-!define MUI_ICON "..\icon.ico"
-!define MUI_UNICON "..\icon.ico"
-# !define MUI_WELCOMEFINISHPAGE_BITMAP "resources\leftimage.bmp" #Include this to add a bitmap on the left side of the Welcome Page. Must be a size of 164x314
-!define MUI_FINISHPAGE_NOAUTOCLOSE # Wait on the INSTFILES page so the user can take a look into the details of the installation steps
-!define MUI_ABORTWARNING # This will warn the user if they exit from the installer.
-
-!insertmacro MUI_PAGE_WELCOME # Welcome to the installer page.
-# !insertmacro MUI_PAGE_LICENSE "resources\eula.txt" # Adds a EULA page to the installer
-!insertmacro MUI_PAGE_DIRECTORY # In which folder install page.
-!insertmacro MUI_PAGE_INSTFILES # Installing page.
-!insertmacro MUI_PAGE_FINISH # Finished installation page.
-
-!insertmacro MUI_UNPAGE_INSTFILES # Uninstalling page
-
-!insertmacro MUI_LANGUAGE "English" # Set the Language of the installer
-
-## The following two statements can be used to sign the installer and the uninstaller. The path to the binaries are provided in %1
-#!uninstfinalize 'signtool --file "%1"'
-#!finalize 'signtool --file "%1"'
-
-Name "${INFO_PRODUCTNAME}"
-OutFile "..\..\..\bin\${INFO_PROJECTNAME}-${ARCH}-installer.exe" # Name of the installer's file.
-!if "${WAILS_INSTALL_SCOPE}" == "user"
-    InstallDir "$LOCALAPPDATA\Programs\${INFO_PRODUCTNAME}"
-!else
-    InstallDir "$PROGRAMFILES64\${INFO_COMPANYNAME}\${INFO_PRODUCTNAME}"
-!endif
-ShowInstDetails show # This will always show the installation details.
-
-Function .onInit
-   !insertmacro wails.checkArchitecture
-FunctionEnd
-
-Section
-    !insertmacro wails.setShellContext
-
-    !insertmacro wails.webview2runtime
-
-    SetOutPath $INSTDIR
-
-    !insertmacro wails.files
-
-    CreateShortcut "$SMPROGRAMS\${INFO_PRODUCTNAME}.lnk" "$INSTDIR\${PRODUCT_EXECUTABLE}"
-    CreateShortCut "$DESKTOP\${INFO_PRODUCTNAME}.lnk" "$INSTDIR\${PRODUCT_EXECUTABLE}"
-
-    !insertmacro wails.associateFiles
-    !insertmacro wails.associateCustomProtocols
-
-    !insertmacro wails.writeUninstaller
-SectionEnd
-
-Section "uninstall"
-    !insertmacro wails.setShellContext
-
-    RMDir /r "$AppData\${PRODUCT_EXECUTABLE}" # Remove the WebView2 DataPath
-
-    RMDir /r $INSTDIR
-
-    Delete "$SMPROGRAMS\${INFO_PRODUCTNAME}.lnk"
-    Delete "$DESKTOP\${INFO_PRODUCTNAME}.lnk"
-
-    !insertmacro wails.unassociateFiles
-    !insertmacro wails.unassociateCustomProtocols
-
-    !insertmacro wails.deleteUninstaller
-SectionEnd
