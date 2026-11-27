@@ -1,846 +1,6328 @@
-========== INDEX.HTML ==========
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#101820">
-    <title>NovaHost Control Panel</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-<div class="app-shell">
-
-    <aside class="sidebar sidebar-left" aria-label="Workspace navigation">
-        <div class="sidebar-brand">
-            <div class="sidebar-brand-icon">
-                <i class="fa-solid fa-server"></i>
-            </div>
-            <div class="sidebar-brand-text">
-                <strong>NovaHost</strong>
-                <span>CONTROL CENTER</span>
-            </div>
-        </div>
-
-        <div class="sidebar-group">
-            <div class="sidebar-heading">WORKSPACE</div>
-
-            <button class="sidebar-link active" data-target="dashboard-top">
-                <i class="fa-solid fa-gauge-high"></i>
-                <span>Dashboard</span>
-            </button>
-
-            <button class="sidebar-link" data-target="module-section">
-                <i class="fa-solid fa-server"></i>
-                <span>Server Modules</span>
-            </button>
-
-            <button class="sidebar-link" data-tool="Projects">
-                <i class="fa-solid fa-folder-open"></i>
-                <span>Projects</span>
-            </button>
-
-            <button class="sidebar-link" data-tool="Databases">
-                <i class="fa-solid fa-database"></i>
-                <span>Databases</span>
-            </button>
-
-            <button class="sidebar-link" data-tool="Runtimes">
-                <i class="fa-solid fa-cubes"></i>
-                <span>Runtimes</span>
-            </button>
-        </div>
-
-        <div class="sidebar-group">
-            <div class="sidebar-heading">TOOLS</div>
-
-            <button class="sidebar-link" data-tool="PHP Manager">
-                <i class="fa-brands fa-php"></i>
-                <span>PHP Manager</span>
-            </button>
-
-            <button class="sidebar-link" data-tool="SSL Manager">
-                <i class="fa-solid fa-shield-halved"></i>
-                <span>SSL Manager</span>
-            </button>
-
-            <button class="sidebar-link" data-tool="Backups">
-                <i class="fa-solid fa-box-archive"></i>
-                <span>Backups</span>
-            </button>
-
-            <button class="sidebar-link" data-tool="Settings">
-                <i class="fa-solid fa-gear"></i>
-                <span>Settings</span>
-            </button>
-        </div>
-
-        <div class="sidebar-status">
-            <span class="sidebar-status-dot"></span>
-            <span>LOCAL ENVIRONMENT</span>
-        </div>
-    </aside>
-
-    <div class="window">
-    <header id="dashboard-top" class="topbar">
-        <div class="brand">
-            <i class="fa-solid fa-server"></i>
-            <strong>NovaHost</strong>
-            <span>Control Panel</span>
-        </div>
-        <div class="top-info">
-            <span id="engine-status" class="engine-status">ENGINE NOT CONNECTED</span>
-            <span id="clock">--:--:--</span>
-        </div>
-    </header>
-
-    <main>
-        <section id="module-section" class="module-section">
-            <div class="section-title">
-                <h2>Modules</h2>
-                <span>Local development environment</span>
-            </div>
-
-            <div class="table-wrap">
-                <table class="module-table">
-                    <thead>
-                        <tr>
-                            <th>Module</th>
-                            <th>PID(s)</th>
-                            <th>Port(s)</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><i class="fa-solid fa-globe module-icon blue"></i><strong>NovaHost Web Engine</strong></td>
-                            <td class="mono" id="pid-engine">--</td>
-                            <td class="mono">8080</td>
-                            <td class="actions">
-                                <button class="btn start" disabled>Start</button>
-                                <button class="btn admin" disabled>Admin</button>
-                                <button class="btn config" disabled>Config</button>
-                                <button class="btn logs" disabled>Logs</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-brands fa-php module-icon purple"></i><strong>PHP Runtime</strong></td>
-                            <td class="mono" id="pid-php">--</td>
-                            <td class="mono">9075</td>
-                            <td class="actions">
-                                <button class="btn start" disabled>Start</button>
-                                <button class="btn admin" disabled>Admin</button>
-                                <button class="btn config" disabled>Config</button>
-                                <button class="btn logs" disabled>Logs</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-database module-icon orange"></i><strong>MariaDB</strong></td>
-                            <td class="mono" id="pid-mariadb">--</td>
-                            <td class="mono">3306</td>
-                            <td class="actions">
-                                <button class="btn start" disabled>Start</button>
-                                <button class="btn admin" disabled>Admin</button>
-                                <button class="btn config" disabled>Config</button>
-                                <button class="btn logs" disabled>Logs</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-solid fa-layer-group module-icon red"></i><strong>Redis</strong></td>
-                            <td class="mono" id="pid-redis">--</td>
-                            <td class="mono">6379</td>
-                            <td class="actions">
-                                <button class="btn start" disabled>Start</button>
-                                <button class="btn admin" disabled>Admin</button>
-                                <button class="btn config" disabled>Config</button>
-                                <button class="btn logs" disabled>Logs</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-brands fa-node-js module-icon green"></i><strong>Node.js</strong></td>
-                            <td class="mono" id="pid-node">--</td>
-                            <td class="mono">Dynamic</td>
-                            <td class="actions">
-                                <button class="btn start" disabled>Start</button>
-                                <button class="btn admin" disabled>Admin</button>
-                                <button class="btn config" disabled>Config</button>
-                                <button class="btn logs" disabled>Logs</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><i class="fa-brands fa-python module-icon yellow"></i><strong>Python</strong></td>
-                            <td class="mono" id="pid-python">--</td>
-                            <td class="mono">Dynamic</td>
-                            <td class="actions">
-                                <button class="btn start" disabled>Start</button>
-                                <button class="btn admin" disabled>Admin</button>
-                                <button class="btn config" disabled>Config</button>
-                                <button class="btn logs" disabled>Logs</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="table-note">
-                <i class="fa-solid fa-circle-info"></i>
-                Process controls will activate after the NovaHost Process Manager is connected.
-            </div>
-        </section>
-
-        <section class="tools-section">
-            <h2>Tools</h2>
-            <div class="tools-grid">
-                <button class="tool-button" data-tool="Config"><i class="fa-solid fa-gear"></i>Config</button>
-                <button class="tool-button" data-tool="Netstat"><i class="fa-solid fa-network-wired"></i>Netstat</button>
-                <button class="tool-button" data-tool="Shell"><i class="fa-solid fa-terminal"></i>Shell</button>
-                <button class="tool-button" data-tool="Explorer"><i class="fa-solid fa-folder-open"></i>Explorer</button>
-                <button class="tool-button" data-tool="Projects"><i class="fa-solid fa-code"></i>Projects</button>
-                <button class="tool-button" data-tool="Databases"><i class="fa-solid fa-database"></i>Databases</button>
-                <button class="tool-button" data-tool="Runtimes"><i class="fa-solid fa-cubes"></i>Runtimes</button>
-                <button class="tool-button" data-tool="PHP Manager"><i class="fa-brands fa-php"></i>PHP Manager</button>
-                <button class="tool-button" data-tool="SSL Manager"><i class="fa-solid fa-shield-halved"></i>SSL Manager</button>
-                <button class="tool-button" data-tool="Backups"><i class="fa-solid fa-box-archive"></i>Backups</button>
-                <button class="tool-button" data-tool="Services"><i class="fa-solid fa-sliders"></i>Services</button>
-                <button class="tool-button" data-tool="Help"><i class="fa-solid fa-circle-question"></i>Help</button>
-            </div>
-            <div id="tool-message" class="tool-message">Select a tool to open its workspace. Tools will be connected as their modules are implemented.</div>
-        </section>
-
-        <section class="logs-section">
-            <div class="logs-header">
-                <h2>NovaHost Log Console</h2>
-                <div class="log-controls">
-                    <button id="pause-logs" title="Pause logs"><i class="fa-solid fa-pause"></i></button>
-                    <button id="clear-logs" title="Clear logs"><i class="fa-solid fa-trash"></i></button>
-                    <button id="export-logs" title="Export logs"><i class="fa-solid fa-download"></i></button>
-                </div>
-            </div>
-            <div class="log-toolbar">
-                <div class="filters">
-                    <button class="filter active" data-filter="all">All</button>
-                    <button class="filter" data-filter="success">Start</button>
-                    <button class="filter" data-filter="stop">Stop</button>
-                    <button class="filter" data-filter="error">Errors</button>
-                    <button class="filter" data-filter="info">Info</button>
-                </div>
-                <span id="log-count">0 entries</span>
-            </div>
-            <div id="log-list" class="log-list">
-                <div class="log-empty">NovaHost is waiting for process events...</div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <span>NovaHost Desktop Edition Â· v0.1.0</span>
-        <span>Web root: D:\NovaHost\home\public</span>
-        <span><b id="timezone-label">--</b> Â· <b id="footer-clock">--:--:--</b></span>
-    </footer>
-</div>
-
-    <aside class="sidebar sidebar-right" aria-label="Quick access">
-        <div class="sidebar-heading">SHORTCUTS</div>
-        <h2 class="quick-access-title">Quick Access</h2>
-
-        <button class="shortcut-button" data-tool="Projects">
-            <span class="shortcut-icon blue"><i class="fa-solid fa-folder-open"></i></span>
-            <span class="shortcut-copy">
-                <strong>Projects</strong>
-                <small>Manage local websites</small>
-            </span>
-            <i class="fa-solid fa-arrow-up-right-from-square shortcut-arrow"></i>
-        </button>
-
-        <button class="shortcut-button" data-tool="Databases">
-            <span class="shortcut-icon orange"><i class="fa-solid fa-database"></i></span>
-            <span class="shortcut-copy">
-                <strong>Databases</strong>
-                <small>Manage database instances</small>
-            </span>
-            <i class="fa-solid fa-arrow-up-right-from-square shortcut-arrow"></i>
-        </button>
-
-        <button class="shortcut-button" data-tool="PHP Manager">
-            <span class="shortcut-icon purple"><i class="fa-brands fa-php"></i></span>
-            <span class="shortcut-copy">
-                <strong>PHP Manager</strong>
-                <small>Versions and configuration</small>
-            </span>
-            <i class="fa-solid fa-arrow-up-right-from-square shortcut-arrow"></i>
-        </button>
-
-        <button class="shortcut-button" data-tool="Backups">
-            <span class="shortcut-icon green"><i class="fa-solid fa-box-archive"></i></span>
-            <span class="shortcut-copy">
-                <strong>Backups</strong>
-                <small>Protect local data</small>
-            </span>
-            <i class="fa-solid fa-arrow-up-right-from-square shortcut-arrow"></i>
-        </button>
-
-        <div class="web-root-card">
-            <div class="web-root-heading">
-                <i class="fa-solid fa-folder-tree"></i>
-                <span>WEB ROOT</span>
-            </div>
-            <code>D:\NovaHost\home\public</code>
-        </div>
-    </aside>
-
-</div><script type="module" src="/src/main.ts"></script>
-</body>
-</html>
-
-
-========== THEME / CSS CONTROLS ==========
-
-  frontend\public\style.css:2:    font-family: "Segoe UI", Arial, sans-serif;
-  frontend\public\style.css:3:    color: #e8edf5;
-> frontend\public\style.css:4:    background: #101820;
-  frontend\public\style.css:5:    font-synthesis: none;
-  frontend\public\style.css:6:    text-rendering: optimizeLegibility;
-  frontend\public\style.css:7:    --bg: #101820;
-  frontend\public\style.css:25:    min-width: 760px;
-  frontend\public\style.css:26:    min-height: 100vh;
-> frontend\public\style.css:27:    background: var(--bg);
-  frontend\public\style.css:28:    color: var(--text);
-  frontend\public\style.css:29:    font-size: 13px;
-  frontend\public\style.css:30:}
-  frontend\public\style.css:31:
-> frontend\public\style.css:32:button {
-  frontend\public\style.css:33:    font: inherit;
-  frontend\public\style.css:34:}
-  frontend\public\style.css:35:
-  frontend\public\style.css:37:    width: min(1180px, calc(100% - 32px));
-  frontend\public\style.css:38:    margin: 18px auto;
-> frontend\public\style.css:39:    background: var(--panel);
-  frontend\public\style.css:40:    border: 1px solid var(--border);
-  frontend\public\style.css:41:    border-radius: 7px;
-  frontend\public\style.css:42:    box-shadow: 0 12px 40px rgba(0, 0, 0, .28);
-  frontend\public\style.css:51:    justify-content: space-between;
-  frontend\public\style.css:52:    gap: 20px;
-> frontend\public\style.css:53:    background: #172530;
-  frontend\public\style.css:54:    border-bottom: 1px solid var(--border);
-  frontend\public\style.css:55:}
-  frontend\public\style.css:56:
-  frontend\public\style.css:111:
-  frontend\public\style.css:112:.section-title,
-> frontend\public\style.css:113:.logs-header {
-  frontend\public\style.css:114:    display: flex;
-  frontend\public\style.css:115:    align-items: center;
-  frontend\public\style.css:116:    justify-content: space-between;
-  frontend\public\style.css:145:    height: 36px;
-  frontend\public\style.css:146:    padding: 0 12px;
-> frontend\public\style.css:147:    background: #263743;
-  frontend\public\style.css:148:    color: #c3d0da;
-  frontend\public\style.css:149:    font-weight: 650;
-  frontend\public\style.css:150:    border-bottom: 1px solid var(--border);
-  frontend\public\style.css:162:
-  frontend\public\style.css:163:.module-table tbody tr:hover {
-> frontend\public\style.css:164:    background: #223440;
-  frontend\public\style.css:165:}
-  frontend\public\style.css:166:
-  frontend\public\style.css:167:.module-table th:first-child,
-  frontend\public\style.css:225:
-  frontend\public\style.css:226:.btn.start {
-> frontend\public\style.css:227:    background: #238b52;
-  frontend\public\style.css:228:    border-color: #31a765;
-  frontend\public\style.css:229:}
-  frontend\public\style.css:230:
-  frontend\public\style.css:231:.btn.stop {
-> frontend\public\style.css:232:    background: #b83e43;
-  frontend\public\style.css:233:    border-color: #d45a5e;
-  frontend\public\style.css:234:}
-  frontend\public\style.css:235:
-  frontend\public\style.css:236:.btn.admin {
-> frontend\public\style.css:237:    background: #286d9e;
-  frontend\public\style.css:238:    border-color: #3987ba;
-  frontend\public\style.css:239:}
-  frontend\public\style.css:240:
-  frontend\public\style.css:241:.btn.config {
-> frontend\public\style.css:242:    background: #586875;
-  frontend\public\style.css:243:    border-color: #71818e;
-  frontend\public\style.css:244:}
-  frontend\public\style.css:245:
-  frontend\public\style.css:246:.btn.logs {
-> frontend\public\style.css:247:    background: #6653a0;
-  frontend\public\style.css:248:    border-color: #8570c2;
-  frontend\public\style.css:249:}
-  frontend\public\style.css:250:
-  frontend\public\style.css:266:    border: 1px solid var(--border);
-  frontend\public\style.css:267:    border-radius: 5px;
-> frontend\public\style.css:268:    background: #172530;
-  frontend\public\style.css:269:}
-  frontend\public\style.css:270:
-  frontend\public\style.css:271:.tools-section h2 {
-  frontend\public\style.css:279:}
-  frontend\public\style.css:280:
-> frontend\public\style.css:281:.tool-button {
-  frontend\public\style.css:282:    min-width: 91px;
-  frontend\public\style.css:283:    height: 35px;
-  frontend\public\style.css:284:    display: inline-flex;
-  frontend\public\style.css:289:    border: 1px solid #405462;
-  frontend\public\style.css:290:    border-radius: 4px;
-> frontend\public\style.css:291:    background: #263945;
-  frontend\public\style.css:292:    color: #dce5ec;
-  frontend\public\style.css:293:    cursor: pointer;
-  frontend\public\style.css:294:    font-size: 12px;
-  frontend\public\style.css:295:}
-  frontend\public\style.css:296:
-> frontend\public\style.css:297:.tool-button i {
-  frontend\public\style.css:298:    color: #65b5ed;
-  frontend\public\style.css:299:}
-  frontend\public\style.css:300:
-> frontend\public\style.css:301:.tool-button:hover {
-> frontend\public\style.css:302:    background: #304957;
-  frontend\public\style.css:303:    border-color: #5a91b4;
-  frontend\public\style.css:304:}
-  frontend\public\style.css:305:
-  frontend\public\style.css:315:    border-radius: 5px;
-  frontend\public\style.css:316:    overflow: hidden;
-> frontend\public\style.css:317:    background: #111b23;
-  frontend\public\style.css:318:}
-  frontend\public\style.css:319:
-> frontend\public\style.css:320:.logs-header {
-  frontend\public\style.css:321:    margin: 0;
-  frontend\public\style.css:322:    padding: 11px 13px;
-> frontend\public\style.css:323:    background: #202f3b;
-  frontend\public\style.css:324:    border-bottom: 1px solid var(--border);
-  frontend\public\style.css:325:}
-  frontend\public\style.css:326:
-  frontend\public\style.css:330:}
-  frontend\public\style.css:331:
-> frontend\public\style.css:332:.log-controls button {
-  frontend\public\style.css:333:    width: 29px;
-  frontend\public\style.css:334:    height: 27px;
-  frontend\public\style.css:335:    border: 1px solid #485b68;
-  frontend\public\style.css:336:    border-radius: 3px;
-> frontend\public\style.css:337:    background: #30424e;
-  frontend\public\style.css:338:    color: #dce5ec;
-  frontend\public\style.css:339:    cursor: pointer;
-  frontend\public\style.css:340:}
-  frontend\public\style.css:341:
-> frontend\public\style.css:342:.log-controls button:hover {
-> frontend\public\style.css:343:    background: #405866;
-  frontend\public\style.css:344:}
-  frontend\public\style.css:345:
-  frontend\public\style.css:346:.log-toolbar {
-  frontend\public\style.css:362:    border: 0;
-  frontend\public\style.css:363:    border-radius: 3px;
-> frontend\public\style.css:364:    background: transparent;
-  frontend\public\style.css:365:    color: #9eafbc;
-  frontend\public\style.css:366:    cursor: pointer;
-  frontend\public\style.css:367:    font-size: 11px;
-  frontend\public\style.css:369:
-  frontend\public\style.css:370:.filter.active {
-> frontend\public\style.css:371:    background: #286d9e;
-  frontend\public\style.css:372:    color: white;
-  frontend\public\style.css:373:}
-  frontend\public\style.css:374:
-  frontend\public\style.css:414:    justify-content: space-between;
-  frontend\public\style.css:415:    gap: 12px;
-> frontend\public\style.css:416:    background: #172530;
-  frontend\public\style.css:417:    border-top: 1px solid var(--border);
-  frontend\public\style.css:418:    color: #91a4b2;
-  frontend\public\style.css:419:    font-size: 11px;
-  frontend\public\style.css:447:}
-  frontend\public\style.css:448:
-> frontend\public\style.css:449:/* NOVAHOST CUSTOM BACKGROUND */
-  frontend\public\style.css:450:body {
-> frontend\public\style.css:451:    background:
-  frontend\public\style.css:452:        linear-gradient(
-  frontend\public\style.css:453:            135deg,
-  frontend\public\style.css:454:            rgba(5, 12, 24, 0.58),
-  frontend\public\style.css:455:            rgba(8, 20, 36, 0.72)
-  frontend\public\style.css:456:        ),
-> frontend\public\style.css:457:        url("/background.png") center center / cover fixed no-repeat;
-  frontend\public\style.css:458:}
-  frontend\public\style.css:459:
-  frontend\public\style.css:460:.window {
-> frontend\public\style.css:461:    background: rgba(15, 29, 43, 0.86);
-  frontend\public\style.css:462:    border: 1px solid rgba(95, 165, 220, 0.28);
-  frontend\public\style.css:463:    backdrop-filter: blur(14px);
-  frontend\public\style.css:464:    -webkit-backdrop-filter: blur(14px);
-  frontend\public\style.css:470:/* ==========================================
-  frontend\public\style.css:471:   NOVAHOST THREE-PANEL DASHBOARD
-> frontend\public\style.css:472:   SIDEBARS + RESPONSIVE LAYOUT + AURORA
-  frontend\public\style.css:473:   ========================================== */
-  frontend\public\style.css:474:
-  frontend\public\style.css:475:body {
-  frontend\public\style.css:487:    pointer-events: none;
-  frontend\public\style.css:488:    opacity: 0.48;
-> frontend\public\style.css:489:    background:
-  frontend\public\style.css:490:        radial-gradient(ellipse at 18% 28%,
-  frontend\public\style.css:491:            rgba(0, 153, 255, 0.24), transparent 38%),
-  frontend\public\style.css:492:        radial-gradient(ellipse at 78% 24%,
-  frontend\public\style.css:532:}
-  frontend\public\style.css:533:
-> frontend\public\style.css:534:/* Shared sidebar appearance */
-> frontend\public\style.css:535:.app-shell > .sidebar {
-  frontend\public\style.css:536:    box-sizing: border-box;
-  frontend\public\style.css:537:    width: 100%;
-  frontend\public\style.css:538:    min-width: 0;
-  frontend\public\style.css:543:    gap: 18px;
-  frontend\public\style.css:544:    color: #dce9f5;
-> frontend\public\style.css:545:    background: linear-gradient(
-  frontend\public\style.css:546:        160deg,
-  frontend\public\style.css:547:        rgba(13, 30, 49, 0.94),
-  frontend\public\style.css:548:        rgba(9, 20, 35, 0.91)
-  frontend\public\style.css:558:
-  frontend\public\style.css:559:/* Left brand */
-> frontend\public\style.css:560:.sidebar-brand {
-  frontend\public\style.css:561:    display: flex;
-  frontend\public\style.css:562:    align-items: center;
-  frontend\public\style.css:563:    gap: 11px;
-  frontend\public\style.css:566:}
-  frontend\public\style.css:567:
-> frontend\public\style.css:568:.sidebar-brand-icon {
-  frontend\public\style.css:569:    width: 39px;
-  frontend\public\style.css:570:    height: 39px;
-  frontend\public\style.css:571:    flex: 0 0 39px;
-  frontend\public\style.css:576:    border: 1px solid rgba(70, 165, 255, 0.32);
-  frontend\public\style.css:577:    border-radius: 10px;
-> frontend\public\style.css:578:    background: linear-gradient(
-  frontend\public\style.css:579:        145deg,
-  frontend\public\style.css:580:        rgba(30, 130, 220, 0.25),
-  frontend\public\style.css:581:        rgba(65, 75, 190, 0.15)
-  frontend\public\style.css:584:}
-  frontend\public\style.css:585:
-> frontend\public\style.css:586:.sidebar-brand-text {
-  frontend\public\style.css:587:    min-width: 0;
-  frontend\public\style.css:588:    display: flex;
-  frontend\public\style.css:589:    flex-direction: column;
-  frontend\public\style.css:591:}
-  frontend\public\style.css:592:
-> frontend\public\style.css:593:.sidebar-brand-text strong {
-  frontend\public\style.css:594:    color: #f0f7ff;
-  frontend\public\style.css:595:    font-size: 15px;
-  frontend\public\style.css:596:    letter-spacing: 0.3px;
-  frontend\public\style.css:597:}
-  frontend\public\style.css:598:
-> frontend\public\style.css:599:.sidebar-brand-text span {
-  frontend\public\style.css:600:    color: #7898b4;
-  frontend\public\style.css:601:    font-size: 9px;
-  frontend\public\style.css:602:    letter-spacing: 1.5px;
-  frontend\public\style.css:604:
-  frontend\public\style.css:605:/* Vertical navigation groups */
-> frontend\public\style.css:606:.sidebar-group {
-  frontend\public\style.css:607:    display: flex;
-  frontend\public\style.css:608:    flex-direction: column;
-  frontend\public\style.css:609:    gap: 6px;
-  frontend\public\style.css:610:}
-  frontend\public\style.css:611:
-> frontend\public\style.css:612:.sidebar-heading {
-  frontend\public\style.css:613:    margin: 0 0 5px;
-  frontend\public\style.css:614:    padding: 0 9px;
-  frontend\public\style.css:615:    color: #7894ad;
-  frontend\public\style.css:619:}
-  frontend\public\style.css:620:
-> frontend\public\style.css:621:.sidebar-link {
-  frontend\public\style.css:622:    box-sizing: border-box;
-  frontend\public\style.css:623:    width: 100%;
-  frontend\public\style.css:624:    min-height: 42px;
-  frontend\public\style.css:630:    border: 1px solid transparent;
-  frontend\public\style.css:631:    border-radius: 7px;
-> frontend\public\style.css:632:    background: transparent;
-  frontend\public\style.css:633:    color: #a9bdcf;
-  frontend\public\style.css:634:    text-align: left;
-  frontend\public\style.css:635:    font: inherit;
-  frontend\public\style.css:637:    cursor: pointer;
-  frontend\public\style.css:638:    transition:
-> frontend\public\style.css:639:        background 180ms ease,
-  frontend\public\style.css:640:        border-color 180ms ease,
-  frontend\public\style.css:641:        color 180ms ease,
-  frontend\public\style.css:642:        transform 180ms ease;
-  frontend\public\style.css:643:}
-  frontend\public\style.css:644:
-> frontend\public\style.css:645:.sidebar-link i {
-  frontend\public\style.css:646:    width: 18px;
-  frontend\public\style.css:647:    flex: 0 0 18px;
-  frontend\public\style.css:648:    color: #7fa8c9;
-  frontend\public\style.css:651:}
-  frontend\public\style.css:652:
-> frontend\public\style.css:653:.sidebar-link:hover {
-  frontend\public\style.css:654:    color: #ffffff;
-> frontend\public\style.css:655:    background: rgba(54, 133, 195, 0.13);
-  frontend\public\style.css:656:    border-color: rgba(88, 166, 230, 0.18);
-  frontend\public\style.css:657:    transform: translateX(2px);
-  frontend\public\style.css:658:}
-  frontend\public\style.css:659:
-> frontend\public\style.css:660:.sidebar-link.active {
-  frontend\public\style.css:661:    color: #ffffff;
-> frontend\public\style.css:662:    background: linear-gradient(
-  frontend\public\style.css:663:        90deg,
-  frontend\public\style.css:664:        rgba(30, 132, 220, 0.24),
-  frontend\public\style.css:665:        rgba(30, 132, 220, 0.07)
-  frontend\public\style.css:669:}
-  frontend\public\style.css:670:
-> frontend\public\style.css:671:.sidebar-link.active i {
-  frontend\public\style.css:672:    color: #65bdff;
-  frontend\public\style.css:673:}
-  frontend\public\style.css:674:
-  frontend\public\style.css:675:/* Local environment status */
-> frontend\public\style.css:676:.sidebar-status {
-  frontend\public\style.css:677:    margin-top: auto;
-  frontend\public\style.css:678:    padding: 12px 9px 2px;
-  frontend\public\style.css:679:    display: flex;
-  frontend\public\style.css:686:}
-  frontend\public\style.css:687:
-> frontend\public\style.css:688:.sidebar-status-dot {
-  frontend\public\style.css:689:    width: 8px;
-  frontend\public\style.css:690:    height: 8px;
-  frontend\public\style.css:691:    flex: 0 0 8px;
-  frontend\public\style.css:692:    border-radius: 50%;
-> frontend\public\style.css:693:    background: #35d69a;
-  frontend\public\style.css:694:    box-shadow: 0 0 10px rgba(53, 214, 154, 0.65);
-  frontend\public\style.css:695:}
-  frontend\public\style.css:696:
-  frontend\public\style.css:703:}
-  frontend\public\style.css:704:
-> frontend\public\style.css:705:.shortcut-button {
-  frontend\public\style.css:706:    box-sizing: border-box;
-  frontend\public\style.css:707:    width: 100%;
-  frontend\public\style.css:708:    min-height: 66px;
-  frontend\public\style.css:713:    border: 1px solid rgba(100, 150, 195, 0.13);
-  frontend\public\style.css:714:    border-radius: 9px;
-> frontend\public\style.css:715:    background: rgba(23, 43, 63, 0.56);
-  frontend\public\style.css:716:    color: #e5f0fb;
-  frontend\public\style.css:717:    text-align: left;
-  frontend\public\style.css:718:    cursor: pointer;
-  frontend\public\style.css:719:    transition:
-> frontend\public\style.css:720:        background 180ms ease,
-  frontend\public\style.css:721:        border-color 180ms ease,
-  frontend\public\style.css:722:        transform 180ms ease;
-  frontend\public\style.css:723:}
-  frontend\public\style.css:724:
-> frontend\public\style.css:725:.shortcut-button:hover {
-> frontend\public\style.css:726:    background: rgba(37, 75, 110, 0.65);
-  frontend\public\style.css:727:    border-color: rgba(82, 166, 235, 0.38);
-  frontend\public\style.css:728:    transform: translateY(-2px);
-  frontend\public\style.css:729:}
-  frontend\public\style.css:741:.shortcut-icon.blue {
-  frontend\public\style.css:742:    color: #6bc0ff;
-> frontend\public\style.css:743:    background: rgba(45, 145, 235, 0.16);
-  frontend\public\style.css:744:}
-  frontend\public\style.css:745:
-  frontend\public\style.css:746:.shortcut-icon.orange {
-  frontend\public\style.css:747:    color: #ffb66d;
-> frontend\public\style.css:748:    background: rgba(235, 145, 45, 0.15);
-  frontend\public\style.css:749:}
-  frontend\public\style.css:750:
-  frontend\public\style.css:751:.shortcut-icon.purple {
-  frontend\public\style.css:752:    color: #c3a0ff;
-> frontend\public\style.css:753:    background: rgba(145, 95, 235, 0.16);
-  frontend\public\style.css:754:}
-  frontend\public\style.css:755:
-  frontend\public\style.css:756:.shortcut-icon.green {
-  frontend\public\style.css:757:    color: #65e0ae;
-> frontend\public\style.css:758:    background: rgba(45, 195, 135, 0.15);
-  frontend\public\style.css:759:}
-  frontend\public\style.css:760:
-  frontend\public\style.css:761:.shortcut-copy {
-  frontend\public\style.css:793:    border: 1px solid rgba(85, 155, 210, 0.2);
-  frontend\public\style.css:794:    border-radius: 9px;
-> frontend\public\style.css:795:    background: rgba(12, 30, 48, 0.72);
-  frontend\public\style.css:796:}
-  frontend\public\style.css:797:
-  frontend\public\style.css:798:.web-root-heading {
-  frontend\public\style.css:833:    }
-  frontend\public\style.css:834:
-> frontend\public\style.css:835:    .sidebar-link,
-> frontend\public\style.css:836:    .shortcut-button {
-  frontend\public\style.css:837:        transition: none;
-  frontend\public\style.css:838:    }
-  frontend\public\style.css:839:}
-  frontend\public\style.css:851:
-  frontend\public\style.css:852:.module-table .btn.stop {
-> frontend\public\style.css:853:    background: #7650c8;
-  frontend\public\style.css:854:    border-color: #7650c8;
-  frontend\public\style.css:855:    color: #fff;
-  frontend\public\style.css:856:}
-  frontend\public\style.css:857:
-  frontend\public\style.css:858:.module-table .btn.stop:hover {
-> frontend\public\style.css:859:    background: #6540b5;
-  frontend\public\style.css:860:}
-
-========== CSS START ==========
-:root {
-    font-family: "Segoe UI", Arial, sans-serif;
-    color: #e8edf5;
-    background: #101820;
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    --bg: #101820;
-    --panel: #192631;
-    --panel2: #202f3b;
-    --border: #344653;
-    --text: #e8edf5;
-    --muted: #9aabb8;
-    --blue: #2588d8;
-    --green: #27ae60;
-    --red: #d94b4b;
-    --orange: #e59b36;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    min-width: 760px;
-    min-height: 100vh;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 13px;
-}
-
-button {
-    font: inherit;
-}
-
-.window {
-    width: min(1180px, calc(100% - 32px));
-    margin: 18px auto;
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, .28);
-    overflow: hidden;
-}
-
-.topbar {
-    min-height: 58px;
-    padding: 0 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    background: #172530;
-    border-bottom: 1px solid var(--border);
-}
-
-.brand,
-.top-info,
-.top-info span {
-    display: flex;
-    align-items: center;
-}
-
-.brand {
-    gap: 10px;
-}
-
-.brand > i {
-    color: #47a8f0;
-    font-size: 23px;
-}
-
-.brand strong {
-    font-size: 19px;
-    letter-spacing: .3px;
-}
-
-.brand > span {
-    color: var(--muted);
-    border-left: 1px solid var(--border);
-    padding-left: 12px;
-    margin-left: 3px;
-}
-
-.top-info {
-    gap: 20px;
-    color: var(--muted);
-    font-size: 12px;
-}
-
-.engine-status {
-    color: #e4a34a;
-    font-weight: 700;
-    letter-spacing: .4px;
-}
-
-#clock,
-#footer-clock,
-.mono {
-    font-family: Consolas, monospace;
-    font-variant-numeric: tabular-nums;
-}
-
-main {
-    padding: 18px;
-}
-
-section {
-    margin-bottom: 18px;
-}
-
-.section-title,
-.logs-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-h2 {
-    margin: 0;
-    font-size: 15px;
-    font-weight: 650;
-}
-
-.section-title > span {
-    color: var(--muted);
-    font-size: 12px;
-}
-
-.table-wrap {
-    overflow-x: auto;
-    border: 1px solid var(--border);
-    border-radius: 5px;
-}
-
-.module-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-    white-space: nowrap;
-}
-
-.module-table th {
-    height: 36px;
-    padding: 0 12px;
-    background: #263743;
-    color: #c3d0da;
-    font-weight: 650;
-    border-bottom: 1px solid var(--border);
-}
-
-.module-table td {
-    height: 49px;
-    padding: 6px 12px;
-    border-bottom: 1px solid #2b3b47;
-}
-
-.module-table tbody tr:last-child td {
-    border-bottom: 0;
-}
-
-.module-table tbody tr:hover {
-    background: #223440;
-}
-
-.module-table th:first-child,
-.module-table td:first-child {
-    min-width: 220px;
-}
-
-.module-table th:nth-child(2) {
-    width: 100px;
-}
-
-.module-table th:nth-child(3) {
-    width: 110px;
-}
-
-.module-table th:last-child {
+FullName
+--------
+D:\NovaHost\frontend\.npmrc
+D:\NovaHost\frontend\index.html
+D:\NovaHost\frontend\index.html.20261126-203059.bak
+D:\NovaHost\frontend\Inter Font License.txt
+D:\NovaHost\frontend\package-lock.json
+D:\NovaHost\frontend\package.json
+D:\NovaHost\frontend\tsconfig.json
+D:\NovaHost\frontend\vite.config.ts
+D:\NovaHost\frontend\bindings\events\index.ts
+D:\NovaHost\frontend\bindings\github.com\wailsapp\wails\v3\internal\eventcreate.ts
+D:\NovaHost\frontend\bindings\github.com\wailsapp\wails\v3\internal\eventdata.d.ts
+D:\NovaHost\frontend\bindings\novahost.local\desktop\engineservice.ts
+D:\NovaHost\frontend\bindings\novahost.local\desktop\greetservice.ts
+D:\NovaHost\frontend\bindings\novahost.local\desktop\index.ts
+D:\NovaHost\frontend\bindings\novahost.local\desktop\models.ts
+D:\NovaHost\frontend\dist\background.png
+D:\NovaHost\frontend\dist\bg-desktop.jpg
+D:\NovaHost\frontend\dist\bg-mobile.jpg
+D:\NovaHost\frontend\dist\index.html
+D:\NovaHost\frontend\dist\Inter-Medium.ttf
+D:\NovaHost\frontend\dist\style.css
+D:\NovaHost\frontend\dist\style.css.before-background
+D:\NovaHost\frontend\dist\typescript.svg
+D:\NovaHost\frontend\dist\wails.png
+D:\NovaHost\frontend\dist\assets\fa-brands-400-Bs6tcqqs.woff2
+D:\NovaHost\frontend\dist\assets\fa-regular-400-DRN8N0d1.woff2
+D:\NovaHost\frontend\dist\assets\fa-solid-900-IAB4Droh.woff2
+D:\NovaHost\frontend\dist\assets\fa-v4compatibility-CErXDOsT.woff2
+D:\NovaHost\frontend\dist\assets\index-BSLjRWIi.css
+D:\NovaHost\frontend\dist\assets\index-CxFvWEbN.js
+D:\NovaHost\frontend\node_modules\.package-lock.json
+D:\NovaHost\frontend\node_modules\.bin\nanoid
+D:\NovaHost\frontend\node_modules\.bin\nanoid.cmd
+D:\NovaHost\frontend\node_modules\.bin\nanoid.ps1
+D:\NovaHost\frontend\node_modules\.bin\rolldown
+D:\NovaHost\frontend\node_modules\.bin\rolldown.cmd
+D:\NovaHost\frontend\node_modules\.bin\rolldown.ps1
+D:\NovaHost\frontend\node_modules\.bin\tsc
+D:\NovaHost\frontend\node_modules\.bin\tsc.cmd
+D:\NovaHost\frontend\node_modules\.bin\tsc.ps1
+D:\NovaHost\frontend\node_modules\.bin\tsserver
+D:\NovaHost\frontend\node_modules\.bin\tsserver.cmd
+D:\NovaHost\frontend\node_modules\.bin\tsserver.ps1
+D:\NovaHost\frontend\node_modules\.bin\vite
+D:\NovaHost\frontend\node_modules\.bin\vite.cmd
+D:\NovaHost\frontend\node_modules\.bin\vite.ps1
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\LICENSE.txt
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\package.json
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\README.md
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\all.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\all.min.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\brands.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\brands.min.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\fontawesome.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\fontawesome.min.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\regular.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\regular.min.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\solid.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\solid.min.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\svg-with-js.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\svg-with-js.min.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\svg.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\svg.min.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\v4-font-face.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\v4-font-face.min.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\v4-shims.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\v4-shims.min.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\v5-font-face.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\css\v5-font-face.min.css
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\all.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\all.min.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\brands.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\brands.min.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\conflict-detection.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\conflict-detection.min.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\fontawesome.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\fontawesome.min.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\regular.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\regular.min.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\solid.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\solid.min.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\v4-shims.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\js\v4-shims.min.js
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\metadata\categories.yml
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\metadata\icon-families.json
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\metadata\icon-families.yml
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\metadata\icons.yml
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\metadata\shims.yml
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\metadata\sponsors.yml
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\brands.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\fontawesome.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\regular.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\solid.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\v4-shims.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_animated.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_bordered.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_core.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_fa.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_functions.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_icons.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_list.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_mixins.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_pulled.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_rotated-flipped.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_shims.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_sizing.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_stacked.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_variables.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\scss\_widths.scss
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\sprites\brands.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\sprites\regular.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\sprites\solid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\sprites-full\brands.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\sprites-full\regular.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\sprites-full\solid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\11ty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\42-group.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\500px.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\a11y-project.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\accessible-icon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\accusoft.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\adn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\adversal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\affiliatetheme.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\airbnb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\algolia.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\alipay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\amazon-pay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\amazon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\amilia.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\android.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\angellist.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\angrycreative.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\angular.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\app-store-ios.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\app-store.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\apper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\apple-pay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\apple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\arch-linux.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\artstation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\asymmetrik.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\atlassian.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\audible.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\autoprefixer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\avianex.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\aviato.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\aws.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\bandcamp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\battle-net.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\behance-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\behance.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\bgg.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\bilibili.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\bimobject.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\bitbucket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\bitcoin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\bity.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\black-tie.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\blackberry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\blogger-b.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\blogger.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\bluesky.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\bluetooth-b.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\bluetooth.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\board-game-geek.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\bootstrap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\bots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\brave-reverse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\brave.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\btc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\buffer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\build-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\buromobelexperte.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\buy-n-large.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\buysellads.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\canadian-maple-leaf.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cash-app.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cc-amazon-pay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cc-amex.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cc-apple-pay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cc-diners-club.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cc-discover.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cc-jcb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cc-mastercard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cc-paypal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cc-stripe.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cc-visa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\centercode.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\centos.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\chrome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\chromecast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\circle-zulip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\claude.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cloudflare.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cloudscale.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cloudsmith.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cloudversify.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cmplid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\codeberg.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\codepen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\codiepie.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\confluence.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\connectdevelop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\contao.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\copilot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cotton-bureau.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cpanel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons-by.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons-nc-eu.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons-nc-jp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons-nc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons-nd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons-pd-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons-pd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons-remix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons-sa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons-sampling-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons-sampling.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons-share.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons-zero.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\creative-commons.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\critical-role.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\css.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\css3-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\css3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\cuttlefish.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\d-and-d-beyond.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\d-and-d.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\dailymotion.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\dart-lang.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\dashcube.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\debian.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\deezer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\delicious.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\deploydog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\deskpro.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\dev.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\deviantart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\devpost.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\dhl.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\diaspora.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\digg.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\digital-ocean.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\discord.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\discourse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\disqus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\dochub.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\docker.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\dolibarr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\draft2digital.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\dribbble-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\dribbble.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\dropbox.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\drupal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\duolingo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\dyalog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\earlybirds.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ebay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\edge-legacy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\edge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\elementor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\eleventy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ello.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ember.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\empire.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\envira.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\erlang.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ethereum.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\etsy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\evernote.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\expeditedssl.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\facebook-f.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\facebook-messenger.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\facebook-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\facebook.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\fantasy-flight-games.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\fedex.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\fediverse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\fedora.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\figma.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\files-pinwheel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\firefox-browser.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\firefox.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\first-order-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\first-order.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\firstdraft.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\flickr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\flipboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\flutter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\fly.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\font-awesome-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\font-awesome-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\font-awesome-logo-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\font-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\fonticons-fi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\fonticons.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\forgejo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\fort-awesome-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\fort-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\forumbee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\foursquare.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\free-code-camp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\freebsd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\fulcrum.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\galactic-republic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\galactic-senate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\get-pocket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\gg-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\gg.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\git-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\git-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\git.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\gitee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\github-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\github-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\github.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\gitkraken.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\gitlab-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\gitlab.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\gitter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\glide-g.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\glide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\globaleaks.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\gofore.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\golang.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\goodreads-g.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\goodreads.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\google-drive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\google-pay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\google-play.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\google-plus-g.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\google-plus-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\google-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\google-scholar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\google-wallet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\google.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\gratipay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\grav.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\gripfire.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\grunt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\guilded.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\gulp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\hacker-news-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\hacker-news.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\hackerrank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\hashnode.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\hips.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\hire-a-helper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\hive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\hooli.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\hornbill.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\hotjar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\houzz.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\html5.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\hubspot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\hugging-face.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ideal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\imdb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\innosoft.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\instagram-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\instagram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\instalod.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\intercom.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\internet-archive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\internet-explorer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\invision.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ioxhost.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\itch-io.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\itunes-note.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\itunes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\java.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\jedi-order.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\jenkins.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\jira.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\joget.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\joomla.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\js-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\js.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\jsfiddle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\julia.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\jxl.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\kaggle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\kakao-talk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\keybase.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\keycdn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\kickstarter-k.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\kickstarter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ko-fi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\korvue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\kubernetes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\laravel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\lastfm-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\lastfm.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\leanpub.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\leetcode.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\less.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\lets-encrypt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\letterboxd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\linkedin-in.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\linkedin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\linktree.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\linode.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\linux.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\lumon-drop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\lumon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\lyft.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\magento.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\mailchimp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\mandalorian.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\markdown.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\mastodon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\matrix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\mattermost.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\maxcdn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\mdb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\medapps.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\medium-m.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\medium.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\medrt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\meetup.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\megaport.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\mendeley.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\meta.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\microblog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\microsoft.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\mintbit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\mix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\mixcloud.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\mixer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\mizuni.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\modx.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\monero.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\napster.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\neos.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\nextcloud.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\nfc-directional.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\nfc-symbol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\nimblr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\node-js.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\node.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\notion.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\npm.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ns8.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\nutritionix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\obs-studio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\obsidian.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\octopus-deploy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\odnoklassniki-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\odnoklassniki.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\odysee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\old-republic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\openai.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\opencart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\openid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\openstreetmap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\opensuse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\opera.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\optin-monster.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\orcid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\osi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\padlet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\page4.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pagelines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\palfed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pandora.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\patreon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\paypal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\perbyte.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\periscope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\phabricator.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\phoenix-framework.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\phoenix-squadron.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\php.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pied-piper-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pied-piper-hat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pied-piper-pp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pied-piper-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pied-piper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pinterest-p.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pinterest-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pinterest.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pixelfed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pixiv.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\playstation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\postgresql.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\product-hunt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\pushed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\python.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\qq.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\quinscape.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\quora.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\r-project.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\raspberry-pi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ravelry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\react.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\reacteurope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\readme.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\rebel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\red-river.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\reddit-alien.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\reddit-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\reddit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\redhat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\rendact.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\renren.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\replyd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\researchgate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\resolving.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\rev.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\roblox-creator-studio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\rocketchat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\rockrms.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ror.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\rust.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\safari.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\salesforce.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\sass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\scaleway.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\schlix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\screenpal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\scribd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\searchengin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\sellcast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\sellsy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\servicestack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\shirtsinbulk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\shoelace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\shopify.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\shopware.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\signal-messenger.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\simplybuilt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\sistrix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\sith.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\sitrox.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\sketch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\skyatlas.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\skype.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\slack-hash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\slack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\slideshare.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\snapchat-ghost.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\snapchat-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\snapchat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\solana.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\soundcloud.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\sourcetree.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\space-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\speakap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\speaker-deck.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\spotify.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-behance.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-bluesky.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-build-awesome-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-deskpro.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-dribbble.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-facebook.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-figma.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-font-awesome-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-font-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-git.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-github.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-gitlab.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-google-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-hacker-news.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-instagram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-js.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-kickstarter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-lastfm.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-letterboxd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-linkedin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-odnoklassniki.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-pied-piper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-pinterest.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-reddit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-snapchat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-steam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-threads.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-tumblr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-twitter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-upwork.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-viadeo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-vimeo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-web-awesome-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-web-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-whatsapp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-x-twitter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-xing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\square-youtube.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\squarespace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\stack-exchange.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\stack-overflow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\stackpath.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\staylinked.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\steam-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\steam-symbol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\steam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\sticker-mule.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\storybook.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\strava.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\stripe-s.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\stripe.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\stubber.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\studiovinari.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\stumbleupon-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\stumbleupon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\substack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\superpowers.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\supple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\supportnow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\suse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\svelte.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\swift.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\symfony.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\symfonycasts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\tailwind-css.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\teamspeak.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\telegram-plane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\telegram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\tencent-weibo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\tesla.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\tex.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\the-red-yeti.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\themeco.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\themeisle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\think-peaks.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\threads.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\threema.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\tidal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\tiktok.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\tor-browser.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\trade-federation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\trello.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\tumblr-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\tumblr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\twitch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\twitter-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\twitter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\typescript.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\typo3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\uber.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ubuntu.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\uikit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ultralytics-hub.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ultralytics-yolo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ultralytics.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\umbraco.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\uncharted.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\uniregistry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\unison.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\unity.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\unreal-engine.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\unsplash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\untappd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ups.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\upwork.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\usb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\usps.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\ussunnah.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\vaadin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\venmo-v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\venmo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\viacoin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\viadeo-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\viadeo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\viber.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\vim.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\vimeo-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\vimeo-v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\vimeo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\vine.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\visual-studio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\vk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\vnv.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\vsco.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\vuejs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\w3c.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\watchman-monitoring.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\waze.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\web-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\webflow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\weebly.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\weibo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\weixin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\whatsapp-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\whatsapp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\whmcs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\wikipedia-w.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\windows.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\wirsindhandwerk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\wix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\wizards-of-the-coast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\wodu.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\wolf-pack-battalion.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\wordpress-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\wordpress.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\wpbeginner.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\wpexplorer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\wpforms.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\wpressr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\wsh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\x-twitter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\xbox.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\xing-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\xing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\xmpp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\xrp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\xrpl.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\y-combinator.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\yahoo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\yammer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\yandex-international.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\yandex.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\yarn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\yelp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\yoast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\youtube-shorts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\youtube-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\youtube.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\zhihu.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\zoom.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\brands\zulip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\address-book.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\address-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\alarm-clock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\angry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\arrow-alt-circle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\arrow-alt-circle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\arrow-alt-circle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\arrow-alt-circle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\bar-chart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\bell-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\bell.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\bookmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\building.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\calendar-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\calendar-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\calendar-days.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\calendar-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\calendar-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\calendar-times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\calendar-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\calendar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\camera-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\camera.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\caret-square-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\caret-square-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\caret-square-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\caret-square-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\chart-bar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\check-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\check-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\chess-bishop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\chess-king.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\chess-knight.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\chess-pawn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\chess-queen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\chess-rook.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\circle-dot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\circle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\circle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\circle-pause.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\circle-play.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\circle-question.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\circle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\circle-stop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\circle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\circle-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\clipboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\clock-four.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\clock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\clone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\closed-captioning.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\cloud.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\comment-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\comment-dots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\comment.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\commenting.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\comments.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\compass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\contact-book.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\contact-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\copy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\copyright.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\credit-card-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\credit-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\dizzy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\dot-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\drivers-license.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\edit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\envelope-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\envelope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\eye-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\eye.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-angry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-dizzy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-flushed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-frown-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-frown.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grimace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grin-beam-sweat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grin-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grin-hearts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grin-squint-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grin-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grin-stars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grin-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grin-tongue-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grin-tongue-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grin-tongue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grin-wide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grin-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-grin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-kiss-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-kiss-wink-heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-kiss.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-laugh-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-laugh-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-laugh-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-laugh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-meh-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-meh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-rolling-eyes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-sad-cry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-sad-tear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-smile-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-smile-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-smile.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-surprise.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\face-tired.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-archive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-audio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-clipboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-code.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-excel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-image.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-lines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-pdf.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-powerpoint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-text.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-video.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-word.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file-zipper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\file.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\floppy-disk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\flushed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\folder-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\folder-closed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\folder-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\folder.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\font-awesome-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\font-awesome-logo-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\font-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\frown-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\frown.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\futbol-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\futbol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\gem.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grimace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grin-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grin-beam-sweat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grin-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grin-hearts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grin-squint-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grin-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grin-stars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grin-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grin-tongue-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grin-tongue-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grin-tongue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grin-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\grin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hand-back-fist.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hand-lizard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hand-paper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hand-peace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hand-point-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hand-point-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hand-point-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hand-point-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hand-pointer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hand-rock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hand-scissors.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hand-spock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hand.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\handshake-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\handshake-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\handshake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hard-drive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hdd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\headphones-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\headphones-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\headphones.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\home-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\home-lg-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\home.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hospital-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hospital-wide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hospital.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hourglass-2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hourglass-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hourglass-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\hourglass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\house.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\id-badge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\id-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\image.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\images.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\keyboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\kiss-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\kiss-wink-heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\kiss.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\laugh-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\laugh-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\laugh-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\laugh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\lemon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\life-ring.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\lightbulb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\list-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\map.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\meh-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\meh-rolling-eyes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\meh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\message.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\minus-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\money-bill-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\money-bill-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\moon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\newspaper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\note-sticky.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\object-group.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\object-ungroup.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\paper-plane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\paste.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\pause-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\pen-to-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\play-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\plus-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\question-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\rectangle-list.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\rectangle-times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\rectangle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\registered.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\sad-cry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\sad-tear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\save.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\share-from-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\share-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\smile-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\smile-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\smile.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\snowflake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\soccer-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\square-caret-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\square-caret-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\square-caret-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\square-caret-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\square-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\square-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\square-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\square-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\star-half-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\star-half-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\star-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\star.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\sticky-note.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\stop-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\sun.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\surprise.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\thumbs-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\thumbs-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\times-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\times-rectangle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\tired.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\trash-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\trash-can.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\truck.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\user-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\user-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\user-large.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\vcard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\window-close.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\window-maximize.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\window-minimize.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\window-restore.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\regular\xmark-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\0.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\4.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\5.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\6.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\7.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\8.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\9.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\a.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ad.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\add.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\address-book.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\address-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\adjust.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\air-freshener.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\alarm-clock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\align-center.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\align-justify.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\align-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\align-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\allergies.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ambulance.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\american-sign-language-interpreting.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\anchor-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\anchor-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\anchor-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\anchor-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\anchor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\angle-double-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\angle-double-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\angle-double-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\angle-double-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\angle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\angle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\angle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\angle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\angles-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\angles-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\angles-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\angles-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\angry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ankh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\apple-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\apple-whole.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\aquarius.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\archive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\archway.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\area-chart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\aries.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-alt-circle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-alt-circle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-alt-circle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-alt-circle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-circle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-circle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-circle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-circle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-down-1-9.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-down-9-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-down-a-z.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-down-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-down-short-wide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-down-up-across-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-down-up-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-down-wide-short.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-down-z-a.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-left-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-left-rotate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-pointer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-right-arrow-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-right-from-bracket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-right-from-file.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-right-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-right-rotate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-right-to-bracket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-right-to-city.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-right-to-file.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-rotate-back.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-rotate-backward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-rotate-forward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-rotate-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-rotate-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-trend-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-trend-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-turn-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-turn-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-up-1-9.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-up-9-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-up-a-z.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-up-from-bracket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-up-from-ground-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-up-from-water-pump.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-up-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-up-right-dots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-up-right-from-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-up-short-wide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-up-wide-short.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-up-z-a.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-alt-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-alt-v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-down-to-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-down-to-people.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-left-right-to-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-left-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-rotate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-spin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-split-up-and-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-to-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-to-dot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-to-eye.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-turn-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-turn-to-dots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-up-down-left-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-up-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-up-to-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows-v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\arrows.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\asl-interpreting.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\assistive-listening-systems.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\asterisk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\at.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\atlas.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\atom.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\audio-description.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\austral-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\automobile.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\award.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\b.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\baby-carriage.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\baby.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\backspace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\backward-fast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\backward-step.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\backward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bacon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bacteria.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bacterium.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bag-shopping.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bahai.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\baht-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\balance-scale-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\balance-scale-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\balance-scale.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ban-smoking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ban.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\band-aid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bandage.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bangladeshi-taka-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bar-chart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\barcode.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bars-progress.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bars-staggered.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\baseball-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\baseball-bat-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\baseball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\basket-shopping.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\basketball-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\basketball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bath.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bathtub.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\battery-0.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\battery-2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\battery-3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\battery-4.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\battery-5.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\battery-car.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\battery-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\battery-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\battery-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\battery-quarter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\battery-three-quarters.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\battery.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bed-pulse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\beer-mug-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\beer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bell-concierge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bell-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bell.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bezier-curve.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bible.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bicycle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\biking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\binoculars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\biohazard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\birthday-cake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bitcoin-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\blackboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\blender-phone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\blender.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\blind.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\blog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bold.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bolt-lightning.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bomb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bong.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\book-atlas.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\book-bible.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\book-bookmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\book-dead.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\book-journal-whills.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\book-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\book-open-reader.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\book-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\book-quran.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\book-reader.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\book-skull.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\book-tanakh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\book.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bookmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\border-all.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\border-none.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\border-style.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\border-top-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bore-hole.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bottle-droplet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bottle-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bowl-food.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bowl-rice.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bowling-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\box-archive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\box-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\box-tissue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\box.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\boxes-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\boxes-packing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\boxes-stacked.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\boxes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\braille.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\brain.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\brazilian-real-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bread-slice.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bridge-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bridge-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bridge-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bridge-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bridge-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bridge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\briefcase-clock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\briefcase-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\briefcase.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\broadcast-tower.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\broom-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\broom.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\brush.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bucket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bug-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bug.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bugs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\building-circle-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\building-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\building-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\building-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\building-columns.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\building-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\building-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\building-ngo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\building-shield.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\building-un.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\building-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\building-wheat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\building.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bullhorn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bullseye.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\burger.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\burn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\burst.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bus-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bus-side.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bus-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\bus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\business-time.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\c.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cab.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cable-car.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cake-candles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\calculator.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\calendar-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\calendar-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\calendar-day.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\calendar-days.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\calendar-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\calendar-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\calendar-times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\calendar-week.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\calendar-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\calendar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\camera-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\camera-retro.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\camera-rotate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\camera.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\campground.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cancel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cancer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\candy-cane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cannabis.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\capricorn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\capsules.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\car-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\car-battery.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\car-burst.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\car-crash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\car-on.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\car-rear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\car-side.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\car-tunnel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\car.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\caravan.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\caret-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\caret-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\caret-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\caret-square-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\caret-square-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\caret-square-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\caret-square-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\caret-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\carriage-baby.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\carrot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cart-arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cart-flatbed-suitcase.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cart-flatbed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cart-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cart-shopping.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cash-register.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cedi-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cent-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\certificate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chain-broken.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chain-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chain.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chair.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chalkboard-teacher.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chalkboard-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chalkboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\champagne-glasses.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\charging-station.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chart-area.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chart-bar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chart-column.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chart-diagram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chart-gantt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chart-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chart-pie.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chart-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\check-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\check-double.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\check-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\check-to-slot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cheese.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chess-bishop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chess-board.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chess-king.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chess-knight.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chess-pawn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chess-queen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chess-rook.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chess.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chevron-circle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chevron-circle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chevron-circle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chevron-circle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chevron-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chevron-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chevron-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\chevron-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\child-combatant.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\child-dress.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\child-reaching.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\child-rifle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\child.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\children.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\church.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-arrow-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-chevron-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-chevron-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-chevron-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-chevron-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-dollar-to-slot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-dot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-half-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-info.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-nodes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-notch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-pause.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-play.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-question.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-radiation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-stop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\city.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\clapperboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\clinic-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\clipboard-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\clipboard-list.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\clipboard-question.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\clipboard-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\clipboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\clock-four.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\clock-rotate-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\clock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\clone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\close.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\closed-captioning-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\closed-captioning.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-download-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-download.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-meatball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-moon-rain.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-moon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-rain.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-showers-heavy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-showers-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-sun-rain.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-sun.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-upload-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud-upload.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cloud.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\clover.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cny.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cocktail.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\code-branch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\code-commit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\code-compare.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\code-fork.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\code-merge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\code-pull-request.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\code.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\coffee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cogs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\coins.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\colon-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\columns.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\comment-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\comment-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\comment-dots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\comment-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\comment-nodes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\comment-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\comment-sms.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\comment.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\commenting.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\comments-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\comments.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\compact-disc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\compass-drafting.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\compass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\compress-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\compress-arrows-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\compress.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\computer-mouse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\computer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\concierge-bell.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\contact-book.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\contact-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cookie-bite.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cookie.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\copy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\copyright.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\couch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\credit-card-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\credit-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\crop-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\crop-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\crop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cross.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\crosshairs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\crow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\crown.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\crutch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cruzeiro-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cube.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cubes-stacked.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cubes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cut.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\cutlery.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\d.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dashboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\database.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\deaf.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\deafness.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dedent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\delete-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\democrat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\desktop-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\desktop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dharmachakra.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\diagnoses.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\diagram-next.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\diagram-predecessor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\diagram-project.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\diagram-successor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\diamond-turn-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\diamond.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dice-d20.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dice-d6.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dice-five.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dice-four.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dice-one.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dice-six.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dice-three.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dice-two.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dice.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\digging.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\digital-tachograph.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\directions.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\disease.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\display.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\divide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dizzy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dna.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dollar-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dolly-box.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dolly-flatbed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dolly.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\donate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dong-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\door-closed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\door-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dot-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dove.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\down-left-and-up-right-to-center.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\down-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\download.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\drafting-compass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dragon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\draw-polygon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\drivers-license.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\droplet-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\droplet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\drum-steelpan.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\drum.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\drumstick-bite.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dumbbell.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dumpster-fire.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dumpster.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\dungeon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\e.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ear-deaf.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ear-listen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\earth-africa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\earth-america.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\earth-americas.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\earth-asia.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\earth-europe.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\earth-oceania.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\earth.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\edit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\egg.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\eject.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\elevator.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ellipsis-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ellipsis-v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ellipsis-vertical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ellipsis.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\envelope-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\envelope-open-text.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\envelope-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\envelope-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\envelope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\envelopes-bulk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\equals.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\eraser.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ethernet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\eur.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\euro-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\euro.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\exchange-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\exchange.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\exclamation-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\exclamation-triangle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\expand-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\expand-arrows-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\expand.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\explosion.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\external-link-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\external-link-square-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\external-link-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\external-link.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\eye-dropper-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\eye-dropper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\eye-low-vision.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\eye-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\eye.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\eyedropper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\f.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-angry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-dizzy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-flushed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-frown-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-frown.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grimace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grin-beam-sweat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grin-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grin-hearts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grin-squint-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grin-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grin-stars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grin-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grin-tongue-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grin-tongue-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grin-tongue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grin-wide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grin-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-grin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-kiss-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-kiss-wink-heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-kiss.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-laugh-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-laugh-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-laugh-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-laugh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-meh-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-meh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-rolling-eyes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-sad-cry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-sad-tear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-smile-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-smile-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-smile.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-surprise.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\face-tired.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fan.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fast-backward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fast-forward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\faucet-drip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\faucet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fax.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\feather-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\feather-pointed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\feather.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\feed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\female.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ferry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fighter-jet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-archive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-audio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-circle-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-circle-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-circle-question.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-clipboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-code.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-contract.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-csv.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-download.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-edit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-excel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-export.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-fragment.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-half-dashed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-image.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-import.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-invoice-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-invoice.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-lines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-medical-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-pdf.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-pen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-powerpoint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-prescription.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-shield.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-signature.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-text.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-upload.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-video.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-waveform.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-word.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file-zipper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\file.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fill-drip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fill.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\film-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\film-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\film.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\filter-circle-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\filter-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\filter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fingerprint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fire-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fire-burner.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fire-extinguisher.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fire-flame-curved.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fire-flame-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fire.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\first-aid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fish-fins.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fish.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\fist-raised.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\flag-checkered.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\flag-usa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\flask-vial.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\flask.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\floppy-disk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\florin-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\flushed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\folder-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\folder-closed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\folder-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\folder-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\folder-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\folder-tree.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\folder.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\font-awesome-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\font-awesome-logo-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\font-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\font.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\football-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\football.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\forward-fast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\forward-step.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\forward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\franc-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\frog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\frown-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\frown.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\funnel-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\futbol-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\futbol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\g.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gamepad.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gas-pump.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gauge-high.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gauge-med.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gauge-simple-high.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gauge-simple-med.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gauge-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gauge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gavel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gbp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gem.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gemini.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\genderless.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ghost.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gift.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gifts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\glass-cheers.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\glass-martini-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\glass-martini.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\glass-water-droplet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\glass-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\glass-whiskey.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\glasses.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\globe-africa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\globe-americas.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\globe-asia.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\globe-europe.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\globe-oceania.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\globe.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\golf-ball-tee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\golf-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gopuram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\graduation-cap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\greater-than-equal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\greater-than.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grid-horizontal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grid-vertical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grimace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grin-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grin-beam-sweat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grin-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grin-hearts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grin-squint-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grin-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grin-stars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grin-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grin-tongue-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grin-tongue-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grin-tongue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grin-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grip-horizontal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grip-lines-vertical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grip-lines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grip-vertical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\grip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\group-arrows-rotate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\guarani-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\guitar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\gun.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\h-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hamburger.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hammer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hamsa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-back-fist.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-dots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-fist.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-holding-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-holding-droplet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-holding-hand.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-holding-heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-holding-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-holding-usd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-holding-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-holding.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-lizard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-middle-finger.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-paper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-peace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-point-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-point-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-point-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-point-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-pointer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-rock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-scissors.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-sparkles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand-spock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hand.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\handcuffs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hands-american-sign-language-interpreting...
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hands-asl-interpreting.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hands-bound.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hands-bubbles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hands-clapping.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hands-helping.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hands-holding-child.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hands-holding-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hands-holding.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hands-praying.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hands-wash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hands.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\handshake-alt-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\handshake-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\handshake-angle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\handshake-simple-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\handshake-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\handshake-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\handshake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hanukiah.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hard-drive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hard-hat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hard-of-hearing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hashtag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hat-cowboy-side.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hat-cowboy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hat-hard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hat-wizard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\haykal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hdd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\head-side-cough-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\head-side-cough.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\head-side-mask.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\head-side-virus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\header.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heading.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\headphones-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\headphones-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\headphones.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\headset.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heart-broken.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heart-circle-bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heart-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heart-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heart-circle-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heart-circle-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heart-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heart-crack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heart-music-camera-bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heart-pulse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heartbeat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\helicopter-symbol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\helicopter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\helmet-safety.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\helmet-un.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\heptagon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hexagon-nodes-bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hexagon-nodes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hexagon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\highlighter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hiking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hill-avalanche.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hill-rockslide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hippo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\history.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hockey-puck.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\holly-berry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\home-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\home-lg-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\home-lg.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\home-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\home.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\horse-head.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\horse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hospital-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hospital-symbol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hospital-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hospital-wide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hospital.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hot-tub-person.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hot-tub.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hotdog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hotel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hourglass-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hourglass-2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hourglass-3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hourglass-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hourglass-end.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hourglass-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hourglass-start.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hourglass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-chimney-crack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-chimney-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-chimney-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-chimney-window.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-chimney.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-crack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-damage.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-fire.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-flood-water-circle-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-flood-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-laptop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-medical-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-medical-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-medical-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-medical-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-signal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-tsunami.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\house.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hryvnia-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hryvnia.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\hurricane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\i-cursor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\i.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ice-cream.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\icicles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\icons.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\id-badge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\id-card-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\id-card-clip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\id-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\igloo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ils.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\image-portrait.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\image.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\images.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\inbox.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\indent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\indian-rupee-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\indian-rupee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\industry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\infinity.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\info-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\info.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\inr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\institution.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\italic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\j.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\jar-wheat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\jar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\jedi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\jet-fighter-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\jet-fighter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\joint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\journal-whills.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\jpy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\jug-detergent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\k.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\kaaba.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\key.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\keyboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\khanda.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\kip-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\kiss-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\kiss-wink-heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\kiss.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\kit-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\kitchen-set.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\kiwi-bird.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\krw.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\l.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ladder-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\land-mine-on.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\landmark-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\landmark-dome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\landmark-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\landmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\language.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\laptop-code.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\laptop-file.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\laptop-house.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\laptop-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\laptop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\lari-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\laugh-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\laugh-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\laugh-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\laugh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\layer-group.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\leaf.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\left-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\left-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\legal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\lemon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\leo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\less-than-equal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\less-than.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\level-down-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\level-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\level-up-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\level-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\libra.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\life-ring.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\lightbulb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\line-chart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\lines-leaning.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\link-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\link.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\lira-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\list-1-2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\list-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\list-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\list-dots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\list-numeric.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\list-ol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\list-squares.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\list-ul.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\list.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\litecoin-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\location-arrow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\location-crosshairs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\location-dot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\location-pin-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\location-pin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\location.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\lock-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\locust.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\long-arrow-alt-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\long-arrow-alt-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\long-arrow-alt-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\long-arrow-alt-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\long-arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\long-arrow-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\long-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\long-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\lotus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\low-vision.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\luggage-cart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\lungs-virus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\lungs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\m.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\magic-wand-sparkles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\magic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\magnet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\magnifying-glass-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\magnifying-glass-chart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\magnifying-glass-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\magnifying-glass-location.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\magnifying-glass-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\magnifying-glass-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\magnifying-glass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mail-bulk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mail-forward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mail-reply-all.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mail-reply.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\male.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\manat-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\map-location-dot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\map-location.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\map-marked-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\map-marked.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\map-marker-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\map-marker.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\map-pin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\map-signs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\map.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\marker.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mars-and-venus-burst.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mars-and-venus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mars-double.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mars-stroke-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mars-stroke-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mars-stroke-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mars-stroke-v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mars-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\martini-glass-citrus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\martini-glass-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\martini-glass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mask-face.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mask-ventilator.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mask.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\masks-theater.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mattress-pillow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\maximize.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\medal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\medkit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\meh-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\meh-rolling-eyes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\meh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\memory.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\menorah.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mercury.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\message.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\meteor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\microchip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\microphone-alt-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\microphone-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\microphone-lines-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\microphone-lines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\microphone-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\microphone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\microscope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mill-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\minimize.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\minus-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\minus-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mitten.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mobile-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mobile-android-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mobile-android.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mobile-button.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mobile-phone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mobile-retro.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mobile-screen-button.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mobile-screen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mobile-vibrate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mobile.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\money-bill-1-wave.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\money-bill-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\money-bill-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\money-bill-transfer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\money-bill-trend-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\money-bill-wave-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\money-bill-wave.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\money-bill-wheat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\money-bill.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\money-bills.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\money-check-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\money-check-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\money-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\monument.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\moon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mortar-board.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mortar-pestle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mosque.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mosquito-net.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mosquito.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\motorcycle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mound.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mountain-city.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mountain-sun.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mountain.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mouse-pointer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mouse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mug-hot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\mug-saucer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\multiply.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\museum.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\music.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\n.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\naira-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\navicon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\network-wired.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\neuter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\newspaper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\non-binary.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\not-equal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\notdef.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\note-sticky.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\notes-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\o.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\object-group.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\object-ungroup.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\octagon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\oil-can.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\oil-well.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\om.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\otter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\outdent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\p.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pager.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\paint-brush.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\paint-roller.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\paintbrush.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\palette.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pallet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\panorama.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\paper-plane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\paperclip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\parachute-box.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\paragraph.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\parking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\passport.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pastafarianism.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\paste.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pause-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pause.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\paw.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\peace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pen-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pen-clip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pen-fancy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pen-nib.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pen-ruler.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pen-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pen-to-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pencil-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pencil-ruler.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pencil-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pencil.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pentagon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\people-arrows-left-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\people-arrows.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\people-carry-box.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\people-carry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\people-group.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\people-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\people-pulling.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\people-robbery.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\people-roof.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pepper-hot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\percent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\percentage.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-arrow-down-to-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-arrow-up-from-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-biking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-booth.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-breastfeeding.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-burst.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-cane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-chalkboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-circle-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-circle-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-circle-question.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-digging.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-dots-from-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-dress-burst.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-dress.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-drowning.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-falling-burst.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-falling.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-half-dress.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-harassing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-hiking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-military-pointing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-military-rifle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-military-to-person.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-praying.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-pregnant.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-rays.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-rifle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-running.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-shelter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-skating.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-skiing-nordic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-skiing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-snowboarding.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-swimming.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-through-window.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-walking-arrow-loop-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-walking-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-walking-dashed-line-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-walking-luggage.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-walking-with-cane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person-walking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\person.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\peseta-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\peso-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\phone-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\phone-flip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\phone-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\phone-square-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\phone-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\phone-volume.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\phone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\photo-film.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\photo-video.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\picture-in-picture.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pie-chart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\piggy-bank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pills.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ping-pong-paddle-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pisces.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pizza-slice.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\place-of-worship.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plane-arrival.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plane-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plane-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plane-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plane-departure.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plane-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plane-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plane-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plant-wilt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plate-wheat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\play-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\play.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plug-circle-bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plug-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plug-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plug-circle-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plug-circle-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plug-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plug.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plus-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plus-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plus-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\podcast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\poll-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\poll.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\poo-bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\poo-storm.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\poo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\poop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\portrait.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pound-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\power-off.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pray.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\praying-hands.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\prescription-bottle-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\prescription-bottle-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\prescription-bottle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\prescription.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\print.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\procedures.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\project-diagram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pump-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\pump-soap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\puzzle-piece.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\q.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\qrcode.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\question-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\question.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\quidditch-broom-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\quidditch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\quote-left-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\quote-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\quote-right-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\quote-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\quran.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\r.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\radiation-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\radiation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\radio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rainbow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\random.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ranking-star.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\receipt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\record-vinyl.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rectangle-ad.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rectangle-list.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rectangle-times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rectangle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\recycle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\redo-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\redo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\refresh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\registered.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\remove-format.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\remove.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\reorder.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\repeat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\reply-all.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\reply.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\republican.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\restroom.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\retweet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ribbon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\right-from-bracket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\right-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\right-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\right-to-bracket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ring.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rmb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\road-barrier.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\road-bridge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\road-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\road-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\road-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\road-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\road-spikes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\road.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\robot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rocket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rod-asclepius.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rod-snake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rotate-back.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rotate-backward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rotate-forward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rotate-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rotate-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rotate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rouble.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\route.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rss-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rss.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rub.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ruble-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ruble.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rug.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ruler-combined.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ruler-horizontal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ruler-vertical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ruler.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\running.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rupee-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rupee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\rupiah-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\s.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sack-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sack-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sad-cry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sad-tear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sagittarius.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sailboat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\satellite-dish.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\satellite.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\save.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\scale-balanced.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\scale-unbalanced-flip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\scale-unbalanced.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\school-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\school-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\school-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\school-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\school-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\school.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\scissors.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\scorpio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\screwdriver-wrench.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\screwdriver.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\scroll-torah.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\scroll.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sd-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\search-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\search-location.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\search-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\search-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\search.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\section.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\seedling.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\septagon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\server.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shapes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\share-alt-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\share-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\share-from-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\share-nodes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\share-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\share.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sheet-plastic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shekel-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shekel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sheqel-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sheqel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shield-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shield-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shield-cat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shield-dog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shield-halved.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shield-heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shield-virus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shield.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ship.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shipping-fast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shirt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shoe-prints.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shop-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shop-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shopping-bag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shopping-basket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shopping-cart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shower.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shrimp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shuffle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shuttle-space.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\shuttle-van.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sign-hanging.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sign-in-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sign-in.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sign-language.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sign-out-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sign-out.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\signal-5.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\signal-perfect.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\signal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\signature.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\signing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\signs-post.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sim-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\single-quote-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\single-quote-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sitemap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\skating.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\skiing-nordic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\skiing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\skull-crossbones.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\skull.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sleigh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sliders-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sliders.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\smile-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\smile-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\smile.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\smog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\smoking-ban.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\smoking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sms.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\snowboarding.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\snowflake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\snowman.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\snowplow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\soap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\soccer-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\socks.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\solar-panel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-alpha-asc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-alpha-desc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-alpha-down-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-alpha-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-alpha-up-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-alpha-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-amount-asc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-amount-desc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-amount-down-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-amount-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-amount-up-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-amount-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-asc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-desc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-numeric-asc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-numeric-desc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-numeric-down-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-numeric-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-numeric-up-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-numeric-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sort.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\spa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\space-shuttle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\spaghetti-monster-flying.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\spell-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\spider.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\spinner.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\spiral.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\splotch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\spoon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\spray-can-sparkles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\spray-can.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sprout.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-arrow-up-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-binary.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-caret-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-caret-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-caret-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-caret-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-envelope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-nfi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-parking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-pen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-person-confined.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-phone-flip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-phone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-poll-horizontal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-poll-vertical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-root-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-root-variable.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-rss.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-share-nodes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-up-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-virus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\staff-aesculapius.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\staff-snake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\stairs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\stamp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\stapler.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\star-and-crescent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\star-half-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\star-half-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\star-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\star-of-david.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\star-of-life.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\star.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\step-backward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\step-forward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sterling-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\stethoscope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sticky-note.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\stop-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\stop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\stopwatch-20.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\stopwatch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\store-alt-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\store-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\store-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\store.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\stream.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\street-view.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\strikethrough.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\stroopwafel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\subscript.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\subtract.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\subway.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\suitcase-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\suitcase-rolling.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\suitcase.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sun-plant-wilt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sun.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\superscript.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\surprise.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\swatchbook.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\swimmer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\swimming-pool.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\synagogue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sync-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\sync.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\syringe.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\t-shirt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\t.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\table-cells-column-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\table-cells-large.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\table-cells-row-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\table-cells-row-unlock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\table-cells.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\table-columns.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\table-list.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\table-tennis-paddle-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\table-tennis.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\table.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tablet-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tablet-android.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tablet-button.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tablet-screen-button.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tablet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tablets.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tachograph-digital.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tachometer-alt-average.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tachometer-alt-fast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tachometer-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tachometer-average.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tachometer-fast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tachometer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tags.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tanakh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tape.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tarp-droplet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tarp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tasks-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tasks.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\taurus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\taxi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\teeth-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\teeth.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\teletype.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\television.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-0.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-4.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-high.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-low.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-quarter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-three-quarters.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\temperature-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tenge-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tenge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tent-arrow-down-to-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tent-arrow-left-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tent-arrow-turn-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tent-arrows-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tents.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\terminal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\text-height.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\text-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\text-width.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\th-large.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\th-list.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\th.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\theater-masks.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thermometer-0.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thermometer-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thermometer-2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thermometer-3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thermometer-4.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thermometer-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thermometer-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thermometer-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thermometer-quarter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thermometer-three-quarters.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thermometer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thumb-tack-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thumb-tack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thumbs-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thumbs-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thumbtack-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thumbtack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\thunderstorm.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ticket-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ticket-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\ticket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\timeline.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\times-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\times-rectangle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\times-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tint-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tired.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\toggle-off.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\toggle-on.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\toilet-paper-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\toilet-paper-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\toilet-paper-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\toilet-paper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\toilet-portable.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\toilet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\toilets-portable.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\toolbox.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tools.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tooth.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\torah.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\torii-gate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tornado.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tower-broadcast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tower-cell.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tower-observation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tractor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\trademark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\traffic-light.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\trailer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\train-subway.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\train-tram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\train.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\transgender-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\transgender.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\trash-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\trash-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\trash-can-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\trash-can.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\trash-restore-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\trash-restore.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\trash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tree-city.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tree.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\triangle-circle-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\triangle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\trophy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\trowel-bricks.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\trowel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck-droplet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck-fast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck-field-un.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck-field.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck-front.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck-loading.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck-monster.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck-moving.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck-pickup.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck-plane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck-ramp-box.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\truck.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\try.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tshirt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\turkish-lira-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\turkish-lira.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\turn-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\turn-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tv-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\tv.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\u.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\umbrella-beach.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\umbrella.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\underline.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\undo-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\undo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\universal-access.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\university.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\unlink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\unlock-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\unlock-keyhole.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\unlock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\unsorted.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\up-down-left-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\up-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\up-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\up-right-and-down-left-from-center.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\up-right-from-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\upload.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\usd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-alt-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-astronaut.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-clock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-cog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-doctor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-edit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-friends.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-gear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-graduate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-group.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-injured.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-large-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-large.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-md.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-ninja.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-nurse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-pen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-secret.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-shield.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-tag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-tie.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\users-between-lines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\users-cog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\users-gear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\users-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\users-rays.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\users-rectangle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\users-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\users-viewfinder.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\users.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\utensil-spoon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\utensils.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\van-shuttle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\vault.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\vcard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\vector-polygon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\venus-double.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\venus-mars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\venus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\vest-patches.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\vest.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\vial-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\vial-virus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\vial.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\vials.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\video-camera.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\video-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\video.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\vihara.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\virgo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\virus-covid-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\virus-covid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\virus-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\virus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\viruses.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\voicemail.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volcano.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volleyball-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volleyball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volume-control-phone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volume-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volume-high.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volume-low.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volume-medium.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volume-mute.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volume-off.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volume-times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volume-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volume-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\volume.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\vote-yea.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\vr-cardboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\w.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\walkie-talkie.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\walking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wallet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wand-magic-sparkles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wand-magic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wand-sparkles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\warehouse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\warning.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\water-ladder.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wave-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\web-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\weight-hanging.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\weight-scale.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\weight.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wheat-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wheat-awn-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wheat-awn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wheelchair-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wheelchair-move.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wheelchair.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\whiskey-glass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wifi-3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wifi-strong.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wifi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wind.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\window-close.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\window-maximize.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\window-minimize.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\window-restore.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wine-bottle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wine-glass-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wine-glass-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wine-glass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\won-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\won.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\worm.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\wrench.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\x-ray.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\x.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\xmark-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\xmark-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\xmarks-lines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\y.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\yen-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\yen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\yin-yang.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\z.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs\solid\zap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\11ty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\42-group.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\500px.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\a11y-project.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\accessible-icon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\accusoft.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\adn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\adversal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\affiliatetheme.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\airbnb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\algolia.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\alipay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\amazon-pay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\amazon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\amilia.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\android.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\angellist.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\angrycreative.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\angular.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\app-store-ios.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\app-store.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\apper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\apple-pay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\apple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\arch-linux.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\artstation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\asymmetrik.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\atlassian.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\audible.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\autoprefixer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\avianex.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\aviato.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\aws.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\bandcamp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\battle-net.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\behance-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\behance.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\bgg.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\bilibili.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\bimobject.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\bitbucket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\bitcoin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\bity.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\black-tie.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\blackberry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\blogger-b.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\blogger.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\bluesky.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\bluetooth-b.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\bluetooth.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\board-game-geek.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\bootstrap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\bots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\brave-reverse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\brave.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\btc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\buffer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\build-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\buromobelexperte.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\buy-n-large.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\buysellads.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\canadian-maple-leaf.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cash-app.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cc-amazon-pay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cc-amex.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cc-apple-pay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cc-diners-club.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cc-discover.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cc-jcb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cc-mastercard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cc-paypal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cc-stripe.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cc-visa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\centercode.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\centos.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\chrome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\chromecast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\circle-zulip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\claude.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cloudflare.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cloudscale.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cloudsmith.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cloudversify.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cmplid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\codeberg.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\codepen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\codiepie.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\confluence.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\connectdevelop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\contao.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\copilot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cotton-bureau.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cpanel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons-by.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons-nc-eu.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons-nc-jp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons-nc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons-nd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons-pd-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons-pd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons-remix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons-sa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons-sampling-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons-sampling.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons-share.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons-zero.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\creative-commons.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\critical-role.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\css.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\css3-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\css3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\cuttlefish.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\d-and-d-beyond.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\d-and-d.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\dailymotion.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\dart-lang.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\dashcube.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\debian.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\deezer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\delicious.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\deploydog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\deskpro.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\dev.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\deviantart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\devpost.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\dhl.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\diaspora.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\digg.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\digital-ocean.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\discord.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\discourse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\disqus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\dochub.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\docker.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\dolibarr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\draft2digital.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\dribbble-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\dribbble.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\dropbox.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\drupal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\duolingo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\dyalog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\earlybirds.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ebay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\edge-legacy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\edge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\elementor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\eleventy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ello.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ember.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\empire.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\envira.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\erlang.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ethereum.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\etsy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\evernote.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\expeditedssl.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\facebook-f.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\facebook-messenger.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\facebook-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\facebook.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\fantasy-flight-games.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\fedex.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\fediverse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\fedora.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\figma.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\files-pinwheel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\firefox-browser.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\firefox.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\first-order-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\first-order.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\firstdraft.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\flickr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\flipboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\flutter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\fly.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\font-awesome-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\font-awesome-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\font-awesome-logo-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\font-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\fonticons-fi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\fonticons.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\forgejo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\fort-awesome-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\fort-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\forumbee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\foursquare.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\free-code-camp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\freebsd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\fulcrum.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\galactic-republic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\galactic-senate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\get-pocket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\gg-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\gg.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\git-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\git-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\git.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\gitee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\github-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\github-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\github.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\gitkraken.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\gitlab-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\gitlab.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\gitter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\glide-g.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\glide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\globaleaks.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\gofore.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\golang.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\goodreads-g.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\goodreads.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\google-drive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\google-pay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\google-play.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\google-plus-g.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\google-plus-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\google-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\google-scholar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\google-wallet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\google.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\gratipay.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\grav.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\gripfire.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\grunt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\guilded.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\gulp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\hacker-news-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\hacker-news.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\hackerrank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\hashnode.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\hips.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\hire-a-helper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\hive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\hooli.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\hornbill.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\hotjar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\houzz.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\html5.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\hubspot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\hugging-face.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ideal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\imdb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\innosoft.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\instagram-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\instagram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\instalod.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\intercom.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\internet-archive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\internet-explorer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\invision.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ioxhost.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\itch-io.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\itunes-note.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\itunes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\java.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\jedi-order.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\jenkins.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\jira.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\joget.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\joomla.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\js-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\js.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\jsfiddle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\julia.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\jxl.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\kaggle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\kakao-talk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\keybase.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\keycdn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\kickstarter-k.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\kickstarter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ko-fi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\korvue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\kubernetes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\laravel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\lastfm-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\lastfm.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\leanpub.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\leetcode.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\less.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\lets-encrypt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\letterboxd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\linkedin-in.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\linkedin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\linktree.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\linode.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\linux.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\lumon-drop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\lumon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\lyft.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\magento.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\mailchimp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\mandalorian.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\markdown.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\mastodon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\matrix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\mattermost.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\maxcdn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\mdb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\medapps.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\medium-m.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\medium.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\medrt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\meetup.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\megaport.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\mendeley.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\meta.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\microblog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\microsoft.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\mintbit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\mix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\mixcloud.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\mixer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\mizuni.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\modx.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\monero.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\napster.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\neos.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\nextcloud.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\nfc-directional.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\nfc-symbol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\nimblr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\node-js.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\node.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\notion.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\npm.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ns8.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\nutritionix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\obs-studio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\obsidian.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\octopus-deploy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\odnoklassniki-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\odnoklassniki.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\odysee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\old-republic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\openai.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\opencart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\openid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\openstreetmap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\opensuse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\opera.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\optin-monster.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\orcid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\osi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\padlet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\page4.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pagelines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\palfed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pandora.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\patreon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\paypal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\perbyte.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\periscope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\phabricator.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\phoenix-framework.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\phoenix-squadron.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\php.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pied-piper-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pied-piper-hat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pied-piper-pp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pied-piper-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pied-piper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pinterest-p.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pinterest-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pinterest.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pixelfed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pixiv.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\playstation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\postgresql.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\product-hunt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\pushed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\python.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\qq.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\quinscape.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\quora.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\r-project.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\raspberry-pi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ravelry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\react.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\reacteurope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\readme.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\rebel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\red-river.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\reddit-alien.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\reddit-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\reddit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\redhat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\rendact.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\renren.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\replyd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\researchgate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\resolving.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\rev.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\roblox-creator-studio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\rocketchat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\rockrms.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ror.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\rust.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\safari.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\salesforce.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\sass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\scaleway.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\schlix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\screenpal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\scribd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\searchengin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\sellcast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\sellsy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\servicestack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\shirtsinbulk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\shoelace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\shopify.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\shopware.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\signal-messenger.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\simplybuilt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\sistrix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\sith.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\sitrox.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\sketch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\skyatlas.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\skype.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\slack-hash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\slack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\slideshare.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\snapchat-ghost.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\snapchat-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\snapchat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\solana.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\soundcloud.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\sourcetree.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\space-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\speakap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\speaker-deck.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\spotify.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-behance.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-bluesky.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-build-awesome-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-deskpro.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-dribbble.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-facebook.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-figma.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-font-awesome-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-font-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-git.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-github.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-gitlab.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-google-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-hacker-news.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-instagram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-js.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-kickstarter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-lastfm.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-letterboxd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-linkedin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-odnoklassniki.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-pied-piper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-pinterest.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-reddit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-snapchat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-steam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-threads.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-tumblr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-twitter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-upwork.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-viadeo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-vimeo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-web-awesome-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-web-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-whatsapp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-x-twitter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-xing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\square-youtube.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\squarespace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\stack-exchange.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\stack-overflow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\stackpath.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\staylinked.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\steam-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\steam-symbol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\steam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\sticker-mule.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\storybook.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\strava.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\stripe-s.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\stripe.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\stubber.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\studiovinari.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\stumbleupon-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\stumbleupon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\substack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\superpowers.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\supple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\supportnow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\suse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\svelte.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\swift.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\symfony.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\symfonycasts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\tailwind-css.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\teamspeak.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\telegram-plane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\telegram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\tencent-weibo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\tesla.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\tex.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\the-red-yeti.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\themeco.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\themeisle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\think-peaks.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\threads.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\threema.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\tidal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\tiktok.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\tor-browser.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\trade-federation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\trello.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\tumblr-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\tumblr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\twitch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\twitter-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\twitter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\typescript.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\typo3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\uber.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ubuntu.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\uikit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ultralytics-hub.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ultralytics-yolo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ultralytics.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\umbraco.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\uncharted.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\uniregistry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\unison.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\unity.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\unreal-engine.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\unsplash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\untappd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ups.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\upwork.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\usb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\usps.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\ussunnah.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\vaadin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\venmo-v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\venmo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\viacoin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\viadeo-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\viadeo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\viber.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\vim.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\vimeo-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\vimeo-v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\vimeo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\vine.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\visual-studio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\vk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\vnv.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\vsco.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\vuejs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\w3c.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\watchman-monitoring.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\waze.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\web-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\webflow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\weebly.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\weibo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\weixin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\whatsapp-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\whatsapp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\whmcs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\wikipedia-w.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\windows.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\wirsindhandwerk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\wix.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\wizards-of-the-coast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\wodu.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\wolf-pack-battalion.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\wordpress-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\wordpress.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\wpbeginner.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\wpexplorer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\wpforms.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\wpressr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\wsh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\x-twitter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\xbox.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\xing-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\xing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\xmpp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\xrp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\xrpl.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\y-combinator.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\yahoo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\yammer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\yandex-international.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\yandex.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\yarn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\yelp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\yoast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\youtube-shorts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\youtube-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\youtube.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\zhihu.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\zoom.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\brands\zulip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\address-book.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\address-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\alarm-clock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\angry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\arrow-alt-circle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\arrow-alt-circle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\arrow-alt-circle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\arrow-alt-circle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\bar-chart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\bell-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\bell.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\bookmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\building.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\calendar-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\calendar-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\calendar-days.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\calendar-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\calendar-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\calendar-times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\calendar-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\calendar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\camera-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\camera.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\caret-square-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\caret-square-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\caret-square-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\caret-square-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\chart-bar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\check-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\check-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\chess-bishop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\chess-king.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\chess-knight.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\chess-pawn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\chess-queen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\chess-rook.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\circle-dot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\circle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\circle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\circle-pause.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\circle-play.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\circle-question.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\circle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\circle-stop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\circle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\circle-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\clipboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\clock-four.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\clock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\clone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\closed-captioning.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\cloud.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\comment-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\comment-dots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\comment.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\commenting.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\comments.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\compass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\contact-book.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\contact-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\copy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\copyright.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\credit-card-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\credit-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\dizzy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\dot-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\drivers-license.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\edit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\envelope-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\envelope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\eye-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\eye.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-angry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-dizzy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-flushed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-frown-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-frown.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grimace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grin-beam-sweat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grin-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grin-hearts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grin-squint-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grin-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grin-stars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grin-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grin-tongue-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grin-tongue-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grin-tongue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grin-wide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grin-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-grin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-kiss-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-kiss-wink-heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-kiss.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-laugh-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-laugh-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-laugh-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-laugh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-meh-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-meh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-rolling-eyes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-sad-cry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-sad-tear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-smile-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-smile-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-smile.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-surprise.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\face-tired.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-archive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-audio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-clipboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-code.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-excel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-image.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-lines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-pdf.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-powerpoint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-text.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-video.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-word.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file-zipper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\file.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\floppy-disk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\flushed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\folder-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\folder-closed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\folder-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\folder.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\font-awesome-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\font-awesome-logo-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\font-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\frown-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\frown.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\futbol-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\futbol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\gem.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grimace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grin-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grin-beam-sweat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grin-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grin-hearts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grin-squint-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grin-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grin-stars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grin-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grin-tongue-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grin-tongue-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grin-tongue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grin-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\grin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hand-back-fist.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hand-lizard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hand-paper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hand-peace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hand-point-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hand-point-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hand-point-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hand-point-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hand-pointer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hand-rock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hand-scissors.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hand-spock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hand.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\handshake-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\handshake-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\handshake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hard-drive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hdd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\headphones-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\headphones-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\headphones.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\home-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\home-lg-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\home.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hospital-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hospital-wide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hospital.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hourglass-2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hourglass-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hourglass-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\hourglass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\house.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\id-badge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\id-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\image.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\images.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\keyboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\kiss-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\kiss-wink-heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\kiss.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\laugh-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\laugh-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\laugh-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\laugh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\lemon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\life-ring.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\lightbulb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\list-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\map.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\meh-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\meh-rolling-eyes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\meh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\message.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\minus-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\money-bill-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\money-bill-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\moon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\newspaper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\note-sticky.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\object-group.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\object-ungroup.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\paper-plane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\paste.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\pause-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\pen-to-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\play-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\plus-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\question-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\rectangle-list.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\rectangle-times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\rectangle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\registered.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\sad-cry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\sad-tear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\save.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\share-from-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\share-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\smile-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\smile-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\smile.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\snowflake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\soccer-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\square-caret-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\square-caret-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\square-caret-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\square-caret-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\square-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\square-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\square-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\square-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\star-half-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\star-half-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\star-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\star.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\sticky-note.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\stop-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\sun.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\surprise.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\thumbs-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\thumbs-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\times-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\times-rectangle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\tired.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\trash-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\trash-can.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\truck.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\user-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\user-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\user-large.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\vcard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\window-close.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\window-maximize.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\window-minimize.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\window-restore.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\regular\xmark-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\0.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\4.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\5.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\6.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\7.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\8.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\9.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\a.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ad.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\add.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\address-book.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\address-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\adjust.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\air-freshener.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\alarm-clock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\align-center.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\align-justify.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\align-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\align-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\allergies.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ambulance.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\american-sign-language-interpreting.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\anchor-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\anchor-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\anchor-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\anchor-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\anchor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\angle-double-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\angle-double-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\angle-double-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\angle-double-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\angle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\angle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\angle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\angle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\angles-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\angles-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\angles-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\angles-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\angry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ankh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\apple-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\apple-whole.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\aquarius.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\archive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\archway.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\area-chart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\aries.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-alt-circle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-alt-circle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-alt-circle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-alt-circle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-circle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-circle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-circle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-circle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-down-1-9.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-down-9-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-down-a-z.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-down-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-down-short-wide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-down-up-across-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-down-up-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-down-wide-short.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-down-z-a.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-left-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-left-rotate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-pointer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-right-arrow-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-right-from-bracket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-right-from-file.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-right-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-right-rotate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-right-to-bracket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-right-to-city.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-right-to-file.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-rotate-back.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-rotate-backward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-rotate-forward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-rotate-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-rotate-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-trend-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-trend-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-turn-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-turn-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-up-1-9.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-up-9-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-up-a-z.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-up-from-bracket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-up-from-ground-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-up-from-water-pump.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-up-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-up-right-dots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-up-right-from-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-up-short-wide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-up-wide-short.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-up-z-a.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-alt-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-alt-v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-down-to-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-down-to-people.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-left-right-to-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-left-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-rotate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-spin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-split-up-and-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-to-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-to-dot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-to-eye.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-turn-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-turn-to-dots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-up-down-left-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-up-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-up-to-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows-v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\arrows.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\asl-interpreting.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\assistive-listening-systems.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\asterisk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\at.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\atlas.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\atom.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\audio-description.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\austral-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\automobile.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\award.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\b.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\baby-carriage.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\baby.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\backspace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\backward-fast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\backward-step.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\backward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bacon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bacteria.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bacterium.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bag-shopping.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bahai.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\baht-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\balance-scale-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\balance-scale-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\balance-scale.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ban-smoking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ban.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\band-aid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bandage.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bangladeshi-taka-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bar-chart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\barcode.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bars-progress.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bars-staggered.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\baseball-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\baseball-bat-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\baseball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\basket-shopping.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\basketball-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\basketball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bath.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bathtub.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\battery-0.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\battery-2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\battery-3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\battery-4.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\battery-5.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\battery-car.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\battery-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\battery-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\battery-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\battery-quarter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\battery-three-quarters.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\battery.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bed-pulse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\beer-mug-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\beer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bell-concierge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bell-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bell.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bezier-curve.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bible.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bicycle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\biking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\binoculars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\biohazard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\birthday-cake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bitcoin-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\blackboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\blender-phone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\blender.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\blind.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\blog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bold.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bolt-lightning.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bomb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bong.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\book-atlas.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\book-bible.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\book-bookmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\book-dead.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\book-journal-whills.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\book-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\book-open-reader.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\book-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\book-quran.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\book-reader.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\book-skull.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\book-tanakh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\book.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bookmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\border-all.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\border-none.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\border-style.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\border-top-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bore-hole.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bottle-droplet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bottle-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bowl-food.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bowl-rice.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bowling-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\box-archive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\box-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\box-tissue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\box.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\boxes-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\boxes-packing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\boxes-stacked.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\boxes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\braille.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\brain.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\brazilian-real-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bread-slice.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bridge-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bridge-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bridge-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bridge-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bridge-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bridge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\briefcase-clock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\briefcase-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\briefcase.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\broadcast-tower.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\broom-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\broom.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\brush.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bucket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bug-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bug.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bugs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\building-circle-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\building-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\building-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\building-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\building-columns.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\building-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\building-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\building-ngo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\building-shield.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\building-un.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\building-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\building-wheat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\building.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bullhorn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bullseye.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\burger.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\burn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\burst.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bus-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bus-side.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bus-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\bus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\business-time.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\c.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cab.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cable-car.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cake-candles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\calculator.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\calendar-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\calendar-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\calendar-day.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\calendar-days.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\calendar-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\calendar-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\calendar-times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\calendar-week.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\calendar-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\calendar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\camera-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\camera-retro.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\camera-rotate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\camera.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\campground.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cancel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cancer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\candy-cane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cannabis.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\capricorn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\capsules.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\car-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\car-battery.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\car-burst.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\car-crash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\car-on.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\car-rear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\car-side.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\car-tunnel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\car.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\caravan.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\caret-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\caret-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\caret-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\caret-square-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\caret-square-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\caret-square-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\caret-square-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\caret-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\carriage-baby.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\carrot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cart-arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cart-flatbed-suitcase.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cart-flatbed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cart-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cart-shopping.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cash-register.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cedi-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cent-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\certificate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chain-broken.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chain-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chain.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chair.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chalkboard-teacher.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chalkboard-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chalkboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\champagne-glasses.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\charging-station.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chart-area.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chart-bar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chart-column.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chart-diagram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chart-gantt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chart-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chart-pie.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chart-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\check-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\check-double.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\check-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\check-to-slot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cheese.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chess-bishop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chess-board.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chess-king.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chess-knight.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chess-pawn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chess-queen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chess-rook.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chess.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chevron-circle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chevron-circle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chevron-circle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chevron-circle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chevron-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chevron-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chevron-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\chevron-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\child-combatant.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\child-dress.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\child-reaching.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\child-rifle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\child.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\children.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\church.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-arrow-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-chevron-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-chevron-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-chevron-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-chevron-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-dollar-to-slot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-dot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-half-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-info.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-nodes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-notch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-pause.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-play.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-question.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-radiation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-stop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\city.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\clapperboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\clinic-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\clipboard-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\clipboard-list.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\clipboard-question.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\clipboard-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\clipboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\clock-four.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\clock-rotate-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\clock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\clone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\close.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\closed-captioning-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\closed-captioning.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-download-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-download.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-meatball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-moon-rain.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-moon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-rain.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-showers-heavy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-showers-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-sun-rain.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-sun.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-upload-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud-upload.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cloud.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\clover.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cny.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cocktail.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\code-branch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\code-commit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\code-compare.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\code-fork.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\code-merge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\code-pull-request.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\code.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\coffee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cogs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\coins.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\colon-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\columns.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\comment-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\comment-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\comment-dots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\comment-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\comment-nodes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\comment-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\comment-sms.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\comment.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\commenting.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\comments-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\comments.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\compact-disc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\compass-drafting.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\compass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\compress-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\compress-arrows-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\compress.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\computer-mouse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\computer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\concierge-bell.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\contact-book.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\contact-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cookie-bite.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cookie.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\copy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\copyright.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\couch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\credit-card-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\credit-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\crop-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\crop-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\crop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cross.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\crosshairs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\crow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\crown.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\crutch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cruzeiro-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cube.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cubes-stacked.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cubes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cut.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\cutlery.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\d.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dashboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\database.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\deaf.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\deafness.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dedent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\delete-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\democrat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\desktop-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\desktop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dharmachakra.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\diagnoses.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\diagram-next.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\diagram-predecessor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\diagram-project.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\diagram-successor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\diamond-turn-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\diamond.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dice-d20.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dice-d6.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dice-five.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dice-four.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dice-one.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dice-six.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dice-three.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dice-two.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dice.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\digging.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\digital-tachograph.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\directions.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\disease.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\display.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\divide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dizzy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dna.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dollar-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dolly-box.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dolly-flatbed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dolly.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\donate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dong-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\door-closed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\door-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dot-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dove.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\down-left-and-up-right-to-center.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\down-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\download.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\drafting-compass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dragon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\draw-polygon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\drivers-license.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\droplet-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\droplet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\drum-steelpan.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\drum.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\drumstick-bite.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dumbbell.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dumpster-fire.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dumpster.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\dungeon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\e.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ear-deaf.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ear-listen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\earth-africa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\earth-america.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\earth-americas.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\earth-asia.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\earth-europe.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\earth-oceania.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\earth.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\edit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\egg.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\eject.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\elevator.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ellipsis-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ellipsis-v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ellipsis-vertical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ellipsis.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\envelope-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\envelope-open-text.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\envelope-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\envelope-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\envelope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\envelopes-bulk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\equals.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\eraser.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ethernet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\eur.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\euro-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\euro.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\exchange-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\exchange.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\exclamation-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\exclamation-triangle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\expand-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\expand-arrows-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\expand.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\explosion.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\external-link-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\external-link-square-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\external-link-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\external-link.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\eye-dropper-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\eye-dropper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\eye-low-vision.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\eye-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\eye.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\eyedropper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\f.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-angry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-dizzy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-flushed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-frown-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-frown.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grimace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grin-beam-sweat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grin-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grin-hearts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grin-squint-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grin-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grin-stars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grin-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grin-tongue-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grin-tongue-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grin-tongue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grin-wide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grin-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-grin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-kiss-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-kiss-wink-heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-kiss.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-laugh-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-laugh-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-laugh-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-laugh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-meh-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-meh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-rolling-eyes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-sad-cry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-sad-tear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-smile-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-smile-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-smile.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-surprise.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\face-tired.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fan.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fast-backward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fast-forward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\faucet-drip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\faucet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fax.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\feather-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\feather-pointed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\feather.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\feed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\female.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ferry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fighter-jet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-archive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-audio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-circle-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-circle-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-circle-question.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-clipboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-code.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-contract.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-csv.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-download.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-edit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-excel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-export.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-fragment.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-half-dashed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-image.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-import.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-invoice-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-invoice.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-lines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-medical-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-pdf.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-pen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-powerpoint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-prescription.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-shield.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-signature.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-text.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-upload.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-video.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-waveform.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-word.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file-zipper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\file.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fill-drip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fill.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\film-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\film-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\film.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\filter-circle-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\filter-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\filter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fingerprint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fire-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fire-burner.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fire-extinguisher.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fire-flame-curved.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fire-flame-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fire.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\first-aid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fish-fins.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fish.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\fist-raised.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\flag-checkered.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\flag-usa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\flask-vial.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\flask.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\floppy-disk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\florin-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\flushed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\folder-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\folder-closed.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\folder-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\folder-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\folder-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\folder-tree.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\folder.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\font-awesome-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\font-awesome-logo-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\font-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\font.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\football-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\football.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\forward-fast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\forward-step.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\forward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\franc-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\frog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\frown-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\frown.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\funnel-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\futbol-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\futbol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\g.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gamepad.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gas-pump.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gauge-high.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gauge-med.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gauge-simple-high.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gauge-simple-med.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gauge-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gauge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gavel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gbp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gem.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gemini.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\genderless.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ghost.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gift.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gifts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\glass-cheers.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\glass-martini-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\glass-martini.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\glass-water-droplet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\glass-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\glass-whiskey.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\glasses.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\globe-africa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\globe-americas.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\globe-asia.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\globe-europe.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\globe-oceania.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\globe.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\golf-ball-tee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\golf-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gopuram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\graduation-cap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\greater-than-equal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\greater-than.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grid-horizontal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grid-vertical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grimace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grin-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grin-beam-sweat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grin-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grin-hearts.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grin-squint-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grin-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grin-stars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grin-tears.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grin-tongue-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grin-tongue-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grin-tongue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grin-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grip-horizontal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grip-lines-vertical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grip-lines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grip-vertical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\grip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\group-arrows-rotate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\guarani-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\guitar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\gun.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\h-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hamburger.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hammer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hamsa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-back-fist.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-dots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-fist.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-holding-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-holding-droplet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-holding-hand.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-holding-heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-holding-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-holding-usd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-holding-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-holding.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-lizard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-middle-finger.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-paper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-peace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-point-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-point-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-point-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-point-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-pointer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-rock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-scissors.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-sparkles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand-spock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hand.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\handcuffs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hands-american-sign-language-interpr...
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hands-asl-interpreting.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hands-bound.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hands-bubbles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hands-clapping.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hands-helping.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hands-holding-child.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hands-holding-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hands-holding.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hands-praying.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hands-wash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hands.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\handshake-alt-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\handshake-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\handshake-angle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\handshake-simple-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\handshake-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\handshake-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\handshake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hanukiah.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hard-drive.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hard-hat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hard-of-hearing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hashtag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hat-cowboy-side.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hat-cowboy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hat-hard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hat-wizard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\haykal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hdd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\head-side-cough-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\head-side-cough.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\head-side-mask.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\head-side-virus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\header.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heading.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\headphones-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\headphones-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\headphones.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\headset.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heart-broken.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heart-circle-bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heart-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heart-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heart-circle-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heart-circle-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heart-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heart-crack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heart-music-camera-bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heart-pulse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heartbeat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\helicopter-symbol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\helicopter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\helmet-safety.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\helmet-un.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\heptagon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hexagon-nodes-bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hexagon-nodes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hexagon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\highlighter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hiking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hill-avalanche.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hill-rockslide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hippo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\history.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hockey-puck.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\holly-berry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\home-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\home-lg-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\home-lg.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\home-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\home.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\horse-head.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\horse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hospital-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hospital-symbol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hospital-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hospital-wide.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hospital.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hot-tub-person.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hot-tub.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hotdog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hotel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hourglass-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hourglass-2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hourglass-3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hourglass-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hourglass-end.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hourglass-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hourglass-start.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hourglass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-chimney-crack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-chimney-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-chimney-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-chimney-window.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-chimney.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-crack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-damage.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-fire.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-flood-water-circle-arrow-right...
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-flood-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-laptop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-medical-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-medical-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-medical-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-medical-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-signal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-tsunami.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house-user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\house.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hryvnia-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hryvnia.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\hurricane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\i-cursor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\i.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ice-cream.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\icicles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\icons.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\id-badge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\id-card-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\id-card-clip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\id-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\igloo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ils.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\image-portrait.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\image.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\images.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\inbox.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\indent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\indian-rupee-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\indian-rupee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\industry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\infinity.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\info-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\info.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\inr.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\institution.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\italic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\j.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\jar-wheat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\jar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\jedi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\jet-fighter-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\jet-fighter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\joint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\journal-whills.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\jpy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\jug-detergent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\k.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\kaaba.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\key.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\keyboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\khanda.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\kip-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\kiss-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\kiss-wink-heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\kiss.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\kit-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\kitchen-set.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\kiwi-bird.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\krw.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\l.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ladder-water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\land-mine-on.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\landmark-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\landmark-dome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\landmark-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\landmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\language.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\laptop-code.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\laptop-file.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\laptop-house.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\laptop-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\laptop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\lari-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\laugh-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\laugh-squint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\laugh-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\laugh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\layer-group.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\leaf.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\left-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\left-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\legal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\lemon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\leo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\less-than-equal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\less-than.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\level-down-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\level-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\level-up-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\level-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\libra.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\life-ring.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\lightbulb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\line-chart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\lines-leaning.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\link-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\link.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\lira-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\list-1-2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\list-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\list-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\list-dots.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\list-numeric.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\list-ol.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\list-squares.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\list-ul.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\list.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\litecoin-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\location-arrow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\location-crosshairs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\location-dot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\location-pin-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\location-pin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\location.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\lock-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\locust.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\long-arrow-alt-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\long-arrow-alt-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\long-arrow-alt-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\long-arrow-alt-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\long-arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\long-arrow-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\long-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\long-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\lotus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\low-vision.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\luggage-cart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\lungs-virus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\lungs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\m.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\magic-wand-sparkles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\magic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\magnet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\magnifying-glass-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\magnifying-glass-chart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\magnifying-glass-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\magnifying-glass-location.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\magnifying-glass-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\magnifying-glass-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\magnifying-glass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mail-bulk.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mail-forward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mail-reply-all.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mail-reply.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\male.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\manat-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\map-location-dot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\map-location.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\map-marked-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\map-marked.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\map-marker-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\map-marker.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\map-pin.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\map-signs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\map.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\marker.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mars-and-venus-burst.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mars-and-venus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mars-double.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mars-stroke-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mars-stroke-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mars-stroke-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mars-stroke-v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mars-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\martini-glass-citrus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\martini-glass-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\martini-glass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mask-face.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mask-ventilator.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mask.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\masks-theater.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mattress-pillow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\maximize.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\medal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\medkit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\meh-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\meh-rolling-eyes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\meh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\memory.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\menorah.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mercury.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\message.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\meteor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\microchip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\microphone-alt-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\microphone-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\microphone-lines-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\microphone-lines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\microphone-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\microphone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\microscope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mill-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\minimize.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\minus-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\minus-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mitten.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mobile-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mobile-android-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mobile-android.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mobile-button.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mobile-phone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mobile-retro.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mobile-screen-button.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mobile-screen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mobile-vibrate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mobile.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\money-bill-1-wave.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\money-bill-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\money-bill-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\money-bill-transfer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\money-bill-trend-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\money-bill-wave-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\money-bill-wave.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\money-bill-wheat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\money-bill.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\money-bills.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\money-check-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\money-check-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\money-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\monument.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\moon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mortar-board.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mortar-pestle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mosque.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mosquito-net.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mosquito.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\motorcycle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mound.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mountain-city.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mountain-sun.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mountain.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mouse-pointer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mouse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mug-hot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\mug-saucer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\multiply.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\museum.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\music.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\n.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\naira-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\navicon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\network-wired.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\neuter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\newspaper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\non-binary.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\not-equal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\notdef.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\note-sticky.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\notes-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\o.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\object-group.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\object-ungroup.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\octagon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\oil-can.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\oil-well.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\om.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\otter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\outdent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\p.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pager.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\paint-brush.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\paint-roller.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\paintbrush.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\palette.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pallet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\panorama.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\paper-plane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\paperclip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\parachute-box.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\paragraph.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\parking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\passport.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pastafarianism.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\paste.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pause-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pause.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\paw.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\peace.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pen-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pen-clip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pen-fancy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pen-nib.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pen-ruler.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pen-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pen-to-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pencil-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pencil-ruler.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pencil-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pencil.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pentagon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\people-arrows-left-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\people-arrows.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\people-carry-box.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\people-carry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\people-group.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\people-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\people-pulling.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\people-robbery.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\people-roof.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pepper-hot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\percent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\percentage.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-arrow-down-to-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-arrow-up-from-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-biking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-booth.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-breastfeeding.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-burst.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-cane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-chalkboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-circle-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-circle-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-circle-question.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-digging.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-dots-from-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-dress-burst.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-dress.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-drowning.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-falling-burst.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-falling.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-half-dress.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-harassing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-hiking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-military-pointing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-military-rifle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-military-to-person.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-praying.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-pregnant.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-rays.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-rifle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-running.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-shelter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-skating.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-skiing-nordic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-skiing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-snowboarding.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-swimming.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-through-window.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-walking-arrow-loop-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-walking-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-walking-dashed-line-arrow-rig...
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-walking-luggage.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-walking-with-cane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person-walking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\person.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\peseta-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\peso-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\phone-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\phone-flip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\phone-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\phone-square-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\phone-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\phone-volume.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\phone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\photo-film.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\photo-video.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\picture-in-picture.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pie-chart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\piggy-bank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pills.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ping-pong-paddle-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pisces.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pizza-slice.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\place-of-worship.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plane-arrival.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plane-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plane-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plane-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plane-departure.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plane-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plane-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plane-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plant-wilt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plate-wheat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\play-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\play.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plug-circle-bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plug-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plug-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plug-circle-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plug-circle-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plug-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plug.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plus-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plus-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plus-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\podcast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\poll-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\poll.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\poo-bolt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\poo-storm.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\poo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\poop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\portrait.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pound-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\power-off.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pray.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\praying-hands.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\prescription-bottle-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\prescription-bottle-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\prescription-bottle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\prescription.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\print.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\procedures.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\project-diagram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pump-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\pump-soap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\puzzle-piece.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\q.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\qrcode.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\question-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\question.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\quidditch-broom-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\quidditch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\quote-left-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\quote-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\quote-right-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\quote-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\quran.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\r.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\radiation-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\radiation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\radio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rainbow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\random.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ranking-star.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\receipt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\record-vinyl.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rectangle-ad.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rectangle-list.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rectangle-times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rectangle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\recycle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\redo-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\redo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\refresh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\registered.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\remove-format.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\remove.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\reorder.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\repeat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\reply-all.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\reply.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\republican.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\restroom.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\retweet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ribbon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\right-from-bracket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\right-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\right-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\right-to-bracket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ring.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rmb.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\road-barrier.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\road-bridge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\road-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\road-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\road-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\road-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\road-spikes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\road.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\robot.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rocket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rod-asclepius.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rod-snake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rotate-back.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rotate-backward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rotate-forward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rotate-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rotate-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rotate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rouble.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\route.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rss-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rss.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rub.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ruble-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ruble.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rug.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ruler-combined.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ruler-horizontal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ruler-vertical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ruler.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\running.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rupee-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rupee.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\rupiah-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\s.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sack-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sack-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sad-cry.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sad-tear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sagittarius.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sailboat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\satellite-dish.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\satellite.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\save.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\scale-balanced.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\scale-unbalanced-flip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\scale-unbalanced.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\school-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\school-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\school-circle-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\school-flag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\school-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\school.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\scissors.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\scorpio.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\screwdriver-wrench.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\screwdriver.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\scroll-torah.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\scroll.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sd-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\search-dollar.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\search-location.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\search-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\search-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\search.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\section.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\seedling.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\septagon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\server.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shapes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\share-alt-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\share-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\share-from-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\share-nodes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\share-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\share.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sheet-plastic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shekel-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shekel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sheqel-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sheqel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shield-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shield-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shield-cat.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shield-dog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shield-halved.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shield-heart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shield-virus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shield.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ship.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shipping-fast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shirt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shoe-prints.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shop-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shop-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shopping-bag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shopping-basket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shopping-cart.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shower.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shrimp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shuffle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shuttle-space.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\shuttle-van.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sign-hanging.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sign-in-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sign-in.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sign-language.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sign-out-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sign-out.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\signal-5.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\signal-perfect.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\signal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\signature.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\signing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\signs-post.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sim-card.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\single-quote-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\single-quote-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sitemap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\skating.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\skiing-nordic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\skiing.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\skull-crossbones.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\skull.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sleigh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sliders-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sliders.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\smile-beam.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\smile-wink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\smile.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\smog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\smoking-ban.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\smoking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sms.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\snowboarding.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\snowflake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\snowman.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\snowplow.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\soap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\soccer-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\socks.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\solar-panel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-alpha-asc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-alpha-desc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-alpha-down-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-alpha-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-alpha-up-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-alpha-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-amount-asc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-amount-desc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-amount-down-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-amount-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-amount-up-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-amount-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-asc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-desc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-numeric-asc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-numeric-desc.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-numeric-down-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-numeric-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-numeric-up-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-numeric-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sort.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\spa.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\space-shuttle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\spaghetti-monster-flying.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\spell-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\spider.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\spinner.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\spiral.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\splotch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\spoon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\spray-can-sparkles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\spray-can.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sprout.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-arrow-up-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-binary.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-caret-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-caret-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-caret-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-caret-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-envelope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-h.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-nfi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-parking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-pen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-person-confined.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-phone-flip.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-phone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-poll-horizontal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-poll-vertical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-root-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-root-variable.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-rss.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-share-nodes.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-up-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-virus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\staff-aesculapius.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\staff-snake.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\stairs.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\stamp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\stapler.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\star-and-crescent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\star-half-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\star-half-stroke.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\star-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\star-of-david.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\star-of-life.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\star.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\step-backward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\step-forward.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sterling-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\stethoscope.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sticky-note.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\stop-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\stop.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\stopwatch-20.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\stopwatch.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\store-alt-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\store-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\store-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\store.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\stream.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\street-view.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\strikethrough.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\stroopwafel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\subscript.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\subtract.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\subway.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\suitcase-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\suitcase-rolling.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\suitcase.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sun-plant-wilt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sun.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\superscript.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\surprise.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\swatchbook.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\swimmer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\swimming-pool.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\synagogue.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sync-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\sync.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\syringe.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\t-shirt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\t.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\table-cells-column-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\table-cells-large.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\table-cells-row-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\table-cells-row-unlock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\table-cells.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\table-columns.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\table-list.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\table-tennis-paddle-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\table-tennis.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\table.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tablet-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tablet-android.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tablet-button.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tablet-screen-button.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tablet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tablets.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tachograph-digital.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tachometer-alt-average.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tachometer-alt-fast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tachometer-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tachometer-average.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tachometer-fast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tachometer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tags.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tanakh.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tape.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tarp-droplet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tarp.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tasks-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tasks.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\taurus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\taxi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\teeth-open.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\teeth.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\teletype.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\television.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-0.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-4.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-arrow-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-high.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-low.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-quarter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-three-quarters.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\temperature-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tenge-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tenge.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tent-arrow-down-to-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tent-arrow-left-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tent-arrow-turn-left.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tent-arrows-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tent.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tents.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\terminal.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\text-height.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\text-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\text-width.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\th-large.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\th-list.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\th.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\theater-masks.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thermometer-0.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thermometer-1.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thermometer-2.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thermometer-3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thermometer-4.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thermometer-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thermometer-full.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thermometer-half.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thermometer-quarter.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thermometer-three-quarters.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thermometer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thumb-tack-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thumb-tack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thumbs-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thumbs-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thumbtack-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thumbtack.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\thunderstorm.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ticket-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ticket-simple.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\ticket.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\timeline.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\times-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\times-rectangle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\times-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tint-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tint.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tired.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\toggle-off.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\toggle-on.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\toilet-paper-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\toilet-paper-blank.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\toilet-paper-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\toilet-paper.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\toilet-portable.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\toilet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\toilets-portable.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\toolbox.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tools.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tooth.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\torah.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\torii-gate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tornado.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tower-broadcast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tower-cell.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tower-observation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tractor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\trademark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\traffic-light.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\trailer.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\train-subway.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\train-tram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\train.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tram.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\transgender-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\transgender.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\trash-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\trash-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\trash-can-arrow-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\trash-can.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\trash-restore-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\trash-restore.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\trash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tree-city.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tree.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\triangle-circle-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\triangle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\trophy.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\trowel-bricks.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\trowel.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck-arrow-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck-droplet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck-fast.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck-field-un.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck-field.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck-front.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck-loading.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck-medical.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck-monster.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck-moving.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck-pickup.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck-plane.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck-ramp-box.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\truck.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\try.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tshirt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\turkish-lira-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\turkish-lira.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\turn-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\turn-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tv-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\tv.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\u.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\umbrella-beach.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\umbrella.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\underline.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\undo-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\undo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\universal-access.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\university.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\unlink.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\unlock-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\unlock-keyhole.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\unlock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\unsorted.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\up-down-left-right.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\up-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\up-long.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\up-right-and-down-left-from-center.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\up-right-from-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\upload.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\usd.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-alt-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-astronaut.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-clock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-cog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-doctor.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-edit.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-friends.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-gear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-graduate.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-group.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-injured.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-large-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-large.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-lock.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-md.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-minus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-ninja.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-nurse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-pen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-plus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-secret.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-shield.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-tag.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-tie.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\user.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\users-between-lines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\users-cog.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\users-gear.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\users-line.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\users-rays.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\users-rectangle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\users-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\users-viewfinder.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\users.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\utensil-spoon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\utensils.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\v.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\van-shuttle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\vault.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\vcard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\vector-polygon.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\venus-double.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\venus-mars.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\venus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\vest-patches.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\vest.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\vial-circle-check.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\vial-virus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\vial.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\vials.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\video-camera.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\video-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\video.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\vihara.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\virgo.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\virus-covid-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\virus-covid.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\virus-slash.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\virus.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\viruses.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\voicemail.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volcano.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volleyball-ball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volleyball.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volume-control-phone.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volume-down.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volume-high.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volume-low.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volume-medium.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volume-mute.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volume-off.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volume-times.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volume-up.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volume-xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\volume.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\vote-yea.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\vr-cardboard.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\w.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\walkie-talkie.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\walking.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wallet.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wand-magic-sparkles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wand-magic.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wand-sparkles.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\warehouse.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\warning.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\water-ladder.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\water.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wave-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\web-awesome.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\weight-hanging.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\weight-scale.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\weight.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wheat-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wheat-awn-circle-exclamation.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wheat-awn.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wheelchair-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wheelchair-move.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wheelchair.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\whiskey-glass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wifi-3.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wifi-strong.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wifi.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wind.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\window-close.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\window-maximize.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\window-minimize.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\window-restore.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wine-bottle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wine-glass-alt.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wine-glass-empty.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wine-glass.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\won-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\won.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\worm.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\wrench.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\x-ray.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\x.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\xmark-circle.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\xmark-square.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\xmark.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\xmarks-lines.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\y.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\yen-sign.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\yen.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\yin-yang.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\z.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\svgs-full\solid\zap.svg
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\webfonts\fa-brands-400.woff2
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\webfonts\fa-regular-400.woff2
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\webfonts\fa-solid-900.woff2
+D:\NovaHost\frontend\node_modules\@fortawesome\fontawesome-free\webfonts\fa-v4compatibility.woff2
+D:\NovaHost\frontend\node_modules\@oxc-project\types\LICENSE
+D:\NovaHost\frontend\node_modules\@oxc-project\types\package.json
+D:\NovaHost\frontend\node_modules\@oxc-project\types\README.md
+D:\NovaHost\frontend\node_modules\@oxc-project\types\types.d.ts
+D:\NovaHost\frontend\node_modules\@rolldown\binding-win32-x64-msvc\package.json
+D:\NovaHost\frontend\node_modules\@rolldown\binding-win32-x64-msvc\README.md
+D:\NovaHost\frontend\node_modules\@rolldown\binding-win32-x64-msvc\rolldown-binding.win32-x64-msvc.node
+D:\NovaHost\frontend\node_modules\@rolldown\pluginutils\LICENSE
+D:\NovaHost\frontend\node_modules\@rolldown\pluginutils\package.json
+D:\NovaHost\frontend\node_modules\@rolldown\pluginutils\README.md
+D:\NovaHost\frontend\node_modules\@rolldown\pluginutils\dist\filter-DvHMSB82.mjs
+D:\NovaHost\frontend\node_modules\@rolldown\pluginutils\dist\index.d.mts
+D:\NovaHost\frontend\node_modules\@rolldown\pluginutils\dist\index.mjs
+D:\NovaHost\frontend\node_modules\@rolldown\pluginutils\dist\filter\index.d.mts
+D:\NovaHost\frontend\node_modules\@rolldown\pluginutils\dist\filter\index.mjs
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\package.json
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\android.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\application.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\appregion.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\browser.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\callable.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\calls.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\cancellable.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\clipboard.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\contextmenu.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\create.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\dialogs.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\drag.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\environment.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\events.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\event_types.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\flags.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\index.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\ios.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\listener.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\nanoid.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\runtime.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\screens.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\stream.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\system.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\updater.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\utils.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\window.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\wml.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\dist\plugins\vite.js
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\android.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\application.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\appregion.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\browser.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\callable.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\calls.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\cancellable.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\clipboard.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\contextmenu.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\create.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\dialogs.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\drag.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\environment.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\events.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\event_types.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\flags.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\index.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\ios.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\listener.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\nanoid.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\runtime.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\screens.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\stream.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\system.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\updater.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\utils.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\window.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\wml.d.ts
+D:\NovaHost\frontend\node_modules\@wailsio\runtime\types\plugins\vite.d.ts
+D:\NovaHost\frontend\node_modules\detect-libc\index.d.ts
+D:\NovaHost\frontend\node_modules\detect-libc\LICENSE
+D:\NovaHost\frontend\node_modules\detect-libc\package.json
+D:\NovaHost\frontend\node_modules\detect-libc\README.md
+D:\NovaHost\frontend\node_modules\detect-libc\lib\detect-libc.js
+D:\NovaHost\frontend\node_modules\detect-libc\lib\elf.js
+D:\NovaHost\frontend\node_modules\detect-libc\lib\filesystem.js
+D:\NovaHost\frontend\node_modules\detect-libc\lib\process.js
+D:\NovaHost\frontend\node_modules\fdir\LICENSE
+D:\NovaHost\frontend\node_modules\fdir\package.json
+D:\NovaHost\frontend\node_modules\fdir\README.md
+D:\NovaHost\frontend\node_modules\fdir\dist\index.cjs
+D:\NovaHost\frontend\node_modules\fdir\dist\index.d.cts
+D:\NovaHost\frontend\node_modules\fdir\dist\index.d.mts
+D:\NovaHost\frontend\node_modules\fdir\dist\index.mjs
+D:\NovaHost\frontend\node_modules\lightningcss\LICENSE
+D:\NovaHost\frontend\node_modules\lightningcss\package.json
+D:\NovaHost\frontend\node_modules\lightningcss\README.md
+D:\NovaHost\frontend\node_modules\lightningcss\node\ast.d.ts
+D:\NovaHost\frontend\node_modules\lightningcss\node\ast.js.flow
+D:\NovaHost\frontend\node_modules\lightningcss\node\browserslistToTargets.js
+D:\NovaHost\frontend\node_modules\lightningcss\node\composeVisitors.js
+D:\NovaHost\frontend\node_modules\lightningcss\node\flags.js
+D:\NovaHost\frontend\node_modules\lightningcss\node\index.d.ts
+D:\NovaHost\frontend\node_modules\lightningcss\node\index.js
+D:\NovaHost\frontend\node_modules\lightningcss\node\index.js.flow
+D:\NovaHost\frontend\node_modules\lightningcss\node\index.mjs
+D:\NovaHost\frontend\node_modules\lightningcss\node\targets.d.ts
+D:\NovaHost\frontend\node_modules\lightningcss\node\targets.js.flow
+D:\NovaHost\frontend\node_modules\lightningcss-win32-x64-msvc\LICENSE
+D:\NovaHost\frontend\node_modules\lightningcss-win32-x64-msvc\lightningcss.win32-x64-msvc.node
+D:\NovaHost\frontend\node_modules\lightningcss-win32-x64-msvc\package.json
+D:\NovaHost\frontend\node_modules\lightningcss-win32-x64-msvc\README.md
+D:\NovaHost\frontend\node_modules\nanoid\index.browser.cjs
+D:\NovaHost\frontend\node_modules\nanoid\index.browser.js
+D:\NovaHost\frontend\node_modules\nanoid\index.cjs
+D:\NovaHost\frontend\node_modules\nanoid\index.d.cts
+D:\NovaHost\frontend\node_modules\nanoid\index.d.ts
+D:\NovaHost\frontend\node_modules\nanoid\index.js
+D:\NovaHost\frontend\node_modules\nanoid\LICENSE
+D:\NovaHost\frontend\node_modules\nanoid\nanoid.js
+D:\NovaHost\frontend\node_modules\nanoid\package.json
+D:\NovaHost\frontend\node_modules\nanoid\README.md
+D:\NovaHost\frontend\node_modules\nanoid\async\index.browser.cjs
+D:\NovaHost\frontend\node_modules\nanoid\async\index.browser.js
+D:\NovaHost\frontend\node_modules\nanoid\async\index.cjs
+D:\NovaHost\frontend\node_modules\nanoid\async\index.d.cts
+D:\NovaHost\frontend\node_modules\nanoid\async\index.d.ts
+D:\NovaHost\frontend\node_modules\nanoid\async\index.js
+D:\NovaHost\frontend\node_modules\nanoid\async\index.native.js
+D:\NovaHost\frontend\node_modules\nanoid\async\package.json
+D:\NovaHost\frontend\node_modules\nanoid\bin\nanoid.cjs
+D:\NovaHost\frontend\node_modules\nanoid\non-secure\index.cjs
+D:\NovaHost\frontend\node_modules\nanoid\non-secure\index.d.ts
+D:\NovaHost\frontend\node_modules\nanoid\non-secure\index.js
+D:\NovaHost\frontend\node_modules\nanoid\non-secure\package.json
+D:\NovaHost\frontend\node_modules\nanoid\url-alphabet\index.cjs
+D:\NovaHost\frontend\node_modules\nanoid\url-alphabet\index.js
+D:\NovaHost\frontend\node_modules\nanoid\url-alphabet\package.json
+D:\NovaHost\frontend\node_modules\picocolors\LICENSE
+D:\NovaHost\frontend\node_modules\picocolors\package.json
+D:\NovaHost\frontend\node_modules\picocolors\picocolors.browser.js
+D:\NovaHost\frontend\node_modules\picocolors\picocolors.d.ts
+D:\NovaHost\frontend\node_modules\picocolors\picocolors.js
+D:\NovaHost\frontend\node_modules\picocolors\README.md
+D:\NovaHost\frontend\node_modules\picocolors\types.d.ts
+D:\NovaHost\frontend\node_modules\picomatch\index.js
+D:\NovaHost\frontend\node_modules\picomatch\LICENSE
+D:\NovaHost\frontend\node_modules\picomatch\package.json
+D:\NovaHost\frontend\node_modules\picomatch\posix.js
+D:\NovaHost\frontend\node_modules\picomatch\README.md
+D:\NovaHost\frontend\node_modules\picomatch\lib\constants.js
+D:\NovaHost\frontend\node_modules\picomatch\lib\parse.js
+D:\NovaHost\frontend\node_modules\picomatch\lib\picomatch.js
+D:\NovaHost\frontend\node_modules\picomatch\lib\scan.js
+D:\NovaHost\frontend\node_modules\picomatch\lib\utils.js
+D:\NovaHost\frontend\node_modules\postcss\LICENSE
+D:\NovaHost\frontend\node_modules\postcss\package.json
+D:\NovaHost\frontend\node_modules\postcss\README.md
+D:\NovaHost\frontend\node_modules\postcss\lib\at-rule.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\at-rule.js
+D:\NovaHost\frontend\node_modules\postcss\lib\comment.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\comment.js
+D:\NovaHost\frontend\node_modules\postcss\lib\container.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\container.js
+D:\NovaHost\frontend\node_modules\postcss\lib\css-syntax-error.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\css-syntax-error.js
+D:\NovaHost\frontend\node_modules\postcss\lib\declaration.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\declaration.js
+D:\NovaHost\frontend\node_modules\postcss\lib\document.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\document.js
+D:\NovaHost\frontend\node_modules\postcss\lib\fromJSON.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\fromJSON.js
+D:\NovaHost\frontend\node_modules\postcss\lib\input.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\input.js
+D:\NovaHost\frontend\node_modules\postcss\lib\lazy-result.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\lazy-result.js
+D:\NovaHost\frontend\node_modules\postcss\lib\list.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\list.js
+D:\NovaHost\frontend\node_modules\postcss\lib\map-generator.js
+D:\NovaHost\frontend\node_modules\postcss\lib\no-work-result.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\no-work-result.js
+D:\NovaHost\frontend\node_modules\postcss\lib\node.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\node.js
+D:\NovaHost\frontend\node_modules\postcss\lib\parse.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\parse.js
+D:\NovaHost\frontend\node_modules\postcss\lib\parser.js
+D:\NovaHost\frontend\node_modules\postcss\lib\postcss.d.mts
+D:\NovaHost\frontend\node_modules\postcss\lib\postcss.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\postcss.js
+D:\NovaHost\frontend\node_modules\postcss\lib\postcss.mjs
+D:\NovaHost\frontend\node_modules\postcss\lib\previous-map.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\previous-map.js
+D:\NovaHost\frontend\node_modules\postcss\lib\processor.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\processor.js
+D:\NovaHost\frontend\node_modules\postcss\lib\result.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\result.js
+D:\NovaHost\frontend\node_modules\postcss\lib\root.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\root.js
+D:\NovaHost\frontend\node_modules\postcss\lib\rule.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\rule.js
+D:\NovaHost\frontend\node_modules\postcss\lib\stringifier.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\stringifier.js
+D:\NovaHost\frontend\node_modules\postcss\lib\stringify.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\stringify.js
+D:\NovaHost\frontend\node_modules\postcss\lib\symbols.js
+D:\NovaHost\frontend\node_modules\postcss\lib\terminal-highlight.js
+D:\NovaHost\frontend\node_modules\postcss\lib\tokenize.js
+D:\NovaHost\frontend\node_modules\postcss\lib\warn-once.js
+D:\NovaHost\frontend\node_modules\postcss\lib\warning.d.ts
+D:\NovaHost\frontend\node_modules\postcss\lib\warning.js
+D:\NovaHost\frontend\node_modules\rolldown\LICENSE
+D:\NovaHost\frontend\node_modules\rolldown\package.json
+D:\NovaHost\frontend\node_modules\rolldown\README.md
+D:\NovaHost\frontend\node_modules\rolldown\THIRD-PARTY-LICENSE
+D:\NovaHost\frontend\node_modules\rolldown\bin\cli.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\cli.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\cli.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\config.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\config.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\experimental-index.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\experimental-index.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\experimental-runtime-types.d.ts
+D:\NovaHost\frontend\node_modules\rolldown\dist\experimental-runtime.d.ts
+D:\NovaHost\frontend\node_modules\rolldown\dist\experimental-runtime.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\filter-index.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\filter-index.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\get-log-filter.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\get-log-filter.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\index.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\index.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\parallel-plugin-worker.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\parallel-plugin-worker.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\parallel-plugin.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\parallel-plugin.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\parse-ast-index.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\parse-ast-index.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\plugins-index.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\plugins-index.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\utils-index.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\utils-index.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\binding-BQxk4mNX.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\binding-DXnWtC_4.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\bindingify-input-options-BjFSnI07.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\constructors-OHACCTTC.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\constructors-viKPej7M.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\create-bundler-option-BJCYFVUH.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\define-config-BQBrxnNZ.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\define-config-u93KkixF.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\dist-BHJd_fmG.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\error-CLo6EJKG.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\get-log-filter-DFFBhB1m.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\load-config-69P1TxdT.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\logger-LvdykevT.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\logging-loixHZcv.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\logs-DyTyzzWG.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\misc-BaVlOYH0.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\normalize-string-or-regex-Bb-uIrCY.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\parse-Bhrl_Rmm.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\prompt-DkftHXS7.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\resolve-tsconfig-ru_qwUC7.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\rolldown-AohEFLrh.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\rolldown-runtime-DYf_mQCB.mjs
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\transform-Chp2CTwF.d.mts
+D:\NovaHost\frontend\node_modules\rolldown\dist\shared\watch-C1G4Q3kq.mjs
+D:\NovaHost\frontend\node_modules\source-map-js\LICENSE
+D:\NovaHost\frontend\node_modules\source-map-js\package.json
+D:\NovaHost\frontend\node_modules\source-map-js\README.md
+D:\NovaHost\frontend\node_modules\source-map-js\source-map.d.ts
+D:\NovaHost\frontend\node_modules\source-map-js\source-map.js
+D:\NovaHost\frontend\node_modules\source-map-js\lib\array-set.js
+D:\NovaHost\frontend\node_modules\source-map-js\lib\base64-vlq.js
+D:\NovaHost\frontend\node_modules\source-map-js\lib\base64.js
+D:\NovaHost\frontend\node_modules\source-map-js\lib\binary-search.js
+D:\NovaHost\frontend\node_modules\source-map-js\lib\mapping-list.js
+D:\NovaHost\frontend\node_modules\source-map-js\lib\quick-sort.js
+D:\NovaHost\frontend\node_modules\source-map-js\lib\source-map-consumer.d.ts
+D:\NovaHost\frontend\node_modules\source-map-js\lib\source-map-consumer.js
+D:\NovaHost\frontend\node_modules\source-map-js\lib\source-map-generator.d.ts
+D:\NovaHost\frontend\node_modules\source-map-js\lib\source-map-generator.js
+D:\NovaHost\frontend\node_modules\source-map-js\lib\source-node.d.ts
+D:\NovaHost\frontend\node_modules\source-map-js\lib\source-node.js
+D:\NovaHost\frontend\node_modules\source-map-js\lib\util.js
+D:\NovaHost\frontend\node_modules\tinyglobby\LICENSE
+D:\NovaHost\frontend\node_modules\tinyglobby\package.json
+D:\NovaHost\frontend\node_modules\tinyglobby\README.md
+D:\NovaHost\frontend\node_modules\tinyglobby\dist\index.cjs
+D:\NovaHost\frontend\node_modules\tinyglobby\dist\index.d.cts
+D:\NovaHost\frontend\node_modules\tinyglobby\dist\index.d.mts
+D:\NovaHost\frontend\node_modules\tinyglobby\dist\index.mjs
+D:\NovaHost\frontend\node_modules\typescript\LICENSE.txt
+D:\NovaHost\frontend\node_modules\typescript\package.json
+D:\NovaHost\frontend\node_modules\typescript\README.md
+D:\NovaHost\frontend\node_modules\typescript\SECURITY.md
+D:\NovaHost\frontend\node_modules\typescript\ThirdPartyNoticeText.txt
+D:\NovaHost\frontend\node_modules\typescript\bin\tsc
+D:\NovaHost\frontend\node_modules\typescript\bin\tsserver
+D:\NovaHost\frontend\node_modules\typescript\lib\cancellationToken.js
+D:\NovaHost\frontend\node_modules\typescript\lib\dynamicImportCompat.js
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.dom.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.dom.iterable.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2015.collection.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2015.core.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2015.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2015.generator.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2015.iterable.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2015.promise.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2015.proxy.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2015.reflect.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2015.symbol.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2015.symbol.wellknown.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2016.array.include.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2016.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2016.full.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2017.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2017.full.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2017.intl.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2017.object.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2017.sharedmemory.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2017.string.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2017.typedarrays.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2018.asyncgenerator.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2018.asynciterable.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2018.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2018.full.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2018.intl.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2018.promise.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2018.regexp.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2019.array.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2019.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2019.full.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2019.intl.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2019.object.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2019.string.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2019.symbol.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2020.bigint.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2020.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2020.date.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2020.full.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2020.intl.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2020.number.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2020.promise.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2020.sharedmemory.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2020.string.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2020.symbol.wellknown.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2021.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2021.full.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2021.intl.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2021.promise.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2021.string.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2021.weakref.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2022.array.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2022.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2022.error.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2022.full.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2022.intl.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2022.object.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2022.sharedmemory.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es2022.string.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es5.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.es6.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.esnext.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.esnext.full.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.esnext.intl.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.esnext.promise.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.esnext.string.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.esnext.weakref.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.scripthost.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.webworker.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.webworker.importscripts.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\lib.webworker.iterable.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\protocol.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\README.md
+D:\NovaHost\frontend\node_modules\typescript\lib\tsc.js
+D:\NovaHost\frontend\node_modules\typescript\lib\tsserver.js
+D:\NovaHost\frontend\node_modules\typescript\lib\tsserverlibrary.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\tsserverlibrary.js
+D:\NovaHost\frontend\node_modules\typescript\lib\typescript.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\typescript.js
+D:\NovaHost\frontend\node_modules\typescript\lib\typescriptServices.d.ts
+D:\NovaHost\frontend\node_modules\typescript\lib\typescriptServices.js
+D:\NovaHost\frontend\node_modules\typescript\lib\typesMap.json
+D:\NovaHost\frontend\node_modules\typescript\lib\typingsInstaller.js
+D:\NovaHost\frontend\node_modules\typescript\lib\watchGuard.js
+D:\NovaHost\frontend\node_modules\typescript\lib\cs\diagnosticMessages.generated.json
+D:\NovaHost\frontend\node_modules\typescript\lib\de\diagnosticMessages.generated.json
+D:\NovaHost\frontend\node_modules\typescript\lib\es\diagnosticMessages.generated.json
+D:\NovaHost\frontend\node_modules\typescript\lib\fr\diagnosticMessages.generated.json
+D:\NovaHost\frontend\node_modules\typescript\lib\it\diagnosticMessages.generated.json
+D:\NovaHost\frontend\node_modules\typescript\lib\ja\diagnosticMessages.generated.json
+D:\NovaHost\frontend\node_modules\typescript\lib\ko\diagnosticMessages.generated.json
+D:\NovaHost\frontend\node_modules\typescript\lib\pl\diagnosticMessages.generated.json
+D:\NovaHost\frontend\node_modules\typescript\lib\pt-br\diagnosticMessages.generated.json
+D:\NovaHost\frontend\node_modules\typescript\lib\ru\diagnosticMessages.generated.json
+D:\NovaHost\frontend\node_modules\typescript\lib\tr\diagnosticMessages.generated.json
+D:\NovaHost\frontend\node_modules\typescript\lib\zh-cn\diagnosticMessages.generated.json
+D:\NovaHost\frontend\node_modules\typescript\lib\zh-tw\diagnosticMessages.generated.json
+D:\NovaHost\frontend\node_modules\vite\client.d.ts
+D:\NovaHost\frontend\node_modules\vite\LICENSE.md
+D:\NovaHost\frontend\node_modules\vite\package.json
+D:\NovaHost\frontend\node_modules\vite\README.md
+D:\NovaHost\frontend\node_modules\vite\bin\openChrome.js
+D:\NovaHost\frontend\node_modules\vite\bin\vite.js
+D:\NovaHost\frontend\node_modules\vite\dist\client\bundledDevClient.mjs
+D:\NovaHost\frontend\node_modules\vite\dist\client\client.mjs
+D:\NovaHost\frontend\node_modules\vite\dist\client\env.mjs
+D:\NovaHost\frontend\node_modules\vite\dist\node\cli.js
+D:\NovaHost\frontend\node_modules\vite\dist\node\index.d.ts
+D:\NovaHost\frontend\node_modules\vite\dist\node\index.js
+D:\NovaHost\frontend\node_modules\vite\dist\node\internal.d.ts
+D:\NovaHost\frontend\node_modules\vite\dist\node\internal.js
+D:\NovaHost\frontend\node_modules\vite\dist\node\module-runner.d.ts
+D:\NovaHost\frontend\node_modules\vite\dist\node\module-runner.js
+D:\NovaHost\frontend\node_modules\vite\dist\node\chunks\build.js
+D:\NovaHost\frontend\node_modules\vite\dist\node\chunks\dist.js
+D:\NovaHost\frontend\node_modules\vite\dist\node\chunks\lib.js
+D:\NovaHost\frontend\node_modules\vite\dist\node\chunks\moduleRunnerTransport.d.ts
+D:\NovaHost\frontend\node_modules\vite\dist\node\chunks\node.js
+D:\NovaHost\frontend\node_modules\vite\dist\node\chunks\postcss-import.js
+D:\NovaHost\frontend\node_modules\vite\misc\false.js
+D:\NovaHost\frontend\node_modules\vite\misc\true.js
+D:\NovaHost\frontend\node_modules\vite\types\customEvent.d.ts
+D:\NovaHost\frontend\node_modules\vite\types\hmrPayload.d.ts
+D:\NovaHost\frontend\node_modules\vite\types\hot.d.ts
+D:\NovaHost\frontend\node_modules\vite\types\import-meta.d.ts
+D:\NovaHost\frontend\node_modules\vite\types\importGlob.d.ts
+D:\NovaHost\frontend\node_modules\vite\types\importMeta.d.ts
+D:\NovaHost\frontend\node_modules\vite\types\metadata.d.ts
+D:\NovaHost\frontend\node_modules\vite\types\internal\cssPreprocessorOptions.d.ts
+D:\NovaHost\frontend\node_modules\vite\types\internal\devtoolsOptions.d.ts
+D:\NovaHost\frontend\node_modules\vite\types\internal\esbuildOptions.d.ts
+D:\NovaHost\frontend\node_modules\vite\types\internal\lightningcssOptions.d.ts
+D:\NovaHost\frontend\node_modules\vite\types\internal\rollupTypeCompat.d.ts
+D:\NovaHost\frontend\node_modules\vite\types\internal\terserOptions.d.ts
+D:\NovaHost\frontend\public\background.png
+D:\NovaHost\frontend\public\bg-desktop.jpg
+D:\NovaHost\frontend\public\bg-mobile.jpg
+D:\NovaHost\frontend\public\Inter-Medium.ttf
+D:\NovaHost\frontend\public\style.css
+D:\NovaHost\frontend\public\style.css.before-background
+D:\NovaHost\frontend\public\typescript.svg
+D:\NovaHost\frontend\public\wails.png
+D:\NovaHost\frontend\src\main.ts
+D:\NovaHost\frontend\src\main.ts.20261126-203059.bak
+D:\NovaHost\frontend\src\main.ts.language-backup-20261126-234809.bak
+D:\NovaHost\frontend\src\vite-env.d.ts
